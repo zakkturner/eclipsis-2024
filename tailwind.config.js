@@ -11,9 +11,14 @@ export default {
     ],
 
     theme: {
+
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+            },
+            colors:{
+                "eclipsis-navy" : "#193153",
+                "eclipsis-gold" : "#cea434",
             },
         },
     },
