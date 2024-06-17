@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Announcement;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -13,7 +14,8 @@ class AnnouncementController extends Controller
      */
     public function index()
     {
-        //
+        $announcements = Announcement::all();
+        return Inertia::render('Admin/Announcements/Index', ['announcements',$announcements]);
     }
 
     /**
@@ -30,7 +32,14 @@ class AnnouncementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+       $announcement = Announcement::create(
+           $request->validate([
+           'is_visible' => 'required',
+           'body' => 'required|max:150',
+
+       ]));
+
     }
 
     /**

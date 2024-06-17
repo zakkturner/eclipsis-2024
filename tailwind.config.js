@@ -18,7 +18,7 @@ export default {
             },
             colors:{
                 "eclipsis-navy" : "#193153",
-                "eclipsis-gold" : "#cea434",
+                "eclipsis-gold" : "#cea434"
             },
         },
     },

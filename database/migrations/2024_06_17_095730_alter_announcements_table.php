@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('announcements', function (Blueprint $table) {
-            $table->id();
-            $table->boolean('is_visible')->default(false);
-            $table->string("body");
+        Schema::table('announcements', function (Blueprint $table) {
 
-            $table->timestamps();
+            $table->dropColumn("phone");
+            $table->dropColumn("facebook_url");
+            $table->dropColumn("twitter_url");
+            $table->dropColumn("instagram_url");
+            $table->dropColumn("youtube_url");
+
         });
     }
 
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('announcements');
+        //
     }
 };
