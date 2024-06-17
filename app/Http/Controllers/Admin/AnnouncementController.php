@@ -15,7 +15,7 @@ class AnnouncementController extends Controller
     public function index()
     {
         $announcements = Announcement::all();
-        return Inertia::render('Admin/Announcements/Index', ['announcements',$announcements]);
+        return Inertia::render('Admin/Announcements/Index', ['announcements' => $announcements]);
     }
 
     /**
@@ -33,6 +33,13 @@ class AnnouncementController extends Controller
     public function store(Request $request)
     {
 
+        if($request->is_visible){
+            foreach (Announcement::all() as $announcement){
+                if($announcement->is_visible){
+                    $announcement->is_visible = false;
+                }
+            }
+        }
        $announcement = Announcement::create(
            $request->validate([
            'is_visible' => 'required',
@@ -47,7 +54,12 @@ class AnnouncementController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $announcement = Announcement::findOrFail($id);;
+
+
+        Inertia::render('Admin/Announcements/Show', [
+            'announcement' => $announcement
+        ]);
     }
 
     /**
