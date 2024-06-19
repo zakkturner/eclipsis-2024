@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import {Announcement} from "@/types";
 
+
 const props = defineProps<{
   announcement: Announcement
 }>();
@@ -16,9 +17,9 @@ const props = defineProps<{
         </div>
         <div class="flex">
             <div>Phone</div>
-            <ul>
+            <ul class="display: flex">
                 <li><a href="https://twitter.com/eclipsisdev"><span>Twitter</span></a></li>
-                <li><a href="https://www.facebook.com/eclipsisstudiosllc"><span>Facebook</span></a></li>
+                <li><a href="https://www.facebook.com/eclipsisstudiosllc"><span><VIcon name="fa-facebook" /></span></a></li>
                 <li><a href="https://www.instagram.com/eclipsisstudios/"><span>Instagram</span></a></li>
             </ul>
         </div>
