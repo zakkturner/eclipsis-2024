@@ -33,11 +33,10 @@ class AnnouncementController extends Controller
      */
     public function store(Request $request)
     {
-
-        $this->remove_visible_announcements();
-               $announcement = Announcement::create(
-                 $this->validateAnnouncement()
-               );
+        $this->remove_visible_announcements($request);
+        $announcement = Announcement::create(
+            $this->validateAnnouncement()
+        );
 
         return to_route("admin.announcements.index", $announcement);
 
@@ -89,7 +88,7 @@ class AnnouncementController extends Controller
     {
         //
     }
-    public function remove_visible_announcements(Request $request): void{
+    private function remove_visible_announcements(Request $request): void{
 
         if($request->is_visible){
             foreach (Announcement::all() as $announcement){

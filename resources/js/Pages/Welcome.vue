@@ -1,9 +1,10 @@
-<script setup>
+<script lang="ts" setup>
 import { Head, Link } from '@inertiajs/vue3';
 import TheHeader from "@/Components/TheHeader.vue";
 import AnnouncementBar from "@/Components/AnnouncementBar.vue";
+import {Announcement} from "@/types.ts";
 
-defineProps({
+const props = defineProps<{
     canLogin: {
         type: Boolean,
     },
@@ -18,7 +19,8 @@ defineProps({
         type: String,
         required: true,
     },
-});
+    announcement: Announcement
+}>();
 
 function handleImageError() {
     document.getElementById('screenshot-container')?.classList.add('!hidden');
@@ -31,7 +33,7 @@ function handleImageError() {
 <template>
     <Head title="Welcome" />
     <div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
-        <AnnouncementBar></AnnouncementBar>
+        <AnnouncementBar :announcement="announcement"></AnnouncementBar>
         <TheHeader></TheHeader>
 
     </div>

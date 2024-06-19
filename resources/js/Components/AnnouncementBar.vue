@@ -1,6 +1,9 @@
-<script setup>
+<script lang="ts" setup>
+import {Announcement} from "@/types";
 
-
+const props = defineProps<{
+  announcement: Announcement
+}>();
 
 </script>
 
@@ -8,7 +11,8 @@
 <div class="bg-eclipsis-navy">
     <div class="flex justify-between items-center">
         <div>
-            <h6 class="text-white">Announcement</h6>
+
+            <h6 class="text-white" v-if="announcement">{{announcement.body}}</h6>
         </div>
         <div class="flex">
             <div>Phone</div>

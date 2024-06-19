@@ -32,7 +32,7 @@ const props = defineProps<{
                 <div class="border-r-2 border-l-2 border-eclipsis-navy w-1/3">
                     {{announcement.body}}
                 </div>
-                <div class="border-r-2 border-eclipsis-navy  w-1/3">
+                <div class="border-r-2 border-eclipsis-navy w-1/3">
                     {{announcement.is_visible ?  "Visible" : "Not Visible" }}
                 </div>
               <div class="w-1/3 flex justify-center py-2">
