@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Announcement;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class AnnouncementController extends Controller
 {
@@ -33,49 +34,52 @@ class AnnouncementController extends Controller
     public function store(Request $request)
     {
 
-        if($request->is_visible){
-            foreach (Announcement::all() as $announcement){
-                if($announcement->is_visible){
-                    $announcement->is_visible = false;
-                }
-            }
-        }
-       $announcement = Announcement::create(
-           $request->validate([
-           'is_visible' => 'required',
-           'body' => 'required|max:150',
+        $this->remove_visible_announcements();
+               $announcement = Announcement::create(
+                 $this->validateAnnouncement()
+               );
 
-       ]));
+        return to_route("admin.announcements.index", $announcement);
 
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id): Response
     {
         $announcement = Announcement::findOrFail($id);;
 
 
-        Inertia::render('Admin/Announcements/Show', [
+        return Inertia::render('Admin/Announcements/Show',
+            [
             'announcement' => $announcement
-        ]);
+            ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id): Response
     {
-        //
+        $announcement = Announcement::findOrFail($id);
+
+      return  Inertia::render('Admin/Announcements/Edit', ['announcement' => $announcement]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Announcement $announcement, Request $request)
     {
-        //
+
+//        $announcement = Announcement::findOrFail($id);
+        $this->remove_visible_announcements($request);
+       $attributes = $this->validateAnnouncement();
+      $announcement->update($attributes);
+
+
+      return redirect()->route('admin.announcements.index');
     }
 
     /**
@@ -84,5 +88,25 @@ class AnnouncementController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+    public function remove_visible_announcements(Request $request): void{
+
+        if($request->is_visible){
+            foreach (Announcement::all() as $announcement){
+                if($announcement->is_visible){
+                    var_dump($announcement->id);
+                    $announcement->is_visible = false;
+                    $announcement->save();
+                }
+            }
+        }
+    }
+    public function validateAnnouncement(?Announcement $announcement = null): array{
+//        $announcement ??= new Announcement();
+        return  request()->validate([
+            'is_visible' => 'required',
+            'body' => 'required|max:150',
+
+        ]);
     }
 }

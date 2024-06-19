@@ -62,7 +62,8 @@ function submit(){
         </form>
 
         <div class="mt-4">
-            <Link class="bg-eclipsis-gold px-8 py-4 rounded text-white border-4 border-eclipsis-gold hover:bg-white hover:text-black transition-all ease-in-out" as="button" type="button" href="/dashboard">Back To Dashboard</Link>
+            <Link class="bg-eclipsis-gold px-8 py-4 rounded text-white border-4 border-eclipsis-gold hover:bg-white hover:text-black transition-all
+            ease-in-out" as="button" type="button" href="/announcements">Back To Announcements</Link>
         </div>
 
     </div>
