@@ -10,17 +10,25 @@ const props = defineProps<{
 
 <template>
 <div class="bg-eclipsis-navy">
-    <div class="flex justify-between items-center">
+    <div class="flex justify-between items-center py-2 mx-2">
         <div>
 
             <h6 class="text-white" v-if="announcement">{{announcement.body}}</h6>
         </div>
-        <div class="flex">
-            <div>Phone</div>
-            <ul class="display: flex">
-                <li><a href="https://twitter.com/eclipsisdev"><span>Twitter</span></a></li>
-                <li><a href="https://www.facebook.com/eclipsisstudiosllc"><span><VIcon name="fa-facebook" /></span></a></li>
-                <li><a href="https://www.instagram.com/eclipsisstudios/"><span>Instagram</span></a></li>
+        <div class="flex text-white ">
+            <div class="mr-2 text-eclipsis-gold"><VIcon name="fa-phone"/><span class="text-white">
+404-482-3287
+</span></div>
+            <ul class="flex justify-between">
+                <li class="mr-2">
+                  <a href="https://twitter.com/eclipsisdev">
+                    <span><VIcon name="fa-twitter"/></span>
+                  </a>
+                </li>
+                <li class="mr-2"><a href="https://www.facebook.com/eclipsisstudiosllc"><span>
+                  <VIcon name="fa-facebook" /></span>
+                </a></li>
+                <li><a href="https://www.instagram.com/eclipsisstudios/"><span><VIcon name="fa-instagram" /></span></a></li>
             </ul>
         </div>
     </div>

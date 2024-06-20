@@ -6,9 +6,9 @@ import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 import { OhVueIcon, addIcons } from "oh-vue-icons";
-import { FaFacebook } from "oh-vue-icons/icons";
+import { FaFacebook, FaTwitter, FaInstagram, FaPhone } from "oh-vue-icons/icons";
 
-addIcons(FaFacebook)
+addIcons(FaFacebook, FaTwitter, FaInstagram, FaPhone)
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 createInertiaApp({
