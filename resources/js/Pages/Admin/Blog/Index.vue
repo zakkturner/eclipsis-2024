@@ -1,0 +1,56 @@
+<script setup lang="ts">
+
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import {Head, Link} from "@inertiajs/vue3";
+
+const {posts, tags, categories} = defineProps<{
+  posts: Post[],
+  tags: string[],
+    categories: string[];
+
+}>()
+</script>
+
+<template>
+  <Head title="Blog" />
+
+  <AuthenticatedLayout>
+    <template #header>
+      <h2 class="font-semibold text-xl text-gray-800 leading-tight">Blog</h2>
+    </template>
+
+    <div class="py-12">
+      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-6">
+          <div class="p-6 text-gray-900">
+              <div>Posts</div>
+          </div>
+        </div>
+        <div class="flex ">
+          <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg w-2/3 mr-4">
+            <div class="p-6  mr-4 text-gray-900 ">
+              <div>Categories</div>
+            </div>
+          </div>
+          <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg w-1/3">
+              <div class="p-6 text-gray-900">
+                <div>
+                 <h3>Tags</h3>
+                </div>
+                <ul v-if="tags">
+                  <li></li>
+                </ul>
+                <p v-else></p>
+              </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </AuthenticatedLayout>
+</template>
+
+<style scoped>
+
+</style>

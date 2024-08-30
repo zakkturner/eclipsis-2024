@@ -7,9 +7,11 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 import { OhVueIcon, addIcons } from "oh-vue-icons";
 import { FaFacebook, FaTwitter, FaInstagram, FaPhone } from "oh-vue-icons/icons";
-
+import { createPinia } from 'pinia';
 addIcons(FaFacebook, FaTwitter, FaInstagram, FaPhone)
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+
+const pinia = createPinia();
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
@@ -18,7 +20,7 @@ createInertiaApp({
         return createApp({ render: () => h(App, props) })
             .component("VIcon", OhVueIcon)
             .use(plugin)
-
+            .use(pinia)
             .use(ZiggyVue)
             .mount(el);
     },

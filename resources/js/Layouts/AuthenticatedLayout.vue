@@ -28,9 +28,9 @@ const showingNavigationDropdown = ref(false);
                             </div>
 
                             <!-- Navigation Links -->
-                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex ">
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Dashboard
+                                  Dashboard
                                 </NavLink>
                             </div>
                             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
@@ -38,6 +38,16 @@ const showingNavigationDropdown = ref(false);
                                     Announcements
                                 </NavLink>
                             </div>
+                          <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                            <NavLink :href="route('admin.services.index')" :active="route().current('admin.services.create')">
+                              Services
+                            </NavLink>
+                          </div>
+                          <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                            <NavLink :href="route('admin.blog.index')" :active="route().current('admin.blog')">
+                              Blog
+                            </NavLink>
+                          </div>
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ms-6">
@@ -51,7 +61,6 @@ const showingNavigationDropdown = ref(false);
                                                 class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
                                             >
                                                 {{ $page.props.auth.user.name }}
-
                                                 <svg
                                                     class="ms-2 -me-0.5 h-4 w-4"
                                                     xmlns="http://www.w3.org/2000/svg"
@@ -67,7 +76,6 @@ const showingNavigationDropdown = ref(false);
                                             </button>
                                         </span>
                                     </template>
-
                                     <template #content>
                                         <DropdownLink :href="route('profile.edit')"> Profile </DropdownLink>
                                         <DropdownLink :href="route('logout')" method="post" as="button">
@@ -77,7 +85,6 @@ const showingNavigationDropdown = ref(false);
                                 </Dropdown>
                             </div>
                         </div>
-
                         <!-- Hamburger -->
                         <div class="-me-2 flex items-center sm:hidden">
                             <button

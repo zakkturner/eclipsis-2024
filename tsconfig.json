@@ -3,7 +3,8 @@
     "baseUrl": "./resources",
     "paths": {
       "@/*": ["js/*"]
-    }
+    },
+    "lib": [ "es2015" ]
   },
   "include": [
     "env.d.ts",

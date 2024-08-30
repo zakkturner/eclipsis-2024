@@ -11,14 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('announcements', function (Blueprint $table) {
-
-            $table->dropColumn("phone");
-            $table->dropColumn("facebook_url");
-            $table->dropColumn("twitter_url");
-            $table->dropColumn("instagram_url");
-            $table->dropColumn("youtube_url");
-
+        Schema::create('tags', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
         });
     }
 
@@ -27,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('tags');
     }
 };
