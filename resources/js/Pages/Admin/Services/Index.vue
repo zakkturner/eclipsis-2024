@@ -2,7 +2,7 @@
 
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link } from "@inertiajs/vue3";
-import { Service } from "@/types";
+import { Service } from "@/types/types";
 import {router} from "@inertiajs/vue3";
 
 const {services, message} = defineProps<{

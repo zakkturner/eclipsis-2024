@@ -2,7 +2,7 @@
 import {computed, ModelRef, reactive} from "vue";
 import {Link, router} from "@inertiajs/vue3";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import {Service} from "@/types";
+import {Service} from "@/types/types";
 import {useCountChars} from "@/Composables/useCountChars";
 import {useLowChars} from "@/Composables/useLowChars";
 

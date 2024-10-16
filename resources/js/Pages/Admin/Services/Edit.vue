@@ -1,7 +1,7 @@
 <script lang="ts"  setup>
 import {ModelRef, reactive, onMounted} from "vue";
 import {Link, router} from "@inertiajs/vue3";
-import { Service} from "@/types";
+import { Service} from "@/types/types";
 import TextArea from "@/Components/Form/TextArea.vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import {useLowChars} from "@/Composables/useLowChars";

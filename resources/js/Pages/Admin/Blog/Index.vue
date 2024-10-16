@@ -6,7 +6,7 @@ import {Head, Link} from "@inertiajs/vue3";
 const {posts, tags, categories} = defineProps<{
   posts: Post[],
   tags: string[],
-    categories: string[];
+  categories: string[];
 
 }>()
 </script>
@@ -24,6 +24,9 @@ const {posts, tags, categories} = defineProps<{
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-6">
           <div class="p-6 text-gray-900">
               <div>Posts</div>
+              <div>
+                <button>Add New Post</button>
+              </div>
           </div>
         </div>
         <div class="flex ">

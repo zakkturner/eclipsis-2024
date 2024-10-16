@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import {ref} from 'vue';
 import AnnouncementBar from "@/Components/AnnouncementBar.vue";
-import {Announcement} from "@/types";
+import {Announcement} from "@/types/types";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import {faBars} from "@fortawesome/free-solid-svg-icons";
 import TheLogo from "@/Components/TheLogo.vue";

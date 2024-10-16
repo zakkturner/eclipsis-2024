@@ -15,7 +15,7 @@ class BlogController extends Controller
 
         $posts = Post::all();
         $categories = Category::all();
-        $tags = Tag::latest()->paginate(10)->get();
+        $tags = Tag::latest()->paginate(10);
 
 
         return Inertia::render('Admin/Blog/Index', ['posts' => $posts, 'tags' => $tags, 'categories' => $categories]);

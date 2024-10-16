@@ -1,13 +1,15 @@
 <script lang="ts" setup>
 import { Head, Link } from '@inertiajs/vue3';
 import TheHeader from "@/Components/TheHeader.vue";
-
-import {Announcement} from "@/types";
+import {Announcement, Service} from "@/types/types";
 import TheHero from "@/Components/TheHero.vue";
 import MobileMenu from "@/Components/MobileMenu.vue";
 import {useUiStateStore} from "@/store";
-import {ref, watch} from "vue";
+import {onBeforeMount, onMounted, ref, watch} from "vue";
 import gsap from "gsap";
+import ServiceList from "@/Components/Services/ServiceList.vue";
+import {useServicesStore} from "@/store/services";
+import Services from "@/Components/Services/Services.vue";
 const props = defineProps<{
     canLogin: {
         type: Boolean,
@@ -23,9 +25,17 @@ const props = defineProps<{
         type: String,
         required: true,
     },
-    announcement: Announcement
+    announcement: Announcement,
+    services: Service[]
+
 }>();
 
+const serviceStore = useServicesStore();
+onBeforeMount(() =>{
+  if(props.services){
+    serviceStore.setServices(props.services);
+  }
+})
 // function handleImageError() {
 //     document.getElementById('screenshot-container')?.classList.add('!hidden');
 //     document.getElementById('docs-card')?.classList.add('!row-span-1');
@@ -58,6 +68,8 @@ watch(
 
       <TheHeader :announcement="announcement"></TheHeader>
       <TheHero></TheHero>
+
+      <Services></Services>
 
     </div>
 
