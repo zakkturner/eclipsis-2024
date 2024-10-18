@@ -20,4 +20,6 @@ class BlogController extends Controller
 
         return Inertia::render('Admin/Blog/Index', ['posts' => $posts, 'tags' => $tags, 'categories' => $categories]);
     }
+
+
 }

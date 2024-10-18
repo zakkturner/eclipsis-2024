@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Category;
 use App\Models\Posts;
 use App\Http\Controllers\Controller;
+use App\Models\Tag;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class AdminPostsController extends Controller
 {
@@ -21,7 +24,10 @@ class AdminPostsController extends Controller
      */
     public function create()
     {
-        //
+
+        $categories = Category::all();
+        $tags = Tag::all();
+        return Inertia::render('Admin/Blog/Posts/Create', [ 'tags' => $tags, 'categories' => $categories]);
     }
 
     /**

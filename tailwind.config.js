@@ -1,5 +1,6 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
 import forms from '@tailwindcss/forms';
+import typography from '@tailwindcss/typography';
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -20,8 +21,22 @@ export default {
                 "eclipsis-navy" : "#193153",
                 "eclipsis-gold" : "#cea434"
             },
+            typography: ({theme}) =>({
+                DEFAULT:{
+
+                    css:{
+                        // '--tw-prose-bullets' : theme('')
+                        li:{
+                            p:{
+                                margin: 0
+                            }
+                        }
+                    }
+                }
+
+            })
         },
     },
 
-    plugins: [forms],
+    plugins: [forms, typography],
 };
