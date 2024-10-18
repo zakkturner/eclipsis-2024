@@ -23,7 +23,9 @@ const editor = useEditor(
 </script>
 
 <template>
-  <section class="buttons flex justify-between items-center flex-wrap gap-x-4 border-t border-l border-r border-gray-500 p-4 bg-gray-50"
+  <section class="flex flex-col w-full">
+
+  <div class="buttons flex justify-between items-center flex-wrap gap-x-4 border-t border-l border-r border-gray-500 p-4 bg-gray-50"
            v-if="editor">
 
         <button @click.prevent="editor.chain().focus().toggleBold().run()" :disabled="!editor.can().chain().focus().toggleBold().run()"
@@ -54,7 +56,7 @@ const editor = useEditor(
 
         <button @click.prevent="editor.chain().focus().setParagraph().run()" class="p-1 rounded" :class="{ 'bg-gray-200':
         editor.isActive('paragraph') }">
-          Paragraph
+          <FontAwesomeIcon :icon="faParagraph" title="Paragraph"></FontAwesomeIcon>
         </button>
         <button @click.prevent="editor.chain().focus().toggleHeading({ level: 1 }).run()"  class="p-1 rounded" :class="{ 'bg-gray-200': editor.isActive('heading', {
           level:
@@ -103,8 +105,9 @@ const editor = useEditor(
         </button>
 
 
-  </section>
+  </div>
   <editor-content :editor="editor"></editor-content>
+  </section>
 </template>
 
 <style scoped>
