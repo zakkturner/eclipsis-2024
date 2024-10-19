@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class CategoriesController extends Controller
 {
@@ -29,7 +30,14 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $attr = $request->validate([
+            '_value' => 'required|min:3',
+        ]);
+
+        Category::create(['name' => $attr['_value']]);
+        $categories = Category::all();
+        return Inertia::render('Admin/Blog/Posts/Create', ["message" => "Category added successfully!", 'categories' => $categories]);
     }
 
     /**

@@ -7,11 +7,16 @@ import {faBold, faItalic, faUnderline, faUndo, faRedo, faStrikethrough, faCode, 
       "@fortawesome/free-solid-svg-icons";
 
 const props = defineProps<{
-  initialContent?: string;
+  modelValue: String
 }>()
+
+const emit = defineEmits(['update:modelValue'])
 const editor = useEditor(
     {
-      content: `<p>${props.initialContent}</p>`,
+      content: props.modelValue,
+      onUpdate:({editor}) => {
+        emit('update:modelValue', editor.getHTML());
+      },
       extensions: [StarterKit, Underline],
       editorProps:{
         attributes:{
