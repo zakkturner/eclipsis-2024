@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Category;
+use App\Models\Post;
 use App\Models\Posts;
 use App\Http\Controllers\Controller;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 
 class AdminPostsController extends Controller
@@ -35,7 +37,22 @@ class AdminPostsController extends Controller
      */
     public function store(Request $request)
     {
-      dd($request->all());
+
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'body' => 'required|string',
+            'thumbnail' => ['nullable', 'image'],
+            'slug' => ['required', Rule::unique('posts', 'slug')],
+            'excerpt' => 'required',
+            'categories' => 'required|array', // Expecting an array of category IDs
+            'categories.*' => 'exists:categories,id', // Ensure each category exists in the categories table
+        ]);
+
+        $validated['user_id'] = auth()->id();
+        $categories = $validated['categories'];
+        unset($validated['categories']);
+      $post = Post::create($validated);
+        $post->categories()->sync($categories);
     }
 
     /**

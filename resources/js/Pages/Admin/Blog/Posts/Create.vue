@@ -5,26 +5,50 @@ import NavLink from "@/Components/NavLink.vue";
 import Editor from "@/Components/Form/Editor.vue";
 import Card from "@/Components/UI/Card.vue";
 import {useForm} from "@inertiajs/vue3";
-import {computed, reactive, ref} from "vue";
+import {computed, reactive, ref, watchEffect} from "vue";
 import {Category} from "@/types/post";
 import {router} from "@inertiajs/vue3";
 
 const props = defineProps<{
   categories: Category[]
 }>()
+
 const form = useForm({
   title: null,
-  content: '<h1>Heading</h1><p>Enter blog text</p>',
+  slug:  '',
+  body: '<h1>Heading</h1><p>Enter blog text</p>',
+  excerpt: '',
   categories: []
 })
+watchEffect(() => {
+  if(form.title != null){
+
+  form.slug = turnToSlug(form.title);
+  }
+
+});
 const newCategoryContent = ref(null);
 const formUI = reactive({
   newCategory: false
 })
 const submitForm = () =>{
+
   router.post('/admin/blog/post', form);
 
 }
+const handleFocusOut = () =>{
+  form.slug = turnToSlug(form.slug);
+}
+
+
+const turnToSlug = (str: string) =>{
+  return str.toString()                         // Convert to string
+      .toLowerCase()                      // Convert to lowercase
+      .trim()                             // Remove leading/trailing spaces
+      .replace(/[\s\W-]+/g, '-')          // Replace spaces and non-alphanumeric characters with '-'
+      .replace(/^-+|-+$/g, '');           // Remove leading/trailing hyphens
+}
+
 const addCategory =  () =>{
   router.post('/admin/blog/categories', newCategoryContent)
     formUI.newCategory = false;
@@ -38,6 +62,14 @@ const buttonText = computed(()=>{
     return 'Create New Category'
   }
 })
+const handleChange = () =>{
+  if (form.excerpt === '') {
+    // Strip HTML tags from form.body
+    const plainText = form.body.replace(/<\/?[^>]+(>|$)/g, "");
+    form.excerpt = plainText.substr(0, 150); // Get the first 150 characters
+  }
+
+}
 </script>
 
 
@@ -57,14 +89,17 @@ const buttonText = computed(()=>{
       <div class="flex flex-col gap-4 md:flex-row ">
         <div class="flex flex-col gap-4 w-3/4">
           <input type="text" class="border border-gray-500" v-model="form.title" placeholder="Title" />
-          <editor initial-content="Enter Blog Text" v-model="form.content"></editor>
+          <input @focusout="handleFocusOut" type="text" class="border border-gray-500" v-model="form.slug" placeholder="Slug" />
+          <input @focusout="handleFocusOut" type="text" class="border border-gray-500" v-model="form.excerpt" placeholder="Excerpt" />
+          <editor @focusout="handleChange" initial-content="Enter Blog Text" v-model="form.body"></editor>
+          <button class="bg-green-500 w-1/6 rounded p-4 text-white font-bold" @click.prevent="submitForm">Create Post</button>
         </div>
         <hr  class="md:hidden"/>
         <div class="flex flex-col gap-4  mx-auto w-1/4">
           <card title="Categories">
             <div class="flex items-center" :key="category.id" v-for="category in categories">
-              <input type="checkbox" :value="category.name" v-model="form.categories"/>
-              <label class="ml-1" :for="category.name">{{category.name}}</label>
+              <input type="checkbox" :value="category.id" v-model="form.categories"/>
+              <label class="ml-1" :for="category.name">{{ category.name }}</label>
             </div>
               <div class="mt-2">
                   <div class="flex" v-if="formUI.newCategory">

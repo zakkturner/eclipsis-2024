@@ -3,6 +3,7 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import {Head, Link} from "@inertiajs/vue3";
 import NavLink from "@/Components/NavLink.vue";
+import {Post} from "@/types/post";
 
 const {posts, tags, categories} = defineProps<{
   posts: Post[],
@@ -25,6 +26,16 @@ const {posts, tags, categories} = defineProps<{
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-6">
           <div class="p-6 text-gray-900">
               <div>Posts</div>
+                <div>
+                  <div v-if="posts.length <= 0" class="">
+                    <h3>No Post created yet</h3>
+                  </div>
+                  <ul v-else>
+                    <li v-for="post in posts" :key="post.id">
+                      <a href="">{{post.title}}</a>
+                    </li>
+                  </ul>
+                </div>
               <div>
                 <NavLink href="/admin/blog/post/create">Add New Post</NavLink>
               </div>
