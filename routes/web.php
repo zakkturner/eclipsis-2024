@@ -36,7 +36,7 @@ Route::middleware('auth')->group(function () {
         ]);
         Route::prefix("blog")->group(function(){
             Route::get('/', [BlogController::class, 'index'])->name('admin.blog.index');
-            Route::resource('/post', AdminPostsController::class);
+            Route::resource('/post', AdminPostsController::class)->parameters(['post' => 'slug']);
             Route::resource('/categories', CategoriesController::class);
     });
     });

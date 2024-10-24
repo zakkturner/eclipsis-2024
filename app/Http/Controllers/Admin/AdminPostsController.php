@@ -58,9 +58,11 @@ class AdminPostsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Posts $posts)
+    public function show($slug)
     {
-        //
+      $post = Post::where('slug', $slug)->firstOrFail();
+
+        return Inertia::render('Admin/Blog/Posts/Show', [ 'post' => $post]);
     }
 
     /**

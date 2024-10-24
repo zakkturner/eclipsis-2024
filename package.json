@@ -29,6 +29,7 @@
         "@tiptap/pm": "^2.8.0",
         "@tiptap/starter-kit": "^2.8.0",
         "@tiptap/vue-3": "^2.8.0",
+        "dayjs": "^1.11.13",
         "gsap": "^3.12.5",
         "oh-vue-icons": "^1.0.0-rc3",
         "pinia": "^2.2.0"

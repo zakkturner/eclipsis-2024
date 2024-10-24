@@ -8,6 +8,8 @@ export interface  Post{
     excerpt: string;
     body: string;
     published_at: Date;
+    created_at: Date;
+    updated_at: Date;
 }
 
 export interface Category{
@@ -16,5 +18,6 @@ export interface Category{
 }
 
 export interface Tag{
-
+    id: number;
+    name: string;
 }

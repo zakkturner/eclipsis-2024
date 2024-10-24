@@ -4,6 +4,8 @@
     "paths": {
       "@/*": ["js/*"]
     },
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "lib": [ "es2015" ]
   },
   "include": [
