@@ -8,6 +8,7 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import {faClock} from "@fortawesome/free-solid-svg-icons";
 import {computed} from "vue";
 import dayjs from "dayjs";
+import {faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons/faMagnifyingGlass";
 
 const {post} = defineProps<{
   post: Post,
@@ -30,21 +31,22 @@ const formattedCreated = computed(()=>{
     <div class="py-12">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-6">
-          <div class="p-6 text-gray-900">
-            <div class="flex w-full justify-between">
+          <div class=" text-gray-900">
+            <div class=" p-2 flex w-full justify-between mb-4 border-b-2 border-eclipsis-gold  bg-eclipsis-navy text-white">
               <h3>Preview Post</h3>
               <div class="flex ">
-                <a class="bg-eclipsis-navy py-2 px-4 text-white mr-2 rounded" :href="`/admin/post/${post.slug}/edit`">Publish</a>
+                <a class="bg-eclipsis-navy py-2 px-4 text-white mr-2 rounded border-2 border-eclipsis-gold" :href="`/admin/post/${post.slug}/edit`">
+                  Publish</a>
 
-                <a class="bg-eclipsis-gold py-2 px-4 text-white mr-2 rounded" :href="`/admin/post/${post.slug}/edit`">Edit</a>
+                <a class="bg-eclipsis-gold py-2 px-4 text-white mr-2 rounded" :href="`/admin/blog/post/${post.slug}/edit`">Edit</a>
                 <a class="bg-red-600 py-2 px-4 text-white rounded">Delete</a>
               </div>
             </div>
-            <div class="flex">
+            <div class="flex gap-4 px-4 items-start">
               <div v-if="!post" class="">
                 <h3>Error finding Post!</h3>
               </div>
-              <div class="my-6 w-3/4" v-else>
+              <div class="mb-6 w-3/4" v-else>
 
                 <div v-if="!post.thumbnail" class="mb-4 rounded-xl overflow-hidden">
                   <img src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1024,h_536/https://blog.snappa.com/wp-content/uploads/2020/01/WP-header-image-size-1024x536.jpg"/>
@@ -64,13 +66,20 @@ const formattedCreated = computed(()=>{
                 </article>
               </div>
 
-                <aside>
-                  <div>Search</div>
+                <aside class="">
                   <div>
+                    <form>
+                      <div class="flex items-center bg-gray-100 p-4 rounded-lg mb-4">
+                         <input type="text" placeholder="Search here..." class=" border-0 bg-transparent">
+                         <font-awesome-icon :icon="faMagnifyingGlass" size="lg"></font-awesome-icon>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="bg-gray-100 p-4 rounded-lg mb-4">
                     Latest Post
 
                   </div>
-                  <div>
+                  <div class="bg-gray-100 p-4 rounded-lg ">
                     Tags
                   </div>
                 </aside>

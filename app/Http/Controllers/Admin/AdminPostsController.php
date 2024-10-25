@@ -29,7 +29,7 @@ class AdminPostsController extends Controller
 
         $categories = Category::all();
         $tags = Tag::all();
-        return Inertia::render('Admin/Blog/Posts/Create', [ 'tags' => $tags, 'categories' => $categories]);
+        return Inertia::render('Admin/Blog/Posts/Create', ['tags' => $tags, 'categories' => $categories]);
     }
 
     /**
@@ -51,7 +51,7 @@ class AdminPostsController extends Controller
         $validated['user_id'] = auth()->id();
         $categories = $validated['categories'];
         unset($validated['categories']);
-      $post = Post::create($validated);
+        $post = Post::create($validated);
         $post->categories()->sync($categories);
     }
 
@@ -60,17 +60,28 @@ class AdminPostsController extends Controller
      */
     public function show($slug)
     {
-      $post = Post::where('slug', $slug)->firstOrFail();
+        $post = Post::where('slug', $slug)->firstOrFail();
 
-        return Inertia::render('Admin/Blog/Posts/Show', [ 'post' => $post]);
+        return Inertia::render('Admin/Blog/Posts/Show', ['post' => $post]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Posts $posts)
+    public function edit($slug)
     {
-        //
+        $post = Post::where('slug', $slug)->firstOrFail();
+        $categories = $post->categories;
+        $tags = $post->tags;
+        $allCategories = Category::all();
+        return Inertia::render(
+            'Admin/Blog/Posts/Edit',
+            [
+                'post' => $post,
+                'categories' => $categories,
+                'allCategories' => $allCategories,
+                'tags' => $tags
+            ]);
     }
 
     /**
