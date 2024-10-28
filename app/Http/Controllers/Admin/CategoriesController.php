@@ -43,9 +43,15 @@ class CategoriesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Category $categories)
+    public function show($param)
     {
-        //
+        $category = Category::where('name', $param)->first();
+        $posts = null;
+        if ($category->posts) {
+            $posts = $category->posts;
+
+        }
+        return Inertia::render('Admin/Blog/Categories/Show', ['posts' => $posts, 'category' => $category]);
     }
 
     /**

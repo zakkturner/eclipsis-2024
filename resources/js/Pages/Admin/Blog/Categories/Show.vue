@@ -8,9 +8,9 @@ import BaseTag from "@/Components/UI/BaseTag.vue";
 
 const {posts, tags, categories} = defineProps<{
   posts: Post[],
-  tags: Tag[],
-  categories: Category[];
-  selectedTag?: Tag;
+
+  category: Category
+
 }>()
 </script>
 
@@ -19,7 +19,10 @@ const {posts, tags, categories} = defineProps<{
 
   <AuthenticatedLayout>
     <template #header>
-      <h2 class="font-semibold text-xl text-gray-800 leading-tight">Blog</h2>
+      <h2 class="font-semibold text-xl text-gray-800 leading-tight">Blog >
+        <NavLink class="font-semibold text-xl text-gray-800 leading-tight" href="/admin/blog/categories">Categories</NavLink>
+        > {{ category.name }}
+      </h2>
     </template>
 
     <div class="py-12">
@@ -30,7 +33,7 @@ const {posts, tags, categories} = defineProps<{
               <h3>
 
               </h3>
-              Posts <span v-if="selectedTag" class="capitalize">Tagged: {{ selectedTag.name }}</span>
+              Posts | <span>Category: {{ category.name }}</span>
             </div>
             <div>
               <div v-if="posts.length <= 0" class="">
@@ -47,34 +50,7 @@ const {posts, tags, categories} = defineProps<{
             </div>
           </div>
         </div>
-        <div class="flex">
-          <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg w-2/3 mr-4">
-            <div class="p-6  mr-4 text-gray-900 ">
-              <div>Categories</div>
-              <ul v-if="categories.length > 0">
-                <li v-for="category in categories">
-                  <a :href="`/admin/blog/categories/${category.name.split(' ').join('-').toLowerCase()}`">{{ category.name }}</a>
-                </li>
-              </ul>
-              <p v-else> No Tags created</p>
-            </div>
-          </div>
-          <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg w-1/3">
-            <div class="p-6 text-gray-900">
-              <div>
-                <h3>Tags</h3>
 
-              </div>
-
-              <ul v-if="tags.length > 0">
-                <li v-for="tag in tags">
-                  <base-tag :tag="tag"></base-tag>
-                </li>
-              </ul>
-              <p v-else> No Tags created</p>
-            </div>
-          </div>
-        </div>
       </div>
 
     </div>

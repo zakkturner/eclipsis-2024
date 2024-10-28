@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import {Head, Link} from "@inertiajs/vue3";
+import {Head, Link, usePage} from "@inertiajs/vue3";
 import NavLink from "@/Components/NavLink.vue";
 import {Post, Tag, Category} from "@/types/post";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
@@ -9,26 +9,34 @@ import {faClock} from "@fortawesome/free-solid-svg-icons";
 import {computed} from "vue";
 import dayjs from "dayjs";
 import {faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons/faMagnifyingGlass";
+import BaseTag from "@/Components/UI/BaseTag.vue";
 
 const {post} = defineProps<{
   post: Post,
-
+  tags: Tag[],
+  categories: Category[],
+  message: string
 
 }>()
-const formattedCreated = computed(()=>{
+const page = usePage();
+const formattedCreated = computed(() => {
   return dayjs(post.created_at).format("MMMM DD, YYYY")
 })
 </script>
 
 <template>
-  <Head :title="post.title" />
+  <Head :title="post.title"/>
 
   <AuthenticatedLayout>
     <template #header>
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">Blog</h2>
     </template>
-
-    <div class="py-12">
+    <div v-if="message" class="alert fixed
+    bg-green-500 p-4 w-full left-1/2 transform
+     -translate-x-1/2 z-10 text-center">
+      <p class="text-white font-bold">{{ message }}</p>
+    </div>
+    <div class="py-12" :class="message && 'pt-20'">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-6">
           <div class=" text-gray-900">
@@ -49,40 +57,44 @@ const formattedCreated = computed(()=>{
               <div class="mb-6 w-3/4" v-else>
 
                 <div v-if="!post.thumbnail" class="mb-4 rounded-xl overflow-hidden">
-                  <img src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1024,h_536/https://blog.snappa.com/wp-content/uploads/2020/01/WP-header-image-size-1024x536.jpg"/>
+                  <img
+                      src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1024,h_536/https://blog.snappa.com/wp-content/uploads/2020/01/WP-header-image-size-1024x536.jpg"/>
                 </div>
                 <div>
                   <div>
-                  <font-awesome-icon :icon="faClock"></font-awesome-icon>
-                    <small>{{formattedCreated}}</small>
+                    <font-awesome-icon :icon="faClock"></font-awesome-icon>
+                    <small>{{ formattedCreated }}</small>
 
                   </div>
                 </div>
                 <div class="mb-4">
 
-                  <h2 class="text-4xl">{{post.title}}</h2>
+                  <h2 class="text-4xl">{{ post.title }}</h2>
                 </div>
                 <article class="prose py-4" v-html="post.body">
                 </article>
               </div>
 
-                <aside class="">
-                  <div>
-                    <form>
-                      <div class="flex items-center bg-gray-100 p-4 rounded-lg mb-4">
-                         <input type="text" placeholder="Search here..." class=" border-0 bg-transparent">
-                         <font-awesome-icon :icon="faMagnifyingGlass" size="lg"></font-awesome-icon>
-                      </div>
-                    </form>
-                  </div>
-                  <div class="bg-gray-100 p-4 rounded-lg mb-4">
-                    Latest Post
+              <aside class="">
+                <div>
+                  <form>
+                    <div class="flex items-center bg-gray-100 p-4 rounded-lg mb-4">
+                      <input type="text" placeholder="Search here..." class=" border-0 bg-transparent">
+                      <font-awesome-icon :icon="faMagnifyingGlass" size="lg"></font-awesome-icon>
+                    </div>
+                  </form>
+                </div>
+                <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                  Latest Post
 
-                  </div>
-                  <div class="bg-gray-100 p-4 rounded-lg ">
-                    Tags
-                  </div>
-                </aside>
+                </div>
+                <div class="bg-gray-100 p-4 rounded-lg ">
+                  Tags
+                  <ul class="flex">
+                    <base-tag v-for="tag in tags" :tag="tag"></base-tag>
+                  </ul>
+                </div>
+              </aside>
 
             </div>
             <div>

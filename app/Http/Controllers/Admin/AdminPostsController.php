@@ -61,8 +61,9 @@ class AdminPostsController extends Controller
     public function show($slug)
     {
         $post = Post::where('slug', $slug)->firstOrFail();
-
-        return Inertia::render('Admin/Blog/Posts/Show', ['post' => $post]);
+        $categories = $post->categories;
+        $tags = $post->tags;
+        return Inertia::render('Admin/Blog/Posts/Show', ['post' => $post, 'categories' => $categories, 'tags' => $tags]);
     }
 
     /**
@@ -87,9 +88,48 @@ class AdminPostsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Posts $posts)
+    public function update(Request $request, $id)
     {
-        //
+        $post = Post::findOrFail($id); // Use findOrFail for better error handling
+
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'body' => 'required|string',
+            'thumbnail' => ['nullable', 'image'],
+            'slug' => ['required', Rule::unique('posts', 'slug')->ignore($post->id)],
+            'excerpt' => 'required',
+            'categories' => 'required|array', // Expecting an array of category IDs
+            'categories.*' => 'exists:categories,id', // Ensure each category exists in the categories table
+            'tags' => 'array|nullable',
+            'tags.*' => 'string|max:50',
+        ]);
+
+        // Create an array of attributes to update
+        $attributesToUpdate = [
+            'title' => $validated['title'],
+            'body' => $validated['body'],
+            'thumbnail' => $validated['thumbnail'] ?? null,
+            'slug' => $validated['slug'],
+            'excerpt' => $validated['excerpt'],
+        ];
+
+        // Update the post without the tags field
+        $post->update($attributesToUpdate);
+        // Sync categories
+        if (isset($validated['categories'])) {
+            $post->categories()->sync($validated['categories']);
+        }
+
+        // Handle tags
+        if (isset($validated['tags'])) {
+            $tagIds = [];
+            foreach ($validated['tags'] as $tagName) {
+                $tag = Tag::firstOrCreate(['name' => $tagName]);
+                $tagIds[] = $tag->id; // Collecting tag IDs
+            }
+            $post->tags()->sync($tagIds); // Sync the tags
+        }
+        return Inertia::render('Admin/Blog/Posts/Show', ['post' => $post, 'message' => "Updated Successfully"]);
     }
 
     /**
