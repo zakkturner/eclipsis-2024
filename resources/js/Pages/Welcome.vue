@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Head, Link } from '@inertiajs/vue3';
+import {Head, Link} from '@inertiajs/vue3';
 import TheHeader from "@/Components/TheHeader.vue";
 import {Announcement, Service} from "@/types/types";
 import TheHero from "@/Components/TheHero.vue";
@@ -10,29 +10,33 @@ import gsap from "gsap";
 import ServiceList from "@/Components/Services/ServiceList.vue";
 import {useServicesStore} from "@/store/services";
 import Services from "@/Components/Services/Services.vue";
+import BlogCarousel from "@/Components/Blog/BlogCarousel.vue";
+import {Post} from "@/types/post";
+
 const props = defineProps<{
-    canLogin: {
-        type: Boolean,
-    },
-    canRegister: {
-        type: Boolean,
-    },
-    laravelVersion: {
-        type: String,
-        required: true,
-    },
-    phpVersion: {
-        type: String,
-        required: true,
-    },
-    announcement: Announcement,
-    services: Service[]
+  canLogin: {
+    type: Boolean,
+  },
+  canRegister: {
+    type: Boolean,
+  },
+  laravelVersion: {
+    type: String,
+    required: true,
+  },
+  phpVersion: {
+    type: String,
+    required: true,
+  },
+  announcement: Announcement,
+  services: Service[],
+  posts: Post[]
 
 }>();
 
 const serviceStore = useServicesStore();
-onBeforeMount(() =>{
-  if(props.services){
+onBeforeMount(() => {
+  if (props.services) {
     serviceStore.setServices(props.services);
   }
 })
@@ -50,28 +54,28 @@ watch(
     (newVal) => {
       if (newVal) {
 
-        gsap.to(main.value, { scale: .15, x: 100, opacity: 0, y: 150, duration: 0.5, ease: 'power2.out' });
+        gsap.to(main.value, {scale: .15, x: 100, opacity: 0, y: 150, duration: 0.5, ease: 'power2.out'});
       } else {
-        gsap.to(main.value, { x: 0, scale: 1, y: 0, opacity: 1,  duration: 0.5, ease: 'power2.in', delay: 1 });
+        gsap.to(main.value, {x: 0, scale: 1, y: 0, opacity: 1, duration: 0.5, ease: 'power2.in', delay: 1});
       }
     },
-    { immediate: true }
+    {immediate: true}
 );
 
 </script>
 
 <template>
-    <Head title="Welcome" />
+  <Head title="Welcome"/>
 
-    <mobile-menu></mobile-menu>
-    <div ref="main" class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50 absolute z-50 top-0 left-0 w-full" >
+  <mobile-menu></mobile-menu>
+  <div ref="main" class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50 absolute z-50 top-0 left-0 w-full">
 
-      <TheHeader :announcement="announcement"></TheHeader>
-      <TheHero></TheHero>
+    <TheHeader :announcement="announcement"></TheHeader>
+    <TheHero></TheHero>
 
-      <Services></Services>
-
-    </div>
+    <Services></Services>
+    <BlogCarousel :posts="posts"></BlogCarousel>
+  </div>
 
 
 </template>

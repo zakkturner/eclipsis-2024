@@ -103,7 +103,7 @@ class AdminPostsController extends Controller
             'tags' => 'array|nullable',
             'tags.*' => 'string|max:50',
         ]);
-
+        $validated['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
         // Create an array of attributes to update
         $attributesToUpdate = [
             'title' => $validated['title'],

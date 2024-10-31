@@ -28,7 +28,8 @@ const form = useForm({
   body: props.post.body,
   excerpt: props.post.excerpt,
   categories: [...props.categories.map(category => category.id)],
-  tags: [...props.tags]
+  tags: [...props.tags],
+  thumbnail: props.post.thumbnail
 })
 const turnToSlug = (str: string) => {
   return str.toString()                         // Convert to string
@@ -49,11 +50,22 @@ const newCategoryContent = ref(null);
 const formUI = reactive({
   noChanges: true,
   newCategory: false,
-  newTag: false
+  newTag: false,
+  fileName: "",
+  thumbnailPreview: null
 })
 const submitForm = () => {
-
-  router.patch(`/admin/blog/post/${props.post.id}`, form);
+  const tagIds = form.tags.map(tag => tag.id)
+  router.post(`/admin/blog/post/${props.post.id}`, {
+    _method: 'put',
+    title: form.title,
+    slug: form.slug,
+    body: form.body,
+    excerpt: form.excerpt,
+    categories: form.categories,
+    tags: tagIds,
+    thumbnail: form.thumbnail,
+  });
 
 }
 const handleFocusOut = () => {
@@ -82,11 +94,10 @@ const handleChange = () => {
 
 }
 const handlePushToTags = (newTag: Tag) => {
-
   form.tags.push(newTag)
   formUI.newTag = true;
-
 }
+
 const removeTag = (tag: Tag) => {
   form.tags.splice(form.tags.indexOf(tag), 1);
 }
@@ -97,6 +108,7 @@ const originalFormData = {
   excerpt: props.post.excerpt,
   categories: [...props.categories.map(category => category.id)],
   tags: [...props.tags],
+  thumbnail: props.post.thumbnail
 };
 
 const formHasChanged = computed(() => {
@@ -105,6 +117,7 @@ const formHasChanged = computed(() => {
       form.slug !== originalFormData.slug ||
       form.body !== originalFormData.body ||
       form.excerpt !== originalFormData.excerpt ||
+      form.thumbnail !== originalFormData.thumbnail ||
       JSON.stringify(form.categories) !== JSON.stringify(originalFormData.categories) ||
       JSON.stringify(form.tags) !== JSON.stringify(originalFormData.tags)
   );
@@ -113,6 +126,19 @@ const formHasChanged = computed(() => {
 watch(formHasChanged, (changed) => {
   formUI.noChanges = !changed; // Set noChanges to true if there are no changes
 });
+const onFileChange = (event) => {
+  const file = event.target.files[0]
+  if (file) {
+    form.thumbnail = file
+    formUI.fileName = file.name;
+    const fileReader = new FileReader()
+    fileReader.addEventListener('load', () => {
+      formUI.thumbnailPreview = fileReader.result
+    })
+    fileReader.readAsDataURL(file)
+  }
+  console.log(file)
+}
 </script>
 
 
@@ -168,7 +194,19 @@ watch(formHasChanged, (changed) => {
               <!--            </primary-button>-->
             </card>
             <card title="Featured Image">
-              <!--            <p class="mb-3 font-normal text-gray-500 dark:text-gray-400">Go to this step by step guideline process on how to certify for your weekly benefits:</p>-->
+
+              <img :src="formUI.thumbnailPreview" v-if="formUI.thumbnailPreview"/>
+              <div class="pt-2 flex flex-col  ">
+                <label
+                    for="fileInput"
+                    class="cursor-pointer bg-blue-500 text-white px-4 py-2 rounded-md"
+                >
+                  Choose File
+                </label>
+                <input id="fileInput" class="hidden" type="file" accept="image/*" @change="onFileChange"/>
+                <span v-if="formUI.fileName" class="truncate max-w-xs text-gray-700">{{ formUI.fileName }}</span>
+
+              </div>
             </card>
           </div>
 
