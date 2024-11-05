@@ -8,11 +8,11 @@ const tagContent = ref('')
 const newTag = ref(false)
 
 const emit = defineEmits(['pushToTags'])
-const handleAddTag = () =>{
+const handleAddTag = () => {
 
   newTag.value = true;
   // form.tags.push()
-  emit('pushToTags',tagContent.value )
+  emit('pushToTags', tagContent.value)
   tagContent.value = ''
 
 
@@ -20,7 +20,7 @@ const handleAddTag = () =>{
 </script>
 
 <template>
-  <input v-model="tagContent"  @keydown.,.prevent="handleAddTag" placeholder="Add Tags">
+  <input v-model="tagContent" @keydown.,.prevent="handleAddTag" placeholder="Add Tags"/>
 
 </template>
 

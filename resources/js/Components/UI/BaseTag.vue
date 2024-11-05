@@ -1,9 +1,12 @@
 <template>
   <li class="rounded-xl uppercase text-[12px] p-4 bg-white p-2 mr-2 mb-2 flex items-center">
 
-    <a :href="`/admin/blog?tag=${tag.id}`">
+    <a v-if="props.route == 'index' " :href="`/admin/blog?tag=${tag.id}`">
       {{ tag.name }}
     </a>
+    <h5 v-else>
+      {{ tag }}
+    </h5>
     <slot/>
   </li>
 </template>
@@ -11,7 +14,9 @@
 
 import {Tag} from "@/types/post";
 
+
 const props = defineProps<{
-  tag: Tag
+  tag: Tag,
+  route: string
 }>()
 </script>

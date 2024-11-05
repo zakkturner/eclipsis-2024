@@ -31,9 +31,8 @@ const formattedCreated = computed(() => {
     <template #header>
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">Blog</h2>
     </template>
-    <div v-if="message" class="alert fixed
-    bg-green-500 p-4 w-full left-1/2 transform
-     -translate-x-1/2 z-10 text-center">
+    <div v-if="message" class="alert
+    bg-green-500 p-4 w-full  z-10 text-center">
       <p class="text-white font-bold">{{ message }}</p>
     </div>
     <div class="py-12" :class="message && 'pt-20'">
@@ -59,6 +58,11 @@ const formattedCreated = computed(() => {
                 <div v-if="!post.thumbnail" class="mb-4 rounded-xl overflow-hidden">
                   <img
                       src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1024,h_536/https://blog.snappa.com/wp-content/uploads/2020/01/WP-header-image-size-1024x536.jpg"/>
+                </div>
+                <div else class="mb-4 rounded-xl overflow-hidden">
+
+                  <img
+                      :src="`/storage/${post.thumbnail}`"/>
                 </div>
                 <div>
                   <div>

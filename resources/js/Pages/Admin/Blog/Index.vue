@@ -5,6 +5,7 @@ import {Head, Link} from "@inertiajs/vue3";
 import NavLink from "@/Components/NavLink.vue";
 import {Post, Tag, Category} from "@/types/post";
 import BaseTag from "@/Components/UI/BaseTag.vue";
+import TagList from "@/Pages/Admin/Blog/Posts/TagList.vue";
 
 const {posts, tags, categories} = defineProps<{
   posts: Post[],
@@ -67,9 +68,7 @@ const {posts, tags, categories} = defineProps<{
               </div>
 
               <ul v-if="tags.length > 0">
-                <li v-for="tag in tags">
-                  <base-tag :tag="tag"></base-tag>
-                </li>
+                <tag-list route="index" :tags="tags"></tag-list>
               </ul>
               <p v-else> No Tags created</p>
             </div>

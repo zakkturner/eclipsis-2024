@@ -10,7 +10,7 @@ const services = serviceStore.services;
 <template>
 
   <h2 class="text-center text-6xl mb-4">Our Services</h2>
-  <ul class="flex justify-between">
+  <ul class="flex ">
     <service v-for="service in services" :key="service.id" :service="service"></service>
   </ul>
 </template>

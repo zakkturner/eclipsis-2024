@@ -16,9 +16,24 @@ class AdminPostsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $tag = $request->query('tag');
+        $selectedTag = null;
+        if ($tag) {
+            $posts = Post::whereHas('tags', function ($query) use ($tag) {
+                $query->where('id', $tag);
+            })->get();
+            $selectedTag = Tag::find($tag);
+        } else {
+            $posts = Post::all();
+        }
+        $categories = Category::all();
+        $tags = Tag::all();
+
+
+        return Inertia::render('Admin/Blog/Index',
+            ['posts' => $posts, 'tags' => $tags, 'categories' => $categories, 'selectedTag' => $selectedTag]);
     }
 
     /**
@@ -38,6 +53,7 @@ class AdminPostsController extends Controller
     public function store(Request $request)
     {
 
+//        dd($request->all());
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'body' => 'required|string',
@@ -50,9 +66,23 @@ class AdminPostsController extends Controller
 
         $validated['user_id'] = auth()->id();
         $categories = $validated['categories'];
+        $validated['thumbnail'] = request()->file('thumbnail')->store('thumbnails', 'public');
         unset($validated['categories']);
         $post = Post::create($validated);
         $post->categories()->sync($categories);
+        // Handle tags
+        if (isset($validated['tags'])) {
+            $tagIds = [];
+            foreach ($validated['tags'] as $tagName) {
+                $tag = Tag::firstOrCreate(['name' => $tagName]);
+                $tagIds[] = $tag->id; // Collecting tag IDs
+            }
+            $post->tags()->sync($tagIds); // Sync the tags
+        }
+        $tags = $post->tags->pluck('name');
+
+        return Inertia::redirect('Admin/Blog/Posts/Show', ['post' => $post, 'categories' => $categories, 'tags' =>
+            $tags]);
     }
 
     /**
@@ -60,9 +90,10 @@ class AdminPostsController extends Controller
      */
     public function show($slug)
     {
+      
         $post = Post::where('slug', $slug)->firstOrFail();
         $categories = $post->categories;
-        $tags = $post->tags;
+        $tags = $post->tags->pluck('name');
         return Inertia::render('Admin/Blog/Posts/Show', ['post' => $post, 'categories' => $categories, 'tags' => $tags]);
     }
 
@@ -81,7 +112,7 @@ class AdminPostsController extends Controller
                 'post' => $post,
                 'categories' => $categories,
                 'allCategories' => $allCategories,
-                'tags' => $tags
+                'tags' => $tags->pluck('name')
             ]);
     }
 
@@ -99,11 +130,11 @@ class AdminPostsController extends Controller
             'slug' => ['required', Rule::unique('posts', 'slug')->ignore($post->id)],
             'excerpt' => 'required',
             'categories' => 'required|array', // Expecting an array of category IDs
-            'categories.*' => 'exists:categories,id', // Ensure each category exists in the categories table
+            'categories.*' => 'exists:categories,id',
             'tags' => 'array|nullable',
             'tags.*' => 'string|max:50',
         ]);
-        $validated['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
+        $validated['thumbnail'] = request()->file('thumbnail')->store('thumbnails', 'public');
         // Create an array of attributes to update
         $attributesToUpdate = [
             'title' => $validated['title'],

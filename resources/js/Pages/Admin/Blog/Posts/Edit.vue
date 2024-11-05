@@ -10,10 +10,9 @@ import {Category, Post, Tag} from "@/types/post";
 import TagForm from "@/Components/Form/TagForm.vue";
 
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import BaseTag from "@/Components/UI/BaseTag.vue";
-import {faClose} from "@fortawesome/free-solid-svg-icons";
-import {faXmark} from "@fortawesome/free-solid-svg-icons/faXmark";
-import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+import ImgForm from "@/Pages/Admin/Blog/Posts/ImgForm.vue";
+import {useTags} from "@/Composables/useTags";
+import TagList from "@/Pages/Admin/Blog/Posts/TagList.vue";
 
 const props = defineProps<{
   categories: Category[];
@@ -63,7 +62,7 @@ const submitForm = () => {
     body: form.body,
     excerpt: form.excerpt,
     categories: form.categories,
-    tags: tagIds,
+    tags: form.tags,
     thumbnail: form.thumbnail,
   });
 
@@ -94,13 +93,17 @@ const handleChange = () => {
 
 }
 const handlePushToTags = (newTag: Tag) => {
-  form.tags.push(newTag)
+  // addTag(newTag)
+  form.tags.push(newTag);
   formUI.newTag = true;
 }
+//
+// const handleRemoveTag = (tag: Tag) => {
+//   removeTag(tag)
+// }
 
-const removeTag = (tag: Tag) => {
-  form.tags.splice(form.tags.indexOf(tag), 1);
-}
+const {tags, addTag, removeTag} = useTags(props.tags)
+
 const originalFormData = {
   title: props.post.title,
   slug: props.post.slug,
@@ -126,19 +129,7 @@ const formHasChanged = computed(() => {
 watch(formHasChanged, (changed) => {
   formUI.noChanges = !changed; // Set noChanges to true if there are no changes
 });
-const onFileChange = (event) => {
-  const file = event.target.files[0]
-  if (file) {
-    form.thumbnail = file
-    formUI.fileName = file.name;
-    const fileReader = new FileReader()
-    fileReader.addEventListener('load', () => {
-      formUI.thumbnailPreview = fileReader.result
-    })
-    fileReader.readAsDataURL(file)
-  }
-  console.log(file)
-}
+
 </script>
 
 
@@ -182,31 +173,12 @@ const onFileChange = (event) => {
               </div>
             </card>
             <card title="Tags">
-              <ul class="flex mb-4 flex-wrap">
-                <base-tag v-for="tag in form.tags" :tag="tag" key="tag.name">
-                  <button class="ml-2 " @click.prevent="removeTag(tag)">
-                    <font-awesome-icon class="w-1/2" size="lg" :icon="faClose"></font-awesome-icon>
-                  </button>
-                </base-tag>
-              </ul>
+              <tag-list route="update" :tags="form.tags"></tag-list>
               <tag-form @pushToTags="handlePushToTags"></tag-form>
-              <!--            <primary-button @click="handleSaveTag" class="mt-4" v-if="formUI.newTag">Save tag<span v-if="form.tags.length > 1">s</span>-->
-              <!--            </primary-button>-->
+
             </card>
             <card title="Featured Image">
-
-              <img :src="formUI.thumbnailPreview" v-if="formUI.thumbnailPreview"/>
-              <div class="pt-2 flex flex-col  ">
-                <label
-                    for="fileInput"
-                    class="cursor-pointer bg-blue-500 text-white px-4 py-2 rounded-md"
-                >
-                  Choose File
-                </label>
-                <input id="fileInput" class="hidden" type="file" accept="image/*" @change="onFileChange"/>
-                <span v-if="formUI.fileName" class="truncate max-w-xs text-gray-700">{{ formUI.fileName }}</span>
-
-              </div>
+              <ImgForm :formUI="formUI" :form="form"/>
             </card>
           </div>
 

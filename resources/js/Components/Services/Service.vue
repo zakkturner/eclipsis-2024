@@ -10,7 +10,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <li class="bg-gray-300 p-20" >{{ service.title }}</li>
+  <li class="bg-gray-300 p-20 mr-4">{{ service.title }}</li>
 </template>
 
 <style scoped>
