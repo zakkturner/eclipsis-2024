@@ -17,6 +17,6 @@ import {Tag} from "@/types/post";
 
 const props = defineProps<{
   tag: Tag,
-  route: string
+  route?: string
 }>()
 </script>

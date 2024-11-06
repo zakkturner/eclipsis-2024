@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class BlogController extends Controller
 {
@@ -18,8 +19,9 @@ class BlogController extends Controller
     public function show($slug)
     {
         $post = Post::where('slug', $slug)->firstOrFail();
-        dd($post);
-        Inertia::render('Blog/Show', ['post' => $post]);
+        $tags = $post->tags()->get();
+        return Inertia::render('Blog/Show', ['post' => $post,
+            'tags' => $tags]);
     }
 
 }
