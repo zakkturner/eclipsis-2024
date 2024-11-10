@@ -20,8 +20,10 @@ class BlogController extends Controller
     {
         $post = Post::where('slug', $slug)->firstOrFail();
         $tags = $post->tags()->get();
+        $categories = $post->categories()->get();
+        $latest_posts = Post::where('slug', '!=', $post->slug)->latest()->limit(5)->get();
         return Inertia::render('Blog/Show', ['post' => $post,
-            'tags' => $tags]);
+            'tags' => $tags, 'latest_posts' => $latest_posts, 'categories' => $categories]);
     }
 
 }

@@ -8,6 +8,7 @@ use App\Models\Posts;
 use App\Http\Controllers\Controller;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 
@@ -90,7 +91,7 @@ class AdminPostsController extends Controller
      */
     public function show($slug)
     {
-      
+
         $post = Post::where('slug', $slug)->firstOrFail();
         $categories = $post->categories;
         $tags = $post->tags->pluck('name');
@@ -134,15 +135,18 @@ class AdminPostsController extends Controller
             'tags' => 'array|nullable',
             'tags.*' => 'string|max:50',
         ]);
-        $validated['thumbnail'] = request()->file('thumbnail')->store('thumbnails', 'public');
-        // Create an array of attributes to update
-        $attributesToUpdate = [
-            'title' => $validated['title'],
-            'body' => $validated['body'],
-            'thumbnail' => $validated['thumbnail'] ?? null,
-            'slug' => $validated['slug'],
-            'excerpt' => $validated['excerpt'],
-        ];
+        if ($request->hasFile('thumbnail')) {
+            $validated['thumbnail'] = $request->file('thumbnail')->store('thumbnails', 'public');
+        } else {
+            // Keep the existing thumbnail if no new file is uploaded
+            unset($validated['thumbnail']);
+        }
+
+        // Attributes to update, except thumbnail if not present
+        $attributesToUpdate = array_merge(
+            Arr::only($validated, ['title', 'body', 'slug', 'excerpt']),
+            ['thumbnail' => $validated['thumbnail'] ?? $post->thumbnail]
+        );
 
         // Update the post without the tags field
         $post->update($attributesToUpdate);
@@ -150,7 +154,7 @@ class AdminPostsController extends Controller
         if (isset($validated['categories'])) {
             $post->categories()->sync($validated['categories']);
         }
-
+        $categories = $post->categories;
         // Handle tags
         if (isset($validated['tags'])) {
             $tagIds = [];
@@ -160,7 +164,9 @@ class AdminPostsController extends Controller
             }
             $post->tags()->sync($tagIds); // Sync the tags
         }
-        return Inertia::render('Admin/Blog/Posts/Show', ['post' => $post, 'message' => "Updated Successfully"]);
+        $tags = $post->tags;
+        return Inertia::render('Admin/Blog/Posts/Show', ['post' => $post, 'categories' => $categories, 'tags' => $tags,
+            'message' => "Updated Successfully"])->with('slug', $post->slug);
     }
 
     /**

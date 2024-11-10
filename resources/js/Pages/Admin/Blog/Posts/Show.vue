@@ -45,7 +45,7 @@ const formattedCreated = computed(() => {
                 <a class="bg-red-600 py-2 px-4 text-white rounded">Delete</a>
               </div>
             </div>
-            <BlogPost/>
+            <BlogPost :post="post" :categories="categories"/>
             <div>
             </div>
           </div>

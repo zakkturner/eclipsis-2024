@@ -1,21 +1,27 @@
 <script setup lang="ts">
 
 
-import {Post, Tag} from "@/types/post";
+import {Category, Post, Tag} from "@/types/post";
 import {Head} from "@inertiajs/vue3";
 import MainLayout from "@/Layouts/MainLayout.vue";
 import BlogPost from "@/Components/Blog/BlogPost.vue";
 
 const props = defineProps<{
   post: Post,
-  tags: Tag[]
+  tags: Tag[],
+  categories: Category[],
+  latest_posts: Post[]
 }>()
 </script>
 
 <template>
   <Head :title="post.title"/>
   <main-layout>
-    <blog-post :post="post" :tags="tags"></blog-post>
+    <section class="w-3/4 mt-40 mx-auto">
+
+      <blog-post :post="post" :latest_posts="latest_posts" :categories="categories" :tags="tags"></blog-post>
+    </section>
+
   </main-layout>
 </template>
 

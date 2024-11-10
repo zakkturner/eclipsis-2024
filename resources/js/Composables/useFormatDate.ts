@@ -7,5 +7,7 @@ type FormattedDate = {
 
 export function useFormatDate(date: Date): FormattedDate {
     const formattedDate: any = dayjs(date).format("MMMM DD, YYYY")
-    return formattedDate;
+    return {
+        formattedDate
+    };
 }

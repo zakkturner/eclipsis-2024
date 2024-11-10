@@ -63,7 +63,7 @@ const submitForm = () => {
     excerpt: form.excerpt,
     categories: form.categories,
     tags: form.tags,
-    thumbnail: form.thumbnail,
+    thumbnail: null
   });
 
 }
