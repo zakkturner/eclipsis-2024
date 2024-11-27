@@ -11,8 +11,8 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', HomeController::class);
-Route::resource('/blog', BlogController::class)->only(['index', 'show'])->parameters(['post' => 'slug']);
-
+Route::resource('/blog', BlogController::class)->except(['store', 'update', 'edit'])->parameters(['post' => 'slug']);
+Route::get('/blog/search', [BlogController::class, 'search'])->name('blog.search');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

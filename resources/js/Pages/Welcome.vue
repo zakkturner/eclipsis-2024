@@ -49,7 +49,9 @@ onBeforeMount(() => {
   <Head title="Welcome"/>
 
   <main-layout :announcement="announcement">
-
+    <template #hero>
+      <TheHero></TheHero>
+    </template>
     <Services></Services>
     <BlogCarousel :posts="posts"></BlogCarousel>
   </main-layout>
