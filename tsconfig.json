@@ -3,7 +3,10 @@
     "baseUrl": "./resources",
     "paths": {
       "@/*": ["js/*"]
-    }
+    },
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "lib": [ "es2015" ]
   },
   "include": [
     "env.d.ts",

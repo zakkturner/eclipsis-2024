@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 
 import {Link} from "@inertiajs/vue3";
-import {Announcement} from "@/types";
+import {Announcement} from "@/types/types";
 
 const props = defineProps<{
     announcements: Announcement[]

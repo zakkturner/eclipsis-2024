@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {Announcement} from "@/types";
+import {Announcement} from "@/types/types";
 
 
 const props = defineProps<{
@@ -10,13 +10,14 @@ const props = defineProps<{
 
 <template>
 <div class="bg-eclipsis-navy">
-    <div class="flex justify-between items-center py-2 mx-2">
+    <div class="flex justify-between items-center py-4  mx-auto max-w-[1600px]">
         <div>
 
             <h6 class="text-white" v-if="announcement">{{announcement.body}}</h6>
         </div>
         <div class="flex text-white ">
-            <div class="mr-2 text-eclipsis-gold"><VIcon name="fa-phone"/><span class="text-white">
+            <div class="mr-2 text-eclipsis-gold">
+              <VIcon name="fa-phone"/><span class="text-white">
 404-482-3287
 </span></div>
             <ul class="flex justify-between">
@@ -36,6 +37,3 @@ const props = defineProps<{
 </div>
 </template>
 
-<style scoped>
-
-</style>

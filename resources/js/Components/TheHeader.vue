@@ -1,75 +1,47 @@
 <script lang="ts" setup>
-
+import {ref} from 'vue';
 import AnnouncementBar from "@/Components/AnnouncementBar.vue";
-import {Announcement} from "@/types";
-import NavLink from "@/Components/NavLink.vue";
+import {Announcement} from "@/types/types";
+import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+import {faBars} from "@fortawesome/free-solid-svg-icons";
+import TheLogo from "@/Components/TheLogo.vue";
+import {useUiStateStore} from "@/store";
+import gsap from "gsap";
+
+const uiStore = useUiStateStore()
+
+
 const props = defineProps<{
-  announcement: Announcement
+  announcement?: Announcement
 }>();
+
+const mobileBtn = ref(null);
+const openMenu = (): void => {
+  uiStore.toggleMenu()
+  gsap.to(mobileBtn, {x: -100, duration: .5})
+}
 </script>
 
 <template>
-<!--    &lt;!&ndash; Preloader &ndash;&gt;-->
-<!--    <div class="preloader">-->
-<!--        <div class="icon"></div>-->
-<!--    </div>-->
 
 
-    <header class="main-header header-style-two">
-      <AnnouncementBar :announcement="announcement"></AnnouncementBar>
-        <!-- Header Upper -->
-        <div class="header-upper max-w-[1200px] mx-auto">
-            <div class="flex justify-between items-center">
-                <!--Logo-->
-                <div class="w-[115px]">
-                    <div class="logo">
-                      <a href="/#top" title="Eclipsis Studios"><img
-                        src="/images/logos/cropped-eclipsis-dark.png" class="main-logo"
-                        alt="Eclipsis Studios | Web Agency"
-                        title="Eclipsis Studios | Web Agency">
-<!--                      <img src="/images/logos/cropped-eclipsis-yellow.png"-->
-<!--                                                                   id="thm-logo" alt="Eclipsis Studios | Web Agency"-->
-<!--                                                                   title="Eclipsis Studios | Web Agency" class="stricked-logo">-->
-                    </a>
-                    </div>
-                </div>
-              <nav class="main-menu navbar-expand-md navbar-light flex justify-between">
-                <div class=" show clearfix" id="navbarSupportedContent">
-                  <ul class="navigation clearfix flex">
-                    <li ><NavLink href="/#top">Home</NavLink>
-
-                    </li>
-                    <li>
-                      <NavLink href="#about">About Us</NavLink>
-
-                    </li>
-                    <li><NavLink href="#services">Services</NavLink>
-
-                    </li>
-                    <li><NavLink href="#work">Our Work</NavLink></li>
-
-                    <li><NavLink href="#discover">Discover</NavLink></li>
-                    <li><NavLink href="#contNavLinkct">Contact</NavLink></li>
-
-                  </ul>
-                </div>
-              </nav>
-                <div class="nav-outer clearfix">
-                    <!--Mobile Navigation Toggler-->
-                    <div class="mobile-nav-toggler lg:hidden"><span class="icon flaticon-menu-2"></span><span
-                        class="txt">Menu</span></div>
-
-                    <!-- Main Menu -->
-
-                </div>
-
-            </div>
+  <header class="main-header header-style-two">
+    <AnnouncementBar :announcement="announcement"></AnnouncementBar>
+    <!-- Header Upper -->
+    <div class="header-upper max-w-[1600px] mx-auto absolute w-full -translate-x-1/2 left-1/2">
+      <div class="flex justify-between items-center mx-2">
+        <!--Logo-->
+        <div class="nav-outer clearfix">
+          <!--Mobile Navigation Toggler-->
+          <button ref="mobileBtn" class="mobile-nav-toggler  hover:cursor-pointer" @click="openMenu">
+            <font-awesome-icon :icon="faBars" size="2x" class="text-eclipsis-gold"/>
+          </button>
         </div>
-        <!--End Header Upper-->
-
-
-    </header>
-
+        <the-logo></the-logo>
+      </div>
+    </div>
+    <!--End Header Upper-->
+  </header>
 
 
 </template>

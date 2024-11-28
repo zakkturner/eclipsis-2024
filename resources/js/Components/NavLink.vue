@@ -22,6 +22,9 @@ const classes = computed(() =>
 
 <template>
     <Link :href="href" :class="classes">
+      <span class="text-eclipsis-navy hover:text-eclipsis-gold transition-all ease-in-out">
         <slot />
+
+      </span>
     </Link>
 </template>

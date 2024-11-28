@@ -1,7 +1,7 @@
 <script lang="ts"  setup>
 import {ModelRef, reactive, onMounted} from "vue";
 import {Link, router} from "@inertiajs/vue3";
-import {Announcement} from "@/types";
+import {Announcement} from "@/types/types";
 import TextArea from "@/Components/Form/TextArea.vue";
 const props = defineProps<{
   announcement : Announcement
