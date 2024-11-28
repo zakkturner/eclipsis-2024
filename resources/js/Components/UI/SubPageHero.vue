@@ -26,7 +26,7 @@ const props = defineProps<{
       <div class="flex justify-center h-full items-center ">
         <div class="text-center px-2">
           <div class="mb-8">
-            <h1 class="text-white text-4xl lg:text-8xl font-black">{{ pageTitle }}</h1>
+            <h1 class="text-white text-4xl lg:text-6xl font-black uppercase">{{ pageTitle }}</h1>
           </div>
           <div class="mb-8">
             <ul class="text-lg font-semibold text-gray-100 lg:text-4xl flex justify-center">

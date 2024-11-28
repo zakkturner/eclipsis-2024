@@ -6,6 +6,7 @@ import {Category, Post, Tag} from "@/types/post";
 import {computed} from "vue";
 import dayjs from "dayjs";
 import BlogPost from "@/Components/Blog/BlogPost.vue";
+import BlogSidebar from "@/Components/Blog/BlogSidebar.vue";
 
 const {post} = defineProps<{
   post: Post,
@@ -29,6 +30,7 @@ const formattedCreated = computed(() => {
     </template>
     <div v-if="message" class="alert
     bg-green-500 p-4 w-full  z-10 text-center">
+      {{ tags }}
       <p class="text-white font-bold">{{ message }}</p>
     </div>
     <div class="py-12" :class="message && 'pt-20'">
@@ -45,8 +47,10 @@ const formattedCreated = computed(() => {
                 <a class="bg-red-600 py-2 px-4 text-white rounded">Delete</a>
               </div>
             </div>
-            <BlogPost :post="post" :categories="categories"/>
-            <div>
+            <div class="flex">
+
+              <BlogPost :post="post" :categories="categories"/>
+              <blog-sidebar :tags="tags"></blog-sidebar>
             </div>
           </div>
         </div>

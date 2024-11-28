@@ -9,24 +9,24 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class TagsController extends Controller
+class CategoriesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function __invoke($tag)
+    public function __invoke($category)
     {
-        $posts = Post::whereHas('tags', function ($query) use ($tag) {
-            $query->where('name', $tag);
+        $posts = Post::whereHas('tags', function ($query) use ($category) {
+            $query->where('name', $category);
         })->with('tags')->get();
         $latest_posts = Post::latest()->limit(5)->get();
         $tags = Tag::all();
 
-        return Inertia::render('Blog/Tag/Index', [
+        return Inertia::render('Blog/Category/Index', [
             "posts" => $posts,
             "latest_posts" => $latest_posts,
             "tags" => $tags,
-            "tag" => $tag,
+            "category" => $category,
         ]);
     }
 

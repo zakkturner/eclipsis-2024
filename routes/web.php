@@ -2,17 +2,21 @@
 
 use App\Http\Controllers\Admin\AdminPostsController;
 use App\Http\Controllers\Admin\AnnouncementController;
-use App\Http\Controllers\Admin\CategoriesController;
+use App\Http\Controllers\Admin\AdminCategoriesController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TagsController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', HomeController::class);
 Route::resource('/blog', BlogController::class)->except(['store', 'update', 'edit'])->parameters(['post' => 'slug']);
 Route::get('/blog/search', [BlogController::class, 'search'])->name('blog.search');
+Route::get('/blog/tag/{tag}', TagsController::class)->name('blog.tag');
+Route::get('/blog/category/{category}', CategoriesController::class)->name('blog.category');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -46,7 +50,7 @@ Route::middleware('auth')->group(function () {
                 'edit' => 'admin.blog.edit',
                 'destroy' => 'admin.blog.destroy',
             ]);
-            Route::resource('/categories', CategoriesController::class);
+            Route::resource('/categories', AdminCategoriesController::class);
         });
     });
 });

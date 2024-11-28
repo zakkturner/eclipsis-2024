@@ -1,7 +1,7 @@
 <template>
   <ul class="flex mb-4 flex-wrap">
-    <base-tag :route="route" v-for="tag in tags" :tag="tag" key="tag.name">
-      <button v-if="route !== 'index'" class="ml-2 " @click.prevent="handleRemoveTag(tag)">
+    <base-tag :indexRoute="indexRoute" v-for="tag in tags" :tag="tag" key="tag.name">
+      <button v-if="!indexRoute" class="ml-2 " @click.prevent="handleRemoveTag(tag)">
         <font-awesome-icon class="w-1/2" size="lg" :icon="faClose"></font-awesome-icon>
       </button>
     </base-tag>
@@ -16,7 +16,7 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 
 const props = defineProps<{
   tags: Tag[];
-  route?: string
+  indexRoute?: boolean
 }>();
 const {removeTag} = useTags(props.tags)
 const handleRemoveTag = (tag: Tag): void => {

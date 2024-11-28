@@ -68,7 +68,7 @@ const {posts, tags, categories} = defineProps<{
               </div>
 
               <ul v-if="tags.length > 0">
-                <tag-list route="index" :tags="tags"></tag-list>
+                <tag-list :indexRoute="true" :tags="tags"></tag-list>
               </ul>
               <p v-else> No Tags created</p>
             </div>

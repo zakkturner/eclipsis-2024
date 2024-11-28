@@ -15,7 +15,7 @@
     <gray-card title="Tags">
       <ul class="flex flex-wrap">
 
-        <base-tag v-for="tag in tags" :tag="tag" route="index"></base-tag>
+        <base-tag v-for="tag in tags" :tag="tag" :indexRoute="true"></base-tag>
       </ul>
     </gray-card>
   </aside>

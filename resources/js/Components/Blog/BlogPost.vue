@@ -57,10 +57,10 @@ const {isShow} = useIsShow(currentRoute, 'blog.show')
         <div class="flex items-end">
           <h5 class="uppercase text-black font-bold mr-1">Categories</h5>
           <p class="text-sm">
-            <a :href="`/blog/${categories[0].name.split(' ').join('-').toLowerCase()}`">
+            <a :href="`/blog/category/${categories[0].name.split(' ').join('-').toLowerCase()}`">
               {{ categories[0].name }}<span v-if="categories[1]">, </span>
             </a>
-            <a v-if="categories[1]" :href="`/blog/${categories[1].name.split(' ').join('-').toLowerCase()}`">
+            <a v-if="categories[1]" :href="`/blog/category/${categories[1].name.split(' ').join('-').toLowerCase()}`">
               {{ categories[1].name }}
             </a>
           </p>
