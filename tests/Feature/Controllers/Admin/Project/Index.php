@@ -25,7 +25,8 @@ class Index extends TestCase
 
         $user = User::factory()->create();
         $projects = Project::factory(10)->create();
+        $this->assertCount(10, Project::all());
         $response = $this->actingAs($user)->get('admin/projects');
-        $response->assertJsonCount(10);
+        $response->assertJsonCount(10, 'projects');
     }
 }

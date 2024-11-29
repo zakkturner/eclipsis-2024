@@ -13,7 +13,8 @@ class AdminProjectController extends Controller
      */
     public function index()
     {
-        return response("Welcome to Admin Project", 200);
+
+        return response(['projects' => Project::all()], 200);
     }
 
     /**
