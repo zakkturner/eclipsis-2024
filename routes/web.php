@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminPostsController;
+use App\Http\Controllers\Admin\AdminProjectController;
 use App\Http\Controllers\Admin\AnnouncementController;
 use App\Http\Controllers\Admin\AdminCategoriesController;
 use App\Http\Controllers\Admin\ServiceController;
@@ -39,6 +40,14 @@ Route::middleware('auth')->group(function () {
             'show' => 'admin.services.show',
             'edit' => 'admin.services.edit',
             'destroy' => 'admin.services.destroy',
+        ]);
+        Route::resource('/projects', AdminProjectController::class)->names([
+            'index' => 'admin.projects.index',
+            'create' => 'admin.projects.create',
+            'store' => 'admin.projects.store',
+            'show' => 'admin.projects.show',
+            'edit' => 'admin.projects.edit',
+            'destroy' => 'admin.projects.destroy',
         ]);
         Route::prefix("blog")->group(function () {
 //            Route::get('/', [BlogController::class, 'index'])->name('admin.blog.index');

@@ -2,16 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Admin\Service;
-use App\Models\Post;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Inertia\Inertia;
 use App\Models\Announcement;
-use Inertia\Response;
-use Illuminate\Support\Facades\Route;
+use App\Models\Post;
+use App\Models\Service;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class HomeController extends Controller
 {

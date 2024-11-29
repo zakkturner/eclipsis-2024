@@ -53,6 +53,7 @@ onBeforeMount(() => {
       <TheHero></TheHero>
     </template>
     <Services></Services>
+    <Projects></Projects>
     <BlogCarousel :posts="posts"></BlogCarousel>
   </main-layout>
 

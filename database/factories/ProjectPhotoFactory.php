@@ -2,12 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\Project;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Category>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ProjectPhoto>
  */
-class CategoryFactory extends Factory
+class ProjectPhotoFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +18,8 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->realText(20)
+            'project_id' => Project::factory(),
+            'img_src' => 'https://picsum.photos/200/300'
         ];
     }
 }
