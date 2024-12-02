@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Project;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class AdminProjectController extends Controller
 {
@@ -14,7 +15,10 @@ class AdminProjectController extends Controller
     public function index()
     {
 
-        return response(['projects' => Project::all()], 200);
+        $projects = Project::with('client')->get();
+
+
+        return Inertia::render('Admin/Projects/Index', ['projects' => $projects]);
     }
 
     /**
@@ -22,7 +26,7 @@ class AdminProjectController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Admin/Projects/Create');
     }
 
     /**
@@ -30,7 +34,16 @@ class AdminProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $attr = $request->validate([
+            'client_id' => 'required|integer|exists:clients,id',
+            'title' => 'string|required|min:3|max:100',
+            'description' => 'string|required|min:3|max:100',
+            'launch_date' => 'date|nullable',
+            'website_url' => 'string|nullable',
+        ]);
+
+        Project::create($attr);
+        return Inertia::render('Admin/Projects/Index', ['projects' => Project::all()]);
     }
 
     /**
@@ -46,7 +59,13 @@ class AdminProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+
+
+        return Inertia::render('Admin/Projects/Edit', [
+            'project' => $project,
+            'project_photos' => $project->project_photos()->get(),
+
+        ]);
     }
 
     /**
@@ -54,7 +73,17 @@ class AdminProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        //
+        $attr = $request->validate([
+            'client_id' => 'required|integer|exists:clients,id',
+            'title' => 'string|required|min:3|max:100',
+            'description' => 'string|required|min:3|max:100',
+            'launch_date' => 'date|nullable',
+            'website_url' => 'string|nullable',
+        ]);
+
+        $project->update($attr);
+        $project->save();
+        return Inertia::render('Admin/Projects/Show', ['project' => $project])->with(["message" => "Project updated successfully"]);
     }
 
     /**
@@ -62,6 +91,7 @@ class AdminProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        $project->delete();
+        return Inertia::render('Admin/Projects/Index', ['projects' => Project::all()])->with(["message" => "Project deleted successfully"]);
     }
 }

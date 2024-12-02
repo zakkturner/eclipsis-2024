@@ -17,7 +17,8 @@ class Index extends TestCase
 
         $user = User::factory()->create();
 
-        $response = $this->actingAs($user)->get('admin/projects')->assertStatus(200);
+        $response = $this->actingAs($user)->get('/admin/projects')
+            ->assertInertia(fn(Assert $page) => $page->component('Project/Index'));
     }
 
     public function test_index_returns_200_with_projects()
