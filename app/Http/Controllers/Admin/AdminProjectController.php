@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Client;
 use App\Models\Project;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -64,6 +65,8 @@ class AdminProjectController extends Controller
         return Inertia::render('Admin/Projects/Edit', [
             'project' => $project,
             'project_photos' => $project->project_photos()->get(),
+            'client' => $project->client()->get()->first(),
+            'clients' => Client::all()
 
         ]);
     }
@@ -76,7 +79,7 @@ class AdminProjectController extends Controller
         $attr = $request->validate([
             'client_id' => 'required|integer|exists:clients,id',
             'title' => 'string|required|min:3|max:100',
-            'description' => 'string|required|min:3|max:100',
+            'description' => 'string|required|min:3|max:200',
             'launch_date' => 'date|nullable',
             'website_url' => 'string|nullable',
         ]);
