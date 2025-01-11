@@ -8,6 +8,7 @@ import {reactive} from "vue";
 import {Client} from "@/types/types";
 import FormGroup from "@/Pages/Admin/Projects/FormGroup.vue";
 import { router } from '@inertiajs/vue3'
+import TextArea from "@/Components/Form/TextArea.vue";
 
 const props = defineProps<{
   project: Project;
@@ -48,7 +49,7 @@ const handleSubmit =()=>{
               <text-input v-model="form.title" name="title"/>
           </form-group>
           <form-group for="description">
-              <text-input v-model="form.description" name="description"/>
+              <text-area rows="15" v-model="form.description" name="description"/>
           </form-group>
           <form-group for="client">
               <select>

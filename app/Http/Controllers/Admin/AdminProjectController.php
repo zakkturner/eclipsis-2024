@@ -52,7 +52,12 @@ class AdminProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        return Inertia::render('Admin/Projects/Show', [
+            'project' => $project,
+            'project_photos' => $project->project_photos()->get(),
+            'client' => $project->client()->get()->first()
+
+        ]);
     }
 
     /**

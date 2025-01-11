@@ -9,6 +9,10 @@ import DangerButton from "@/Components/DangerButton.vue";
 
 const props = defineProps<{
   photos: BasePhoto[]
+  showPage?: {
+      type: boolean,
+      default: false
+  }
 }>()
 
 const isOpen = ref(false);
@@ -26,7 +30,7 @@ const selectPhoto = (photo: BasePhoto) => {
     <li v-for="photo in photos" @click="selectPhoto(photo)" class="mr-6 rounded overflow-hidden hover:cursor-pointer hover:grayscale">
       <img class="w-[200px] h-[300px]" :src="photo.img_src" alt="" srcset="">
     </li>
-    <li class="mr-6 rounded overflow-hidden">
+    <li class="mr-6 rounded overflow-hidden" v-if="!showPage">
       <div class="flex items-center justify-center w-[200px] h-[300px] bg-gray-800">
         <button class="bg-gray-700 p-8 rounded-full text-gray-300">
           Add
