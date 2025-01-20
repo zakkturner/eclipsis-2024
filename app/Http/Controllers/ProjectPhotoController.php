@@ -8,53 +8,20 @@ use Illuminate\Http\Request;
 
 class ProjectPhotoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validatedPhoto = $request->validate([
+            'alt' => 'nullable|min:3|max:255',
+            'img_src' => 'nullable|mimes:jpeg,jpg,png,gif'
+        ]);
+        $validatedPhoto['img_src'] = request()->file('img_src')->store('project_photos', 'public');
+        $validatedPhoto['project_id'] = 1;
+        ProjectPhoto::create($validatedPhoto);
+
+        return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(ProjectPhoto $projectPhoto)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(ProjectPhoto $projectPhoto)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, ProjectPhoto $projectPhoto)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.

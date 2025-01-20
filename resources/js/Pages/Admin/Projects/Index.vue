@@ -29,6 +29,13 @@ const tableHeadings = [
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
           <div class="p-6 text-gray-900">
             <div class="w-full mx-auto flex flex-col justify-center">
+              <div class="flex w-full justify-end mb-10">
+              
+                <NavLink
+                    class="bg-green-700   px-4 py-2 rounded text-white! border-4 border-eclipsis-gold hover:bg-white hover:text-black transition-all
+                          ease-in-out" href="/admin/projects/create"><span class="text-white">Add Project</span>
+                </NavLink>
+              </div>
               <custom-table :tableHeadings="tableHeadings">
                 <li v-for="project in projects" :key="project.id" class="border-eclipsis-navy border-t-2 first:border-t-0 last:border-b-2">
                   <div class="flex justify-between">
@@ -51,8 +58,8 @@ const tableHeadings = [
                     <div class="w-1/3 border-r-2  border-eclipsis-navy flex justify-center items-center py-2">
 
                       <NavLink
-                          class="bg-eclipsis-gold  px-4 py-2 rounded text-white border-4 border-eclipsis-gold hover:bg-white hover:text-black transition-all
-                          ease-in-out" :href="'/admin/projects/' + project.id + '/edit'">Edit
+                          class="bg-eclipsis-gold   px-4 py-2 rounded text-white! border-4 border-eclipsis-gold hover:bg-white hover:text-black transition-all
+                          ease-in-out" :href="'/admin/projects/' + project.id + '/edit'"><span class="text-white">Edit</span>
                       </NavLink>
                     </div>
                     <div class="w-1/3 border-r-2  border-eclipsis-navy flex justify-center items-center py-2">

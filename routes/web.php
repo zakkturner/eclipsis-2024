@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminClientController;
 use App\Http\Controllers\Admin\AdminPostsController;
 use App\Http\Controllers\Admin\AdminProjectController;
 use App\Http\Controllers\Admin\AnnouncementController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProjectPhotoController;
 use App\Http\Controllers\TagsController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -33,6 +35,29 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('announcements', AnnouncementController::class);
     Route::prefix('admin')->group(function () {
+        Route::prefix("blog")->group(function () {
+//            Route::get('/', [BlogController::class, 'index'])->name('admin.blog.index');
+            Route::resource('/post', AdminPostsController::class)->parameters(['post' => 'slug'])->names([
+                'index' => 'admin.blog.index',
+                'show' => 'admin.blog.show',
+                'create' => 'admin.blog.create',
+                'store' => 'admin.blog.store',
+                'edit' => 'admin.blog.edit',
+                'destroy' => 'admin.blog.destroy',
+            ]);
+            Route::resource('/categories', AdminCategoriesController::class);
+
+
+        });
+        Route::resource('/clients', AdminClientController::class)->names([
+            'index' => 'admin.clients.index',
+            'create' => 'admin.clients.create',
+            'store' => 'admin.clients.store',
+            'show' => 'admin.clients.show',
+            'edit' => 'admin.clients.edit',
+            'destroy' => 'admin.clients.destroy',
+        ]);
+        Route::post('/project-photos', [ProjectPhotoController::class, 'store'])->name('project_photos.store');
         Route::resource('/services', ServiceController::class)->names([
             'index' => 'admin.services.index',
             'create' => 'admin.services.create',
@@ -49,18 +74,6 @@ Route::middleware('auth')->group(function () {
             'edit' => 'admin.projects.edit',
             'destroy' => 'admin.projects.destroy',
         ]);
-        Route::prefix("blog")->group(function () {
-//            Route::get('/', [BlogController::class, 'index'])->name('admin.blog.index');
-            Route::resource('/post', AdminPostsController::class)->parameters(['post' => 'slug'])->names([
-                'index' => 'admin.blog.index',
-                'show' => 'admin.blog.show',
-                'create' => 'admin.blog.create',
-                'store' => 'admin.blog.store',
-                'edit' => 'admin.blog.edit',
-                'destroy' => 'admin.blog.destroy',
-            ]);
-            Route::resource('/categories', AdminCategoriesController::class);
-        });
     });
 });
 

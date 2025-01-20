@@ -37,4 +37,5 @@ export interface BasePhoto {
     img_src: string;
     created_at: string;
     updated_at: string;
+    alt?: string;
 }
