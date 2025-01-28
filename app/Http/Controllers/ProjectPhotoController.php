@@ -13,7 +13,8 @@ class ProjectPhotoController extends Controller
     {
         $validatedPhoto = $request->validate([
             'alt' => 'nullable|min:3|max:255',
-            'img_src' => 'nullable|mimes:jpeg,jpg,png,gif'
+            'img_src' => 'nullable|mimes:jpeg,jpg,png,gif',
+            'position' => 'nullable|min:3|max:255',
         ]);
         $validatedPhoto['img_src'] = request()->file('img_src')->store('project_photos', 'public');
         $validatedPhoto['project_id'] = 1;
@@ -22,6 +23,18 @@ class ProjectPhotoController extends Controller
         return redirect()->back();
     }
 
+    public function update(Request $request, $id)
+    {
+
+        $validatedPhoto = $request->validate([
+            'alt' => 'nullable|min:3|max:255',
+            'position' => 'nullable|min:3|max:255',
+        ]);
+        ProjectPhoto::find($id)->update($validatedPhoto);
+
+        return redirect()->back()->with(['message' => 'Photo Updated Successfully']);
+
+    }
 
     /**
      * Remove the specified resource from storage.

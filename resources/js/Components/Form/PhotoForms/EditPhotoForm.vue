@@ -3,22 +3,26 @@
 import {Ref, ref} from "vue";
 import {BasePhoto} from "@/types/types";
 import DangerButton from "@/Components/DangerButton.vue";
-import {useForm} from "@inertiajs/vue3";
+import {useForm, usePage} from "@inertiajs/vue3";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import FormGroup from "@/Components/Form/FormGroup.vue";
 
+const {flash} = usePage().props;
+
 const props = defineProps<{
   alt?: string,
+  position?: string
   selectedPhoto: BasePhoto,
+  // message?: string
 }>()
 const shouldDelete = ref(false);
 const form = useForm({
+  position: props.position,
   alt: props.alt,
 })
 const handleEdit = (photo: BasePhoto) => {
-  form.post("/admin/project-photos ", {
-    _method: 'put',
-  });
+  console.log('edit');
+  form.put(`/admin/project-photos/${props.selectedPhoto.id}`);
 }
 </script>
 
@@ -30,13 +34,21 @@ const handleEdit = (photo: BasePhoto) => {
       <hr class="my-2">
       <div class="flex flex-col justify-between h-full">
         <form @submit.prevent="handleEdit">
-          <div class="flex items-end">
+          <div class="flex flex-col ">
             <form-group for="alt">
               <input type="text" v-model="form.alt" class="mr-2"/>
             </form-group>
-            <PrimaryButton class="h-10 ">Save</PrimaryButton>
+            <form-group for="position">
+              <select type="text" v-model="form.position" class="mr-2 w-100">
+                <option value="featured">Featured</option>
+                <option value="first">First</option>
+                <option value="second">Second</option>
+                <option value="third">Third</option>
+              </select>
+            </form-group>
+            <PrimaryButton class="h-10 mt-4">Save</PrimaryButton>
           </div>
-
+          <p class="text-green-700 font-bold" v-if="flash.message">{{ flash.message }}</p>
         </form>
         <div class="mt-6">
           <DangerButton @click.prevent="shouldDelete = true" class="mb-2">Delete Photo</DangerButton>

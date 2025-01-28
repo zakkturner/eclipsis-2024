@@ -48,7 +48,7 @@ const closeModal = () => {
 
 
   <modal maxWidth="6xl" :centered="true" @close="closeModal" :closeable="true" :show="isOpen">
-    <edit-photo-form :alt="selectedPhoto.alt" v-if="selectedPhoto" :selected-photo="selectedPhoto"/>
+    <edit-photo-form :position="selectedPhoto.position" :alt="selectedPhoto.alt" v-if="selectedPhoto" :selected-photo="selectedPhoto"/>
     <add-photo v-else></add-photo>
   </modal>
 

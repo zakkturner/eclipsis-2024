@@ -14,7 +14,7 @@ const props = defineProps<{
   project: Project;
   project_photos: ProjectPhoto[]
   client: Client,
-  clients: Client[]
+  clients: Client[],
 }>()
 const form = reactive({
   title: props.project.title,

@@ -57,7 +57,10 @@ Route::middleware('auth')->group(function () {
             'edit' => 'admin.clients.edit',
             'destroy' => 'admin.clients.destroy',
         ]);
-        Route::post('/project-photos', [ProjectPhotoController::class, 'store'])->name('project_photos.store');
+        Route::prefix("project-photos")->group(function () {
+            Route::post('/', [ProjectPhotoController::class, 'store'])->name('project_photos.store');
+            Route::put('/{id}', [ProjectPhotoController::class, 'update'])->name('project_photos.update');
+        });
         Route::resource('/services', ServiceController::class)->names([
             'index' => 'admin.services.index',
             'create' => 'admin.services.create',
