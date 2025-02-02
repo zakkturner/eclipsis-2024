@@ -31,12 +31,13 @@ const closeModal = () => {
 </script>
 
 <template>
-  <ul class="flex">
-    <li v-for="photo in photos" @click="selectPhoto(photo)" class="mr-6 rounded overflow-hidden hover:cursor-pointer hover:grayscale">
-      <img class="w-[200px] h-[300px]" :src="`/storage/${photo.img_src}`" alt="" srcset="">
+  <ul class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 justify-between">
+    <li v-for="photo in photos" @click="selectPhoto(photo)"
+        class=" rounded overflow-hidden hover:cursor-pointer hover:grayscale w-full h-[300px] ">
+      <img class="w-full h-full" :src="`/storage/${photo.img_src}`" alt="" srcset="">
     </li>
-    <li class="mr-6 rounded overflow-hidden" v-if="!showPage">
-      <div class="flex items-center justify-center w-[200px] h-[300px] bg-gray-800">
+    <li class=" rounded overflow-hidden bg-gray-800 w-full h-[300px] " v-if="!showPage">
+      <div class="flex items-center justify-center justify-center h-full ">
         <button @click="isOpen = true" class="bg-gray-700 p-8 rounded-full text-gray-300">
           Add
           <font-awesome-icon :icon="faPlus"></font-awesome-icon>

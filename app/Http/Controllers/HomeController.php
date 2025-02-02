@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Announcement;
 use App\Models\Post;
+use App\Models\Project;
 use App\Models\Service;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -18,6 +19,10 @@ class HomeController extends Controller
         $announcement = Announcement::where('is_visible', 1)->first();
         $services = Service::where('is_visible', 1)->get();
         $posts = Post::all();
+        $projects = Project::latest()->with('services')->with(['project_photos' => function ($query) {
+            $query->where('position', 'featured');
+        }])->take(6)->get();
+
         return Inertia::render('Welcome', [
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
@@ -26,6 +31,7 @@ class HomeController extends Controller
             'announcement' => $announcement,
             'services' => $services,
             'posts' => $posts,
+            'projects' => $projects,
         ]);
     }
 }

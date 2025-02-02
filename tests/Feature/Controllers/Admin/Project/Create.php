@@ -31,12 +31,12 @@ class Create extends TestCase
         $client = Client::factory()->create();
         $response = $this->actingAs($user)->post('/admin/projects', [
             'client_id' => $client->id,
-            'title' => 'Project Title',
-            'description' => 'Project Description',
+            'title' => 'Projects Title',
+            'description' => 'Projects Description',
         ]);
         $this->assertDatabaseHas('projects', [
-            'title' => 'Project Title',
-            'description' => 'Project Description',
+            'title' => 'Projects Title',
+            'description' => 'Projects Description',
         ]);
     }
 }

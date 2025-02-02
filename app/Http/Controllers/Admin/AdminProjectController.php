@@ -91,7 +91,7 @@ class AdminProjectController extends Controller
 
         $project->update($attr);
         $project->save();
-        return Inertia::render('Admin/Projects/Show', ['project' => $project])->with(["message" => "Project updated successfully"]);
+        return Inertia::render('Admin/Projects/Show', ['project' => $project])->with(["message" => "Projects updated successfully"]);
     }
 
     /**
@@ -100,6 +100,6 @@ class AdminProjectController extends Controller
     public function destroy(Project $project)
     {
         $project->delete();
-        return Inertia::render('Admin/Projects/Index', ['projects' => Project::all()])->with(["message" => "Project deleted successfully"]);
+        return Inertia::render('Admin/Projects/Index', ['projects' => Project::all()])->with(["message" => "Projects deleted successfully"]);
     }
 }

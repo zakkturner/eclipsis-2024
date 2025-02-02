@@ -13,6 +13,8 @@ import Services from "@/Components/Services/Services.vue";
 import BlogCarousel from "@/Components/Blog/BlogCarousel.vue";
 import {Post} from "@/types/post";
 import MainLayout from "@/Layouts/MainLayout.vue";
+import Projects from "@/Components/Projects/Projects.vue";
+import {Project} from "@/types/project";
 
 const props = defineProps<{
   canLogin: {
@@ -31,8 +33,8 @@ const props = defineProps<{
   },
   announcement: Announcement,
   services: Service[],
-  posts: Post[]
-
+  posts: Post[],
+  projects: Project[]
 }>();
 
 const serviceStore = useServicesStore();
@@ -53,7 +55,7 @@ onBeforeMount(() => {
       <TheHero></TheHero>
     </template>
     <Services></Services>
-    <Projects></Projects>
+    <Projects :projects="projects"></Projects>
     <BlogCarousel :posts="posts"></BlogCarousel>
   </main-layout>
 

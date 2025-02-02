@@ -18,7 +18,7 @@ class CaseStudyFactory extends Factory
     public function definition(): array
     {
         return [
-            'project_id' => Project::factory(), // Creates or associates a Project instance
+            'project_id' => Project::factory(), // Creates or associates a Projects instance
             'title' => $this->faker->sentence,
             'problem' => $this->faker->optional()->paragraph,
             'solution' => $this->faker->optional()->paragraph,

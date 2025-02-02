@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class ProjectController extends Controller
 {
@@ -13,54 +14,28 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        $Projects = Project::with('services')->get();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
      */
-    public function show(Project $project)
+    public function show($id)
     {
-        //
+        $project = Project::with('services')->with('case_studies')->with('client')->with('project_photos')->find($id);
+        $similar_projects = Project::whereHas('services', function ($query) use ($project) {
+            $query->whereIn('services.id', $project->services->pluck('id'));
+        })
+            ->where('id', '!=', $project->id)->with('services') // Exclude the current project
+            ->take(3)
+            ->get();
+
+        return Inertia::render('Projects/Show', [
+            'project' => $project,
+            'similar_projects' => $similar_projects
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Project $project)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Project $project)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Project $project)
-    {
-        //
-    }
 }

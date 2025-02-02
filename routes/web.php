@@ -10,6 +10,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectPhotoController;
 use App\Http\Controllers\TagsController;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +21,11 @@ Route::resource('/blog', BlogController::class)->except(['store', 'update', 'edi
 Route::get('/blog/search', [BlogController::class, 'search'])->name('blog.search');
 Route::get('/blog/tag/{tag}', TagsController::class)->name('blog.tag');
 Route::get('/blog/category/{category}', CategoriesController::class)->name('blog.category');
+Route::prefix('/view-projects')->group(function () {
+    Route::get('/', [ProjectController::class, 'index'])->name('project.index');
+
+    Route::get('/{id}', [ProjectController::class, 'show'])->name('project.show');
+});
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
