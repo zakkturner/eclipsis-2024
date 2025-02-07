@@ -50,7 +50,12 @@ const showingNavigationDropdown = ref(false);
               </div>
               <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                 <NavLink :href="route('admin.projects.index')" :active="route().current().includes('admin.projects')">
-                  Projects {{ }}
+                  Projects
+                </NavLink>
+              </div>
+              <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <NavLink :href="route('admin.clients.index')" :active="route().current().includes('admin.clients')">
+                  Clients
                 </NavLink>
               </div>
             </div>

@@ -15,6 +15,7 @@ import {Post} from "@/types/post";
 import MainLayout from "@/Layouts/MainLayout.vue";
 import Projects from "@/Components/Projects/Projects.vue";
 import {Project} from "@/types/project";
+import Contact from "@/Components/Contact/Contact.vue";
 
 const props = defineProps<{
   canLogin: {
@@ -57,6 +58,7 @@ onBeforeMount(() => {
     <Services></Services>
     <Projects :projects="projects"></Projects>
     <BlogCarousel :posts="posts"></BlogCarousel>
+    <Contact></Contact>
   </main-layout>
 
 

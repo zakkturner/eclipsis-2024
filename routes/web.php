@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\AdminCategoriesController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
@@ -26,6 +27,8 @@ Route::prefix('/view-projects')->group(function () {
 
     Route::get('/{id}', [ProjectController::class, 'show'])->name('project.show');
 });
+
+Route::post('/clients', ClientController::class)->name('guest.clients');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

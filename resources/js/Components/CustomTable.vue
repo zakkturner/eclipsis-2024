@@ -7,7 +7,7 @@ const props = defineProps<{
 <template>
   <div class="">
     <div class="flex justify-between border-b-2 border-eclipsis-gold  bg-eclipsis-navy text-white">
-      <div v-for="heading in tableHeadings" class="border-r-2 border-eclipsis-navy  w-1/3">
+      <div v-for="heading in tableHeadings" class="border-r-2 border-eclipsis-navy  w-1/6">
 
         <h5 class="capitalize p-2">{{ heading }}</h5>
       </div>
