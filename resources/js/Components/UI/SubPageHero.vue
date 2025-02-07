@@ -17,7 +17,7 @@ const props = defineProps<{
 <template>
   <section
       class="
-        h-4/6
+        h-2/6
         bg-[url('/images/code.jpg')]
          bg-no-repeat
          bg-cover

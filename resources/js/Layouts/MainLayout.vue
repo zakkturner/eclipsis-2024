@@ -29,7 +29,7 @@ watch(
 
 <template>
   <mobile-menu></mobile-menu>
-  <div ref="main" class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50 absolute z-50 top-0 left-0 w-full h-fit">
+  <div ref="main" class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50 absolute z-50 top-0 left-0 w-full h-fit ">
     <TheHeader :announcement="announcement"></TheHeader>
     <slot name="hero"></slot>
     <slot/>
