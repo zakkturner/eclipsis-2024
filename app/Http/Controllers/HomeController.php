@@ -6,6 +6,7 @@ use App\Models\Announcement;
 use App\Models\Post;
 use App\Models\Project;
 use App\Models\Service;
+use App\Models\Testimonial;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -22,6 +23,7 @@ class HomeController extends Controller
         $projects = Project::latest()->with('services')->with(['project_photos' => function ($query) {
             $query->where('position', 'featured');
         }])->take(6)->get();
+        $testimonials = Testimonial::with("client")->take(3)->get();
 
         return Inertia::render('Welcome', [
             'canLogin' => Route::has('login'),
@@ -32,6 +34,7 @@ class HomeController extends Controller
             'services' => $services,
             'posts' => $posts,
             'projects' => $projects,
+            'testimonials' => $testimonials,
         ]);
     }
 }

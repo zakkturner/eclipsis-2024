@@ -13,23 +13,28 @@ import {router} from "@inertiajs/vue3";
 import gsap from 'gsap';
 import DangerButton from "@/Components/DangerButton.vue";
 
+interface Testimonial {
+  id: number;
+  name: string;
+  client: Client;
+  createdAt: Date;
+}
+
 const props = defineProps<{
-  clients: Client[]
+  testimonials: Testimonial[]
 }>()
 const tableHeadings = [
-  'company',
-  'contact name',
-  'email',
-  'phone',
-  'website url',
-  'budget',
-  'Actions'
+  'name',
+  'client',
+  'body',
+  'created date',
+
 ];
 
 const msgContainer = ref(null)
 const message = ref('');
 const isOpen = ref(false);
-const selectedClient = ref(null)
+const selectedTestimonial = ref(null)
 const messageAnimation = async () => {
   await nextTick();
   gsap.fromTo(msgContainer.value, {x: 200, opacity: 0}, {x: 0, duration: .7, opacity: 1, ease: 'power3.inOut', delay: .5});
@@ -38,7 +43,7 @@ const messageAnimation = async () => {
   }, 5000)
 }
 const handleDelete = () => {
-  router.delete('/admin/clients/' + selectedClient.value, {
+  router.delete('/admin/clients/' + selectedTestimonial.value, {
     preserveScroll: true, // Prevents scrolling to top on validation error
     onSuccess: () => {
       message.value = "Deleted Client Successfully"
@@ -75,50 +80,39 @@ const handleDelete = () => {
                 </NavLink>
               </div>
               <custom-table :tableHeadings="tableHeadings">
-                <li v-for="client in clients" :key="client.id" class="border-eclipsis-navy border-t-2 first:border-t-0 last:border-b-2">
-                  <div class="grid grid-cols-7">
+                <li v-for="testimonial in testimonials" :key="testimonial.id"
+                    class="border-eclipsis-navy border-t-2 first:border-t-0 last:border-b-2">
+                  <div class="grid grid-cols-5">
                     <!-- Company -->
-                    <div class="border-r-2 border-l-2 border-eclipsis-navy flex-1 p-2">
-                      {{ client.company }}
-                    </div>
 
                     <!-- Contact Name -->
                     <div class="border-r-2 border-eclipsis-navy flex-1 p-2">
-                      {{ client.name }}
+                      {{ testimonial.name }}
                     </div>
 
                     <!-- Email -->
                     <div class="border-r-2 border-eclipsis-navy flex-1 p-2 break-words overflow-hidden whitespace-normal">
-                      {{ client.email }}
+                      {{ testimonial.client.name }}
                     </div>
 
                     <!-- Phone -->
                     <div class="border-r-2 border-eclipsis-navy flex-1 p-2">
-                      {{ client.phone }}
+                      {{ testimonial.createdAt }}
                     </div>
 
-                    <!-- Website URL -->
-                    <div class="border-r-2 border-eclipsis-navy flex-1 p-2">
-                      <a :href="client.website_url" class="text-blue-600 underline">{{ client.website_url }}</a>
-                    </div>
-
-                    <!-- Budget -->
-                    <div class="border-r-2 border-eclipsis-navy flex-1 p-2">
-                      {{ client.budget }}
-                    </div>
 
                     <!-- Edit Button -->
                     <div class="border-r-2 border-eclipsis-navy flex-1 flex justify-center items-center py-2">
                       <NavLink
                           class="bg-eclipsis-gold mr-2 px-4 py-2 rounded text-white border-4 border-eclipsis-gold
                                    hover:bg-eclipsis-navy hover:text-black hover:border-eclipsis-gold transition-all ease-in-out transition duration-700 ease-in-out group"
-                          :href="'/admin/clients/' + client.id + '/edit'">
+                          :href="'/admin/clients/' + testimonial.id + '/edit'">
                             <span class="text-eclipsis-navy group-hover:text-eclipsis-gold">
                               <font-awesome-icon :icon="faPencil"></font-awesome-icon>
                             </span>
                       </NavLink>
 
-                      <button @click="isOpen = true, selectedClient = client.id"
+                      <button @click="isOpen = true, selectedTestimonial = testimonial.id"
                               class="bg-red-600 px-4 py-1 rounded text-white border-4 border-red-600 hover:bg-white hover:text-black transition-all ease-in-out">
                         <font-awesome-icon :icon="faTrash"></font-awesome-icon>
                       </button>
@@ -144,7 +138,7 @@ const handleDelete = () => {
         <h4 class="py-4">Are you sure you want to delete?</h4>
         <div>
           <danger-button @click.prevent="handleDelete" class="mr-2">Delete</danger-button>
-          <cancel-button @click.prevent="isOpen = false, selectedClient = null">Cancel</cancel-button>
+          <cancel-button @click.prevent="isOpen = false, selectedTestimonial = null">Cancel</cancel-button>
         </div>
       </div>
 

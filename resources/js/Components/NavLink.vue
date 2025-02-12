@@ -1,15 +1,15 @@
 <script setup>
-import { computed } from 'vue';
-import { Link } from '@inertiajs/vue3';
+import {computed} from 'vue';
+import {Link} from '@inertiajs/vue3';
 
 const props = defineProps({
-    href: {
-        type: String,
-        required: true,
-    },
-    active: {
-        type: Boolean,
-    },
+  href: {
+    type: String,
+    required: true,
+  },
+  active: {
+    type: Boolean,
+  },
 });
 
 const classes = computed(() =>
@@ -21,10 +21,10 @@ const classes = computed(() =>
 </script>
 
 <template>
-    <Link :href="href" :class="classes">
-      <span class="text-eclipsis-navy hover:text-eclipsis-gold transition-all ease-in-out">
-        <slot />
+  <Link :href="href" :class="classes">
+      <span class="text-white text-lg hover:text-eclipsis-gold transition-all ease-in-out">
+        <slot/>
 
       </span>
-    </Link>
+  </Link>
 </template>
