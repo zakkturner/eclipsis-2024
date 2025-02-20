@@ -12,90 +12,100 @@ const showingNavigationDropdown = ref(false);
 
 <template>
   <div>
-    <div class="min-h-screen bg-gray-100">
-      <nav class="bg-white border-b border-gray-100">
+    <div class="min-h-screen bg-gray-100 flex">
+      <nav class="bg-eclipsis-navy border-b border-gray-100">
         <!-- Primary Navigation Menu -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="flex justify-between h-16">
-            <div class="flex">
+            <div class="flex flex-col  h-full">
               <!-- Logo -->
-              <div class="shrink-0 flex items-center">
+              <div class=" flex justify-center mb-10">
                 <Link :href="route('dashboard')">
                   <ApplicationLogo
-                      class="block h-9 w-auto fill-current text-gray-800"
+                      class="block h-20 w-auto fill-current text-gray-800"
                   />
                 </Link>
               </div>
+              <hr class="border border-gray-400 mb-4">
 
               <!-- Navigation Links -->
-              <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex ">
-                <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                  Dashboard
-                </NavLink>
+              <div class="h-fit">
+
+                <div class="hidden space-x-8 sm:-my-px  sm:flex justify-center ">
+                  <NavLink class="text-white" :href="route('dashboard')" :active="route().current('dashboard')">
+                    Dashboard
+                  </NavLink>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px  sm:flex justify-center">
+                  <NavLink :href="route('announcements.index')" :active="route().current('announcements')">
+                    Announcements
+                  </NavLink>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px  sm:flex justify-center">
+                  <NavLink :href="route('admin.services.index')" :active="route().current().includes('admin.services')">
+                    Services
+                  </NavLink>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px  sm:flex justify-center">
+                  <NavLink :href="route('admin.blog.index')" :active="route().current().includes('admin.blog')">
+                    Blog
+                  </NavLink>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px  sm:flex justify-center">
+                  <NavLink :href="route('admin.projects.index')" :active="route().current().includes('admin.projects')">
+                    Projects
+                  </NavLink>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px  sm:flex justify-center">
+                  <NavLink :href="route('admin.clients.index')" :active="route().current().includes('admin.clients')">
+                    Clients
+                  </NavLink>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px  sm:flex justify-center">
+                  <NavLink :href="route('admin.testimonials.index')" :active="route().current().includes('admin.testimonials')">
+                    Testimonials
+                  </NavLink>
+                </div>
               </div>
-              <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                <NavLink :href="route('announcements.index')" :active="route().current('announcements')">
-                  Announcements
-                </NavLink>
+              <div class="hidden sm:flex justify-center sm:items-center absolute bottom-6">
+                <!-- Settings Dropdown -->
+                <div class="ms-3 relative">
+                  <Dropdown align="right" width="48">
+                    <template #trigger>
+                                          <span class="inline-flex rounded-md">
+                                              <button
+                                                  type="button"
+                                                  class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
+                                              >
+                                                  {{ $page.props.auth.user.name }}
+                                                  <svg
+                                                      class="ms-2 -me-0.5 h-4 w-4"
+                                                      xmlns="http://www.w3.org/2000/svg"
+                                                      viewBox="0 0 20 20"
+                                                      fill="currentColor"
+                                                  >
+                                                      <path
+                                                          fill-rule="evenodd"
+                                                          d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                          clip-rule="evenodd"
+                                                      />
+                                                  </svg>
+                                              </button>
+                                          </span>
+                    </template>
+                    <template #content>
+                      <DropdownLink :href="route('profile.edit')"> Profile</DropdownLink>
+                      <DropdownLink :href="route('logout')" method="post" as="button">
+                        Log Out
+                      </DropdownLink>
+                    </template>
+                  </Dropdown>
+                </div>
               </div>
-              <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                <NavLink :href="route('admin.services.index')" :active="route().current().includes('admin.services')">
-                  Services
-                </NavLink>
-              </div>
-              <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                <NavLink :href="route('admin.blog.index')" :active="route().current().includes('admin.blog')">
-                  Blog
-                </NavLink>
-              </div>
-              <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                <NavLink :href="route('admin.projects.index')" :active="route().current().includes('admin.projects')">
-                  Projects
-                </NavLink>
-              </div>
-              <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                <NavLink :href="route('admin.clients.index')" :active="route().current().includes('admin.clients')">
-                  Clients
-                </NavLink>
-              </div>
+              <!-- Hamburger -->
             </div>
 
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
-              <!-- Settings Dropdown -->
-              <div class="ms-3 relative">
-                <Dropdown align="right" width="48">
-                  <template #trigger>
-                                        <span class="inline-flex rounded-md">
-                                            <button
-                                                type="button"
-                                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
-                                            >
-                                                {{ $page.props.auth.user.name }}
-                                                <svg
-                                                    class="ms-2 -me-0.5 h-4 w-4"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 20 20"
-                                                    fill="currentColor"
-                                                >
-                                                    <path
-                                                        fill-rule="evenodd"
-                                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                        clip-rule="evenodd"
-                                                    />
-                                                </svg>
-                                            </button>
-                                        </span>
-                  </template>
-                  <template #content>
-                    <DropdownLink :href="route('profile.edit')"> Profile</DropdownLink>
-                    <DropdownLink :href="route('logout')" method="post" as="button">
-                      Log Out
-                    </DropdownLink>
-                  </template>
-                </Dropdown>
-              </div>
-            </div>
-            <!-- Hamburger -->
+
             <div class="-me-2 flex items-center sm:hidden">
               <button
                   @click="showingNavigationDropdown = !showingNavigationDropdown"
@@ -143,7 +153,7 @@ const showingNavigationDropdown = ref(false);
           <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">
               <div class="font-medium text-base text-gray-800">
-                {{ $page.props.auth.user.name }}
+                {{ $page.props.auth.user.name }}s
               </div>
               <div class="font-medium text-sm text-gray-500">{{ $page.props.auth.user.email }}</div>
             </div>
@@ -159,14 +169,14 @@ const showingNavigationDropdown = ref(false);
       </nav>
 
       <!-- Page Heading -->
-      <header class="bg-white shadow" v-if="$slots.header">
-        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-          <slot name="header"/>
-        </div>
-      </header>
 
       <!-- Page Content -->
-      <main>
+      <main class="w-full">
+        <header class="bg-white shadow w-full" v-if="$slots.header">
+          <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <slot name="header"/>
+          </div>
+        </header>
         <slot/>
       </main>
     </div>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminClientController;
 use App\Http\Controllers\Admin\AdminPostsController;
 use App\Http\Controllers\Admin\AdminProjectController;
+use App\Http\Controllers\Admin\AdminTestimonialController;
 use App\Http\Controllers\Admin\AnnouncementController;
 use App\Http\Controllers\Admin\AdminCategoriesController;
 use App\Http\Controllers\Admin\ServiceController;
@@ -77,6 +78,14 @@ Route::middleware('auth')->group(function () {
             'show' => 'admin.services.show',
             'edit' => 'admin.services.edit',
             'destroy' => 'admin.services.destroy',
+        ]);
+        Route::resource('/testimonials', AdminTestimonialController::class)->names([
+            'index' => 'admin.testimonials.index',
+            'create' => 'admin.testimonials.create',
+            'store' => 'admin.testimonials.store',
+            'show' => 'admin.testimonials.show',
+            'edit' => 'admin.testimonials.edit',
+            'destroy' => 'admin.testimonials.destroy',
         ]);
         Route::resource('/projects', AdminProjectController::class)->names([
             'index' => 'admin.projects.index',

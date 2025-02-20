@@ -39,3 +39,12 @@ export interface BasePhoto {
     updated_at: string;
     alt?: string;
 }
+
+export interface Testimonial {
+    id: number;
+    name: string;
+    body: string;
+    client: Client;
+    created_at: Date;
+    avatar: string;
+}

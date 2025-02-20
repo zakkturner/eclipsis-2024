@@ -7,7 +7,7 @@ import {reactive, ref} from "vue";
 import FormGroup from "@/Components/Form/FormGroup.vue";
 import {router} from '@inertiajs/vue3'
 import TextArea from "@/Components/Form/TextArea.vue";
-import CancelButton from "@/Pages/Admin/Clients/CancelButton.vue";
+import CancelButton from "@/Components/CancelButton.vue";
 
 const form = reactive({
   company: "",
