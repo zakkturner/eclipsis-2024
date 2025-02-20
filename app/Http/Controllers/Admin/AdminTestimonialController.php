@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Client;
 use App\Models\Testimonial;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\In;
@@ -15,7 +16,7 @@ class AdminTestimonialController extends Controller
      */
     public function index()
     {
-        $testimonials = Testimonials::with("client")->all();
+        $testimonials = Testimonial::with("client")->get();
 
         return Inertia::render('Admin/Testimonials/Index', [
             'testimonials' => $testimonials
@@ -27,7 +28,8 @@ class AdminTestimonialController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Admin/Testimonials/Create');
+        $clients = Client::all();
+        return Inertia::render('Admin/Testimonials/Create', ['clients' => $clients]);
     }
 
     /**
@@ -43,11 +45,9 @@ class AdminTestimonialController extends Controller
             'client_id' => 'required|exists:clients,id',
             'avatar' => 'nullable|mimes:jpeg,jpg,png,gif'
         ]);
-        $validatedPhoto['img_src'] = request()->file('img_src')->store('project_photos', 'public');
+        $attr['avatar'] = request()->file('avatar')->store('testimonials', 'public');
         $newTestimonial = Testimonial::create($attr);
-        return Inertia::render('Admin/Testimonials/Show', [
-            'testimonial' => $newTestimonial
-        ]);
+        return redirect()->route('admin.testimonials.show', $newTestimonial->id);
     }
 
     /**
@@ -55,9 +55,12 @@ class AdminTestimonialController extends Controller
      */
     public function show($id)
     {
+
         return Inertia::render('Admin/Testimonials/Show',
             [
-                'testimonial' => Testimonial::find($id)
+                'testimonial' => Testimonial::with([
+                    'client:id,name,company'
+                ])->find($id)
             ]);
     }
 
@@ -67,7 +70,8 @@ class AdminTestimonialController extends Controller
     public function edit($id)
     {
         return Inertia::render('Admin/Testimonials/Edit', [
-            'testimonial' => Testimonial::find($id)
+            'testimonial' => Testimonial::with('client')->find($id),
+            'clients' => Client::all()
         ]);
     }
 
@@ -80,17 +84,31 @@ class AdminTestimonialController extends Controller
         $attr = $request->validate([
             'name' => 'required|nullable',
             'body' => 'required|min:3',
-            'client_id' => 'required|exists:clients,id'
+            'client_id' => 'required|exists:clients,id',
+            'avatar' => 'nullable|mimes:jpeg,jpg,png,gif'
         ]);
-
+        $oldAvatar = $testimonial->avatar;
+        if ($request->hasFile('avatar')) {
+            $attr['avatar'] = request()->file('avatar')->store('testimonials', 'public');
+            // Optionally delete old avatar
+            if ($oldAvatar && \Storage::disk('public')->exists($oldAvatar)) {
+                \Storage::disk('public')->delete($oldAvatar);
+            }
+        } else {
+            // Keep the existing avatar if no new one is uploaded
+            $attr['avatar'] = $testimonial->avatar;
+        }
+        $testimonial->update($attr);
+        return redirect()->route('admin.testimonials.show', $id);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(Testimonial $testimonial)
     {
 
-        Testimonial::destroy($id);
+        $testimonial->delete();
+        return redirect()->route('admin.testimonials.index', ['message' => "Testimonial deleted successfully"]);
     }
 }

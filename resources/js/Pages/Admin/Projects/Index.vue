@@ -30,13 +30,13 @@ const tableHeadings = [
           <div class="p-6 text-gray-900">
             <div class="w-full mx-auto flex flex-col justify-center">
               <div class="flex w-full justify-end mb-10">
-              
+
                 <NavLink
                     class="bg-green-700   px-4 py-2 rounded text-white! border-4 border-eclipsis-gold hover:bg-white hover:text-black transition-all
                           ease-in-out" href="/admin/projects/create"><span class="text-white">Add Project</span>
                 </NavLink>
               </div>
-              <custom-table :tableHeadings="tableHeadings">
+              <custom-table v-if="projects.length > 0" :tableHeadings="tableHeadings">
                 <li v-for="project in projects" :key="project.id" class="border-eclipsis-navy border-t-2 first:border-t-0 last:border-b-2">
                   <div class="flex justify-between">
 
@@ -76,7 +76,9 @@ const tableHeadings = [
                   </div>
                 </li>
               </custom-table>
-
+              <custom-table :tableHeadings="tableHeadings" v-else>
+                <li>No data added.</li>
+              </custom-table>
             </div>
           </div>
         </div>

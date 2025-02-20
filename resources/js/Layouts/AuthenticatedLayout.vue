@@ -26,7 +26,7 @@ const showingNavigationDropdown = ref(false);
                   />
                 </Link>
               </div>
-              <hr class="border border-eclipsis-gold mb-4">
+              <hr class="border border-gray-400 mb-4">
 
               <!-- Navigation Links -->
               <div class="h-fit">
@@ -59,6 +59,11 @@ const showingNavigationDropdown = ref(false);
                 <div class="hidden space-x-8 sm:-my-px  sm:flex justify-center">
                   <NavLink :href="route('admin.clients.index')" :active="route().current().includes('admin.clients')">
                     Clients
+                  </NavLink>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px  sm:flex justify-center">
+                  <NavLink :href="route('admin.testimonials.index')" :active="route().current().includes('admin.testimonials')">
+                    Testimonials
                   </NavLink>
                 </div>
               </div>

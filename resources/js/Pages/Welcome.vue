@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import {Head, Link} from '@inertiajs/vue3';
 import TheHeader from "@/Components/TheHeader.vue";
-import {Announcement, Service} from "@/types/types";
+import {Announcement, Service, Testimonial} from "@/types/types";
 import TheHero from "@/Components/TheHero.vue";
 import MobileMenu from "@/Components/MobileMenu.vue";
 import {useUiStateStore} from "@/store";
@@ -16,6 +16,8 @@ import MainLayout from "@/Layouts/MainLayout.vue";
 import Projects from "@/Components/Projects/Projects.vue";
 import {Project} from "@/types/project";
 import Contact from "@/Components/Contact/Contact.vue";
+import TestimonialParallax from "@/Components/Testimonials/TestimonialParallax.vue";
+import Testimonials from "@/Components/Testimonials/Testimonials.vue";
 
 const props = defineProps<{
   canLogin: {
@@ -35,7 +37,8 @@ const props = defineProps<{
   announcement: Announcement,
   services: Service[],
   posts: Post[],
-  projects: Project[]
+  projects: Project[],
+  testimonials: Testimonial[]
 }>();
 
 const serviceStore = useServicesStore();
@@ -57,6 +60,8 @@ onBeforeMount(() => {
     </template>
     <Services></Services>
     <Projects :projects="projects"></Projects>
+    <TestimonialParallax></TestimonialParallax>
+    <Testimonials v-if="testimonials.length > 0" :testimonials="testimonials"></Testimonials>
     <BlogCarousel :posts="posts"></BlogCarousel>
     <Contact></Contact>
   </main-layout>
