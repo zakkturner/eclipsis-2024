@@ -38,6 +38,7 @@ const formattedCreated = (post: Post) => computed(() => {
                 disableOnInteraction: false,
               }"
         class="w-full h-full"
+        
     >
 
       <swiper-slide class="text-center mb-16" v-for="post in posts">
