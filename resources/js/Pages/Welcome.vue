@@ -18,6 +18,7 @@ import {Project} from "@/types/project";
 import Contact from "@/Components/Contact/Contact.vue";
 import TestimonialParallax from "@/Components/Testimonials/TestimonialParallax.vue";
 import Testimonials from "@/Components/Testimonials/Testimonials.vue";
+import About from "@/Components/About.vue";
 
 const props = defineProps<{
   canLogin: {
@@ -58,6 +59,7 @@ onBeforeMount(() => {
     <template #hero>
       <TheHero></TheHero>
     </template>
+    <About></About>
     <Services></Services>
     <Projects :projects="projects"></Projects>
     <TestimonialParallax></TestimonialParallax>
