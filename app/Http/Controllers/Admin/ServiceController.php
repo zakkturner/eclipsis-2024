@@ -74,7 +74,8 @@ class ServiceController extends Controller
         ]);
 
 
-        $service->save($attrs);
+        $service->update($attrs);
+        return redirect()->route('admin.services.index')->with('message', 'Service updated successfully');
     }
 
     /**

@@ -8,9 +8,7 @@ const services = serviceStore.services;
 </script>
 
 <template>
-
-  <h2 class="text-center text-6xl mb-4">Our Services</h2>
-  <ul class="flex ">
+  <ul class=" px-12 xl:px-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 ">
     <service v-for="service in services" :key="service.id" :service="service"></service>
   </ul>
 </template>
