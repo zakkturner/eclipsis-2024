@@ -8,8 +8,11 @@ import {ZiggyVue} from '../../vendor/tightenco/ziggy';
 import {OhVueIcon, addIcons} from "oh-vue-icons";
 import {FaFacebook, FaTwitter, FaInstagram, FaPhone} from "oh-vue-icons/icons";
 import {createPinia} from 'pinia';
+import * as FaIcons from "oh-vue-icons/icons/fa";
 
+const Fa = Object.values({...FaIcons});
 addIcons(FaFacebook, FaTwitter, FaInstagram, FaPhone)
+addIcons(...Fa);
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 const pinia = createPinia();

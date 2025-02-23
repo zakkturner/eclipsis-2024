@@ -9,6 +9,7 @@ export interface Service {
     title: string;
     description: string;
     is_visible: boolean;
+    icon?: string;
 }
 
 export interface BreadCrumb {
