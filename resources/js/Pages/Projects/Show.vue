@@ -58,7 +58,7 @@ const {backgroundImage} = useBackgroundImage()
     <template #hero>
       <SubPageHero :pageTitle="project.title" :breadcrumbs="breadCrumbs"></SubPageHero>
     </template>
-    <section class="w-3/4 mt-40 mx-auto flex gap-4 ">
+    <section class="w-3/4 mt-40 mb-40 mx-auto flex gap-4 ">
       <div class="w-[1170px] mx-auto">
         <div class="w-full h-[556px] mx-auto overflow-hidden  rounded-lg mb-10">
           <img v-if="projectPhotos.featured" class="w-full grayscale hover:grayscale-0 transition-all ease-in-out transition-duration-300"

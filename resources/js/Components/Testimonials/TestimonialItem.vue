@@ -27,7 +27,7 @@ const handleAnimation = (enter = false) => {
 </script>
 
 <template>
-  <div class="px-2 flex flex-col items-center ">
+  <div class="px-2 flex flex-col items-center mb-10">
     <div ref="testimonialBox" @mouseenter="handleAnimation(true)" @mouseleave="handleAnimation(false)"
          class="bg-white w-full h-[268px] flex justify-center items-center">
       <p ref="testimonialBody" class="text-center max-w-[252px] mx-auto">

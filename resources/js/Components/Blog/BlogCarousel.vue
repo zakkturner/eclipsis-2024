@@ -25,7 +25,7 @@ const formattedCreated = (post: Post) => computed(() => {
   <section class="max-w-6xl mx-auto my-20 ">
     <section-title subtitle="Our News" title="News & Articles"></section-title>
     <swiper-container
-        :slidesPerView="2"
+        :slidesPerView="1"
         :spaceBetween="30"
         :loop="true"
         :pagination="{
@@ -33,12 +33,15 @@ const formattedCreated = (post: Post) => computed(() => {
 
 
         }"
+        :breakpoints="{
+        768: { slidesPerView: 2 }
+        }"
         :autoplay="{
                 delay: 2500,
                 disableOnInteraction: false,
               }"
         class="w-full h-full"
-        
+
     >
 
       <swiper-slide class="text-center mb-16" v-for="post in posts">

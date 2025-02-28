@@ -59,13 +59,13 @@ onBeforeMount(() => {
     <template #hero>
       <TheHero></TheHero>
     </template>
-    <About></About>
-    <Services></Services>
-    <Projects :projects="projects"></Projects>
-    <TestimonialParallax></TestimonialParallax>
+    <About id="about"></About>
+    <Services id="services"></Services>
+    <Projects :projects="projects" id="portfolio"></Projects>
+    <TestimonialParallax id="testimonials"></TestimonialParallax>
     <Testimonials v-if="testimonials.length > 0" :testimonials="testimonials"></Testimonials>
-    <BlogCarousel :posts="posts"></BlogCarousel>
-    <Contact></Contact>
+    <BlogCarousel :posts="posts" id="blog"></BlogCarousel>
+    <Contact id="contact"></Contact>
   </main-layout>
 
 
