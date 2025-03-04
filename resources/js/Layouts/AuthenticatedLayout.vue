@@ -66,9 +66,14 @@ const showingNavigationDropdown = ref(false);
                     Testimonials
                   </NavLink>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px  sm:flex justify-center">
+                  <NavLink :href="route('admin.settings')" :active="route().current().includes('admin.settings')">
+                    Settings
+                  </NavLink>
+                </div>
               </div>
               <div class="hidden sm:flex justify-center sm:items-center absolute bottom-6">
-                <!-- Settings Dropdown -->
+                <!-- SettingsController Dropdown -->
                 <div class="ms-3 relative">
                   <Dropdown align="right" width="48">
                     <template #trigger>
@@ -149,7 +154,7 @@ const showingNavigationDropdown = ref(false);
             </ResponsiveNavLink>
           </div>
 
-          <!-- Responsive Settings Options -->
+          <!-- Responsive SettingsController Options -->
           <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">
               <div class="font-medium text-base text-gray-800">
