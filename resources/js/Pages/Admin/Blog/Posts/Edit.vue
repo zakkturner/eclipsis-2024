@@ -63,7 +63,7 @@ const submitForm = () => {
     excerpt: form.excerpt,
     categories: form.categories,
     tags: form.tags,
-    thumbnail: null
+    thumbnail: form.thumbnail
   });
 
 }
@@ -126,9 +126,21 @@ const formHasChanged = computed(() => {
   );
 });
 
-watch(formHasChanged, (changed) => {
-  formUI.noChanges = !changed; // Set noChanges to true if there are no changes
-});
+watch(
+    () => [
+      form.title,
+      form.slug,
+      form.body,
+      form.excerpt,
+      form.thumbnail,
+      JSON.stringify(form.categories),
+      JSON.stringify(form.tags)
+    ],
+    () => {
+      formUI.noChanges = !formHasChanged.value;
+    },
+    {deep: true}
+);
 
 </script>
 

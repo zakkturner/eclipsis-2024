@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Announcement;
+use App\Models\CompanyInfo;
 use App\Models\Post;
 use App\Models\Project;
 use App\Models\Service;
@@ -24,6 +25,7 @@ class HomeController extends Controller
             $query->where('position', 'featured');
         }])->take(6)->get();
         $testimonials = Testimonial::with("client")->take(3)->get();
+        $company_info = CompanyInfo::first();
 
         return Inertia::render('Welcome', [
             'canLogin' => Route::has('login'),
@@ -35,6 +37,7 @@ class HomeController extends Controller
             'posts' => $posts,
             'projects' => $projects,
             'testimonials' => $testimonials,
+            'company_info' => $company_info,
         ]);
     }
 }

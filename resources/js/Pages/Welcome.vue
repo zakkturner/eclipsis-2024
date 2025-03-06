@@ -38,6 +38,7 @@ const props = defineProps<{
   posts: Post[],
   projects: Project[],
   testimonials: Testimonial[]
+  company_info: any
 }>();
 
 const serviceStore = useServicesStore();
@@ -47,7 +48,8 @@ onBeforeMount(() => {
   }
 })
 
-provide('posts', props.posts)
+provide('posts', props.posts);
+provide('company_info', props.company_info)
 </script>
 
 <template>
