@@ -23,7 +23,7 @@ const boxAnimation = (isEntering) => {
 
 
   <div :style="backgroundImage"
-       class="w-[370px] h-[426px] p-10 bg-cover bg-center flex items-center justify-center text-white font-bold"
+       class="xl:w-[370px] h-[426px] p-10 bg-cover bg-center flex items-center justify-center text-white font-bold"
        @mouseenter="boxAnimation( true)"
        @mouseleave="boxAnimation( false)">
     <div class="h-full w-full bg-eclipsis-navy text-eclipsis-gold flex flex-col items-center justify-center p-10 [transform:rotateX(-90deg)]"

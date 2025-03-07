@@ -22,7 +22,7 @@ const formattedCreated = (post: Post) => computed(() => {
 </script>
 
 <template>
-  <section class="max-w-6xl mx-auto my-20 ">
+  <section class="max-w-[90%] xl:max-w-6xl mx-auto my-20 ">
     <section-title subtitle="Our News" title="News & Articles"></section-title>
     <swiper-container
         :slidesPerView="1"

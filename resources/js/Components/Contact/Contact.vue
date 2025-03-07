@@ -35,7 +35,7 @@ const handleSubmit = () => {
 
 <template>
   <section class="bg-eclipsis-navy">
-    <div class="flex flex-col md:flex-row justify-between py-32 max-w-[90%] md:max-w-6xl mx-auto">
+    <div class="flex flex-col xl:flex-row justify-between py-32 max-w-[90%] xl:max-w-6xl mx-auto">
       <div>
         <div class="mb-8">
           <h3 class="text-white uppercase text-5xl font-bold mb-10">Get in touch with us<span class="text-eclipsis-gold">.</span></h3>
