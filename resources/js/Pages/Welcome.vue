@@ -1,13 +1,9 @@
 <script lang="ts" setup>
+import {onBeforeMount, onMounted, provide, ref, watch} from "vue";
 import {Head, Link} from '@inertiajs/vue3';
 import TheHeader from "@/Components/TheHeader.vue";
 import {Announcement, Service, Testimonial} from "@/types/types";
 import TheHero from "@/Components/TheHero.vue";
-import MobileMenu from "@/Components/MobileMenu.vue";
-import {useUiStateStore} from "@/store";
-import {onBeforeMount, onMounted, ref, watch} from "vue";
-import gsap from "gsap";
-import ServiceList from "@/Components/Services/ServiceList.vue";
 import {useServicesStore} from "@/store/services";
 import Services from "@/Components/Services/Services.vue";
 import BlogCarousel from "@/Components/Blog/BlogCarousel.vue";
@@ -19,6 +15,8 @@ import Contact from "@/Components/Contact/Contact.vue";
 import TestimonialParallax from "@/Components/Testimonials/TestimonialParallax.vue";
 import Testimonials from "@/Components/Testimonials/Testimonials.vue";
 import About from "@/Components/About.vue";
+import SignUp from "@/Components/Blog/SignUp.vue";
+import TheFooter from "@/Components/Footer/TheFooter.vue";
 
 const props = defineProps<{
   canLogin: {
@@ -40,6 +38,7 @@ const props = defineProps<{
   posts: Post[],
   projects: Project[],
   testimonials: Testimonial[]
+  company_info: any
 }>();
 
 const serviceStore = useServicesStore();
@@ -49,7 +48,8 @@ onBeforeMount(() => {
   }
 })
 
-
+provide('posts', props.posts);
+provide('company_info', props.company_info)
 </script>
 
 <template>
@@ -59,13 +59,15 @@ onBeforeMount(() => {
     <template #hero>
       <TheHero></TheHero>
     </template>
-    <About></About>
-    <Services></Services>
-    <Projects :projects="projects"></Projects>
-    <TestimonialParallax></TestimonialParallax>
+    <About id="about"></About>
+    <Services id="services"></Services>
+    <Projects :projects="projects" id="portfolio"></Projects>
+    <TestimonialParallax id="testimonials"></TestimonialParallax>
     <Testimonials v-if="testimonials.length > 0" :testimonials="testimonials"></Testimonials>
-    <BlogCarousel :posts="posts"></BlogCarousel>
-    <Contact></Contact>
+    <Contact id="contact"></Contact>
+    <BlogCarousel :posts="posts" id="blog"></BlogCarousel>
+    <SignUp/>
+    <TheFooter/>
   </main-layout>
 
 

@@ -35,7 +35,7 @@ const handleSubmit = () => {
 
 <template>
   <section class="bg-eclipsis-navy">
-    <div class="flex justify-between py-32 max-w-6xl mx-auto">
+    <div class="flex flex-col xl:flex-row justify-between py-32 max-w-[90%] xl:max-w-6xl mx-auto">
       <div>
         <div class="mb-8">
           <h3 class="text-white uppercase text-5xl font-bold mb-10">Get in touch with us<span class="text-eclipsis-gold">.</span></h3>
@@ -43,7 +43,7 @@ const handleSubmit = () => {
 
         </div>
         <ul>
-          <li class="flex items-center mb-4">
+          <li class="flex  items-center mb-4">
             <div class="bg-eclipsis-gold h-16 w-16 flex justify-center items-center rounded-full mr-4">
               <font-awesome-icon class="text-eclipsis-navy" size="sm" :icon="faLocationDot"/>
             </div>
@@ -75,14 +75,14 @@ const handleSubmit = () => {
       <div class="flex flex-col">
 
         <form class="">
-          <div class="flex gap-4 mb-4">
+          <div class="flex flex-col md:flex-row gap-4 mb-4">
             <text-input type="text" v-model="form.name" placeholder="Your Name" required></text-input>
             <text-input type="text" v-model="form.phone" placeholder="Your Phone" required></text-input>
           </div>
           <div class=" gap-4 mb-4">
             <text-input class="w-full" type="text" v-model="form.email" placeholder="Your Email" required></text-input>
           </div>
-          <div class="flex gap-4 mb-4">
+          <div class="flex flex-col md:flex-row gap-4 mb-4">
             <text-input type="text" v-model="form.company" placeholder="Company Name" required></text-input>
             <text-input type="text" v-model="form.website_url" placeholder="Website Url" required></text-input>
           </div>

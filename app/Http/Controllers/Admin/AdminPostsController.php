@@ -135,7 +135,9 @@ class AdminPostsController extends Controller
             'tags' => 'array|nullable',
             'tags.*' => 'string|max:50',
         ]);
+       
         if ($request->hasFile('thumbnail')) {
+
             $validated['thumbnail'] = $request->file('thumbnail')->store('thumbnails', 'public');
         } else {
             // Keep the existing thumbnail if no new file is uploaded

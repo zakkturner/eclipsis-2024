@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col">
+  <div class="flex flex-col mb-4">
     <label class="capitalize" :for="props.for">{{ props.text ?? props.for }}</label>
     <slot v-if="!socials"></slot>
     <div v-else class="flex items-center">

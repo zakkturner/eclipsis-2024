@@ -27,9 +27,9 @@ const handleAnimation = (enter = true) => {
 
 <template>
   <li ref="serviceItem" @mouseenter="handleAnimation" @mouseleave="handleAnimation(false)"
-      class="bg-gray-300 p-20 w-full  flex items-center">
-    <VIcon fill="#cea434" class="mr-4" scale="3.5" :name="service.icon"></VIcon>
-    <h4 ref="serviceText" class="text-xl font-black">{{ service.title }}</h4>
+      class="bg-gray-300 p-20 w-full  flex  items-center ">
+    <VIcon fill="#cea434" class="mr-4 " scale="3.5" :name="service.icon"></VIcon>
+    <h4 ref="serviceText" class="text-xl font-black text-center md:text-left">{{ service.title }}</h4>
   </li>
 </template>
 
