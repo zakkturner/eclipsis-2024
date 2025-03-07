@@ -39,24 +39,43 @@ const routes = [
   }
 ];
 
+function linksEnter() {
+  gsap.fromTo(menuItems.value,
+      {opacity: 0, x: -20},
+      {opacity: 1, x: 0, duration: 0.5, ease: 'power2.out', stagger: 0.1}
+  );
+}
+
+function linksExit() {
+  gsap.to(menuItems.value,
+      {opacity: 0, x: -20, duration: 0.5, ease: 'power2.in', stagger: 0.1}
+  );
+}
+
 watch(
     () => uiStore.isMenuOpen,
     (newVal) => {
       if (newVal) {
-
-        gsap.fromTo(menuItems.value,
-            {opacity: 0, x: -20},
-            {opacity: 1, x: 0, duration: 0.5, ease: 'power2.out', stagger: 0.1}
-        );
+        linksEnter();
       } else {
-
-        gsap.to(menuItems.value,
-            {opacity: 0, x: -20, duration: 0.5, ease: 'power2.in', stagger: 0.1}
-        );
+        linksExit();
       }
     },
     {immediate: true}
 );
+
+function handleClick(path) {
+  linksExit();
+  uiStore.isMenuOpen = false
+  setTimeout(() => {
+    const targetElement = document.querySelector(path);
+    if (targetElement) {
+      targetElement.scrollIntoView({behavior: "smooth"});
+    }
+  }, 1500);
+
+}
+
 const mouseEnterAnimation = (e) => {
   // console.log( "mouse entered")
   gsap.to(e.target, {color: '#cea434', duration: 0.3, ease: 'power2.out'});
@@ -73,11 +92,13 @@ const mouseExitAnimation = (e) => {
     <nav>
       <ul>
         <li ref="menuItems" v-for="route in routes" key="route.name" class="mb-4">
-          <Link @mouseover="mouseEnterAnimation" @mouseleave="mouseExitAnimation" class="text-5xl lg:text-9xl text-white" :href="route.path">{{
+          <a @mouseover="mouseEnterAnimation" @mouseleave="mouseExitAnimation" @click.prevent="handleClick(route.path)"
+             class="text-5xl lg:text-9xl text-white"
+          >{{
               route
                   .name
             }}
-          </Link>
+          </a>
         </li>
       </ul>
     </nav>
