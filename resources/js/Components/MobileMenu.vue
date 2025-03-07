@@ -88,7 +88,7 @@ const mouseExitAnimation = (e) => {
 </script>
 
 <template>
-  <section class=" flex justify-between bg-[url('/images/moon.gif')] bg-cover bg-no-repeat bg-center  h-screen w-full p-2">
+  <section class="overflow-hidden flex justify-between bg-[url('/images/moon.gif')] bg-cover bg-no-repeat bg-center  h-screen w-full p-2">
     <nav>
       <ul>
         <li ref="menuItems" v-for="route in routes" key="route.name" class="mb-4">
