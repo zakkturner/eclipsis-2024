@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import {onBeforeMount, onMounted, provide, ref, watch} from "vue";
 import {Head, Link} from '@inertiajs/vue3';
-import TheHeader from "@/Components/TheHeader.vue";
+import TheHeader from "@/Components/Header/TheHeader.vue";
 import {Announcement, Service, Testimonial} from "@/types/types";
 import TheHero from "@/Components/TheHero.vue";
 import {useServicesStore} from "@/store/services";
