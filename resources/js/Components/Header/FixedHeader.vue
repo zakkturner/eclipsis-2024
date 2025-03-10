@@ -18,7 +18,7 @@ const openMenu = (): void => {
 </script>
 
 <template>
-  <header class="fixed  w-full bg-eclipsis-gold -top-20 border-b border-gray-400 shadow">
+  <header class="fixed z-[999] w-full bg-eclipsis-gold -top-20 border-b border-gray-400 shadow">
     <div class="header-upper max-w-[90%] xl:max-w-[1600px] absolute lg:relative w-full -translate-x-1/2 left-1/2 py-5">
       <div class="flex justify-between items-center mx-2">
         <!--Logo-->
@@ -26,7 +26,7 @@ const openMenu = (): void => {
         <nav class="hidden lg:block ">
           <ul class="flex">
             <li v-for="route in navRoutes">
-              <NavLink :href="route.path">{{ route.name }}</NavLink>
+              <NavLink :light="true" :href="route.path">{{ route.name }}</NavLink>
             </li>
           </ul>
         </nav>
