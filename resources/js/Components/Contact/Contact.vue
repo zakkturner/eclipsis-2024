@@ -101,7 +101,7 @@ const handleSubmit = () => {
 
           </div>
           <div class="flex gap-4 mb-4">
-            <button class="bg-eclipsis-gold p-6 text-eclipsis-navy text-sm rounded" @click.prevent="handleSubmit">Send Message</button>
+            <button class="bg-eclipsis-gold p-6 text-eclipsis-navy font-semibold text-sm rounded" @click.prevent="handleSubmit">Send Message</button>
           </div>
         </form>
         <div class="bg-white rounded p-4" v-if="$page.props.message">

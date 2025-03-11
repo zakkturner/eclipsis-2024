@@ -5,26 +5,26 @@ export const routes = [
     },
     {
         name: 'About',
-        path: '#about'
+        path: '/#about'
     },
     {
         name: 'Services',
-        path: '#services'
+        path: '/#services'
     },
     {
         name: 'Portfolio',
-        path: '#portfolio'
+        path: '/#portfolio'
     },
     {
         name: 'Testimonials',
-        path: '#testimonials'
+        path: '/#testimonials'
     },
     {
         name: 'Blog',
-        path: '#blog'
+        path: '/#blog'
     },
     {
         name: 'Contact',
-        path: '#contact'
+        path: '/#contact'
     }
 ];

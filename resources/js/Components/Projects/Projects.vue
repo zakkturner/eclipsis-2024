@@ -7,6 +7,8 @@ import gsap from "gsap";
 import {ref} from "vue";
 import ProjectItem from "@/Components/Projects/ProjectItem.vue";
 import {useBackgroundImage} from "@/Composables/useBackgroundImage";
+import LinkButton from "@/Components/LinkButton.vue";
+import ProjectsGrid from "@/Components/Projects/ProjectsGrid.vue";
 
 const props = defineProps<{
   projects: Project[]
@@ -20,9 +22,9 @@ const {backgroundImage} = useBackgroundImage()
 <template>
   <base-section class="bg-gray-100">
     <section-title subtitle="Our Work" title="View Latest Projects"></section-title>
-    <div class="grid grid-cols-1 max-w-[90%] mx-auto  xl:max-w-6xl justify-items-center sm:grid-cols-2 xl:grid-cols-3 gap-10 xl:gap-4 ">
-      <project-item v-for="project in projects" :backgroundImage="backgroundImage(project.project_photos)" :key="project.id"
-                    :project="project"></project-item>
+    <projects-grid :projects="projects"></projects-grid>
+    <div class="flex justify-center mt-6">
+      <link-button link="/view-projects">View All</link-button>
     </div>
   </base-section>
 </template>

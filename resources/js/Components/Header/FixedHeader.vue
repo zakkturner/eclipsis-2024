@@ -7,6 +7,7 @@ import {useUiStateStore} from "@/store";
 import {ref} from "vue";
 import TheLogo from "@/Components/TheLogo.vue";
 import NavLink from "@/Components/NavLink.vue";
+import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 
 const navRoutes = routes;
 const uiStore = useUiStateStore()
@@ -18,7 +19,7 @@ const openMenu = (): void => {
 </script>
 
 <template>
-  <header class="fixed  w-full bg-eclipsis-gold -top-20 border-b border-gray-400 shadow">
+  <header class="fixed z-[999] w-full h-32 lg:h-auto bg-eclipsis-gold -top-40 lg:-top-20 border-b border-gray-400 shadow">
     <div class="header-upper max-w-[90%] xl:max-w-[1600px] absolute lg:relative w-full -translate-x-1/2 left-1/2 py-5">
       <div class="flex justify-between items-center mx-2">
         <!--Logo-->
@@ -26,14 +27,14 @@ const openMenu = (): void => {
         <nav class="hidden lg:block ">
           <ul class="flex">
             <li v-for="route in navRoutes">
-              <NavLink :href="route.path">{{ route.name }}</NavLink>
+              <NavLink :light="true" :href="route.path">{{ route.name }}</NavLink>
             </li>
           </ul>
         </nav>
-        <div class="lg:hidden nav-outer clearfix">
+        <div class="block lg:hidden nav-outer clearfix">
           <!--Mobile Navigation Toggler-->
           <button ref="mobileBtn" class="mobile-nav-toggler  hover:cursor-pointer" @click="openMenu">
-            <font-awesome-icon :icon="faBars" size="2x" class="text-eclipsis-gold"/>
+            <font-awesome-icon :icon="faBars" size="2x" class="text-eclipsis-navy"/>
           </button>
         </div>
       </div>

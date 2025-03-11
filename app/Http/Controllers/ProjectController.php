@@ -14,7 +14,11 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $Projects = Project::with('services')->get();
+        $projects = Project::with('services')->get();
+
+        return Inertia::render('Projects/Index', [
+            "projects" => $projects
+        ]);
     }
 
 

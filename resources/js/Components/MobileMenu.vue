@@ -38,6 +38,7 @@ const routes = [
     path: '#contact'
   }
 ];
+const emit = defineEmits(['menuClicked', 'clicked']);
 
 function linksEnter() {
   gsap.fromTo(menuItems.value,
@@ -67,13 +68,15 @@ watch(
 function handleClick(path) {
   linksExit();
   uiStore.isMenuOpen = false
+
   setTimeout(() => {
     const targetElement = document.querySelector(path);
     if (targetElement) {
       targetElement.scrollIntoView({behavior: "smooth"});
     }
-  }, 1500);
 
+  }, 1500);
+  emit('menuClicked')
 }
 
 const mouseEnterAnimation = (e) => {
@@ -85,6 +88,14 @@ const mouseExitAnimation = (e) => {
   // console.log( "mouse entered")
   gsap.to(e.target, {color: '#fff', duration: 0.3, ease: 'power2.out'});
 };
+
+const handleClose = () => {
+  uiStore.closeMenu();
+  setTimeout(() => {
+    emit('menuClicked')
+
+  }, 2000)
+}
 </script>
 
 <template>
@@ -103,7 +114,7 @@ const mouseExitAnimation = (e) => {
       </ul>
     </nav>
     <div>
-      <button @click="uiStore.closeMenu" class="text-5xl">
+      <button @click="handleClose" class="text-5xl">
         <img src="/images/icons/exit.ico"/>
       </button>
     </div>
