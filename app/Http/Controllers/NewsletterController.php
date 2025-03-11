@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use JetBrains\PhpStorm\NoReturn;
 
 class NewsletterController extends Controller
 {
