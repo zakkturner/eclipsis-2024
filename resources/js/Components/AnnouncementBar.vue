@@ -9,7 +9,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div class="bg-eclipsis-navy">
+  <div class="bg-eclipsis-navy hidden lg:block">
     <div class="flex justify-between items-center py-4  mx-auto max-w-[90%] xl:max-w-[1600px]">
       <div>
 

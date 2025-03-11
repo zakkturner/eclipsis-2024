@@ -20,6 +20,7 @@ const props = defineProps<{
 const mobileBtn = ref(null);
 const navRoutes = routes;
 const openMenu = (): void => {
+
   uiStore.toggleMenu()
   gsap.to(mobileBtn, {x: -100, duration: .5})
 }
