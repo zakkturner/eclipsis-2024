@@ -29,19 +29,19 @@ const formattedCreated = (post: Post) => computed(() => {
         :spaceBetween="30"
         :loop="true"
         :pagination="{
-          clickable: true,
+              clickable: true,
 
 
-        }"
+            }"
         :breakpoints="{
-        768: { slidesPerView: 2 }
-        }"
+            768: { slidesPerView: 2 }
+            }"
         :autoplay="{
-                delay: 2500,
-                disableOnInteraction: false,
-              }"
+                    delay: 2500,
+                    disableOnInteraction: false,
+                  }"
         class="w-full h-full"
-
+        v-if="posts.length > 0"
     >
 
       <swiper-slide class="text-center mb-16" v-for="post in posts">
@@ -60,6 +60,9 @@ const formattedCreated = (post: Post) => computed(() => {
         </div>
       </swiper-slide>
     </swiper-container>
+    <div class="py-20 text-2xl flex justify-center" v-else>
+      <h2>No Posts Yet!</h2>
+    </div>
   </section>
 
 

@@ -22,9 +22,9 @@ use Inertia\Inertia;
 
 Route::get('/', HomeController::class);
 Route::resource('/blog', BlogController::class)->except(['store', 'update', 'edit'])->parameters(['post' => 'slug']);
+Route::get('/blog/category/{category}', CategoriesController::class)->name('blog.category');
 Route::get('/blog/search', [BlogController::class, 'search'])->name('blog.search');
 Route::get('/blog/tag/{tag}', TagsController::class)->name('blog.tag');
-Route::get('/blog/category/{category}', CategoriesController::class)->name('blog.category');
 Route::prefix('/view-projects')->group(function () {
     Route::get('/', [ProjectController::class, 'index'])->name('project.index');
 
