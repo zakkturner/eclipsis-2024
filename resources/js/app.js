@@ -9,6 +9,7 @@ import {OhVueIcon, addIcons} from "oh-vue-icons";
 import {FaFacebook, FaTwitter, FaInstagram, FaPhone} from "oh-vue-icons/icons";
 import {createPinia} from 'pinia';
 import * as FaIcons from "oh-vue-icons/icons/fa";
+import posthogPlugin from "./plugins/posthog";
 
 const Fa = Object.values({...FaIcons});
 addIcons(FaFacebook, FaTwitter, FaInstagram, FaPhone)
@@ -27,6 +28,7 @@ createInertiaApp({
             .component("VIcon", OhVueIcon)
             .use(plugin)
             .use(pinia)
+            .use(posthogPlugin)
             .use(ZiggyVue)
             .mount(el);
     },
