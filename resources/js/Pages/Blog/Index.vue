@@ -14,7 +14,7 @@ const props = defineProps<{
   query,
   tags: Tag[],
   latest_posts: Post[],
-  
+
 }>()
 
 const breadCrumbs: BreadCrumb[] = [
