@@ -14,6 +14,7 @@ import gsap from 'gsap';
 import DangerButton from "@/Components/DangerButton.vue";
 import dayjs from "dayjs";
 import {useFormatDate} from "@/Composables/useFormatDate";
+import LinkButton from "@/Components/LinkButton.vue";
 
 
 const props = defineProps<{
@@ -71,10 +72,10 @@ const {formattedDate} = useFormatDate()
             <div class="w-full mx-auto flex flex-col justify-center">
               <div class="flex w-full justify-end mb-10">
 
-                <NavLink
-                    class="bg-green-700   px-4 py-2 rounded text-white! border-4 border-eclipsis-gold hover:bg-white hover:text-black transition-all
-                          ease-in-out" href="/admin/testimonials/create"><span class="text-white">Add Testimonial</span>
-                </NavLink>
+                <link-button
+                    class="bg-green-700   px-4 py-2 rounded text-white! border-4 border-green-700 hover:bg-white group hover:text-black transition-all
+                          ease-in-out" link="/admin/testimonials/create"><span class="text-white group-hover:text-green-700">Add Testimonial</span>
+                </link-button>
               </div>
               <custom-table :tableHeadings="tableHeadings" v-if="testimonials.length > 0">
                 <li v-for="testimonial in testimonials" :key="testimonial.id"

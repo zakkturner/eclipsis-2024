@@ -6,6 +6,7 @@ import NavLink from "@/Components/NavLink.vue";
 import {Post, Tag, Category} from "@/types/post";
 import BaseTag from "@/Components/UI/BaseTag.vue";
 import TagList from "@/Pages/Admin/Blog/Posts/TagList.vue";
+import LinkButton from "@/Components/LinkButton.vue";
 
 const {posts, tags, categories} = defineProps<{
   posts: Post[],
@@ -43,8 +44,8 @@ const {posts, tags, categories} = defineProps<{
                 </li>
               </ul>
             </div>
-            <div>
-              <NavLink href="/admin/blog/post/create">Add New Post</NavLink>
+            <div class="my-6">
+              <link-button link="/admin/blog/post/create">Add New Post</link-button>
             </div>
           </div>
         </div>

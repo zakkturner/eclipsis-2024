@@ -3,6 +3,7 @@ import {Project} from "@/types/project";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import CustomTable from "@/Components/CustomTable.vue";
 import NavLink from "@/Components/NavLink.vue";
+import LinkButton from "@/Components/LinkButton.vue";
 
 const props = defineProps<{
   projects: Project[]
@@ -31,10 +32,11 @@ const tableHeadings = [
             <div class="w-full mx-auto flex flex-col justify-center">
               <div class="flex w-full justify-end mb-10">
 
-                <NavLink
-                    class="bg-green-700   px-4 py-2 rounded text-white! border-4 border-eclipsis-gold hover:bg-white hover:text-black transition-all
-                          ease-in-out" href="/admin/projects/create"><span class="text-white">Add Project</span>
-                </NavLink>
+                <link-button
+                    bg="bg-green-700"
+                    class="   px-4 py-2 rounded text-white! border-4 border-green-700 hover:bg-white transition-all group
+                          ease-in-out" link="/admin/projects/create"><span class="text-white group-hover:text-green-700">Add Project</span>
+                </link-button>
               </div>
               <custom-table v-if="projects.length > 0" :tableHeadings="tableHeadings">
                 <li v-for="project in projects" :key="project.id" class="border-eclipsis-navy border-t-2 first:border-t-0 last:border-b-2">
