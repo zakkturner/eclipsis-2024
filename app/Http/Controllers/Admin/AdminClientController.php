@@ -5,11 +5,17 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreClientRequest;
 use App\Models\Client;
+use App\Services\NewsletterService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class AdminClientController extends Controller
 {
+
+    public function __construct(private NewsletterService $newsletterService)
+    {
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -36,10 +42,12 @@ class AdminClientController extends Controller
         $validatedData = $request->validated();
 
         Client::create($validatedData);
-        return Inertia::render('/Welcome', [
-            'message' => 'Thank You! Someone from our team will be in touch with you soon.',
+        $this->newsletterService->subscribe($validatedData['name'], '', $validatedData['email']);
+        return Inertia::render('Admin/Clients/Index', [
+            'message' => 'New Client Created',
             'data' => $validatedData
         ], 201);
+
     }
 
     /**
