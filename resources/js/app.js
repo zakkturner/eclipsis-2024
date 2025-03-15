@@ -10,6 +10,10 @@ import {FaFacebook, FaTwitter, FaInstagram, FaPhone} from "oh-vue-icons/icons";
 import {createPinia} from 'pinia';
 import * as FaIcons from "oh-vue-icons/icons/fa";
 import posthogPlugin from "./plugins/posthog";
+import {gsap} from 'gsap'
+import {ScrollTrigger} from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const Fa = Object.values({...FaIcons});
 addIcons(FaFacebook, FaTwitter, FaInstagram, FaPhone)
@@ -30,6 +34,8 @@ createInertiaApp({
             .use(pinia)
             .use(posthogPlugin)
             .use(ZiggyVue)
+            .provide('gsap', gsap)
+            .provide('ScrollTrigger', ScrollTrigger)
             .mount(el);
     },
     progress: {

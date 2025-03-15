@@ -19,21 +19,8 @@ import SignUp from "@/Components/Blog/SignUp.vue";
 import TheFooter from "@/Components/Footer/TheFooter.vue";
 
 const props = defineProps<{
-  canLogin: {
-    type: Boolean,
-  },
-  canRegister: {
-    type: Boolean,
-  },
-  laravelVersion: {
-    type: String,
-    required: true,
-  },
-  phpVersion: {
-    type: String,
-    required: true,
-  },
-  announcement: Announcement,
+
+  announcement?: Announcement,
   services: Service[],
   posts: Post[],
   projects: Project[],

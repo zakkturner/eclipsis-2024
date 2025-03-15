@@ -1,20 +1,18 @@
 <script setup lang="ts">
 
+import {nextTick, onMounted, ref, watch, inject} from "vue";
 import MobileMenu from "@/Components/MobileMenu.vue";
 import TheHeader from "@/Components/Header/TheHeader.vue";
 import {Announcement} from "@/types/types";
-import {nextTick, onMounted, ref, watch} from "vue";
-import gsap from "gsap";
+
 import {useUiStateStore} from "@/store";
 import TheHero from "@/Components/TheHero.vue";
-import {ScrollTrigger} from "gsap/ScrollTrigger";
 import {faBars} from "@fortawesome/free-solid-svg-icons";
 import NavLink from "@/Components/NavLink.vue";
 import TheLogo from "@/Components/TheLogo.vue";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import FixedHeader from "@/Components/Header/FixedHeader.vue";
 
-gsap.registerPlugin(ScrollTrigger);
 const props = defineProps<{
   announcement?: Announcement
 }>();
@@ -22,44 +20,48 @@ const uiStore = useUiStateStore();
 const main = ref(null);
 const headerStatic = ref<HTMLElement | null>(null);
 const headerFixed = ref<HTMLElement | null>(null);
-
+const gsap = inject('gsap');
+const ScrollTrigger = inject('ScrollTrigger', null)
 onMounted(() => {
-  console.log(headerFixed.value);
+
 
   nextTick(() => {
-    ScrollTrigger.refresh();
+    if (ScrollTrigger) {
 
-    const mm = gsap.matchMedia();
+      ScrollTrigger.refresh();
 
-    mm.add("(min-width: 1024px)", () => {
-      gsap.fromTo("#headerFixed", {y: 0, opacity: 0}, {
-        y: 80,
-        opacity: 1,
-        scrollTrigger: {
-          trigger: "#staticHeader",
-          start: "top top",
-          end: "bottom -20%",
-          scrub: true,
-          // markers: true
-        },
-        ease: "slow(0.7,0.7,false)"
+      const mm = gsap.matchMedia();
+
+      mm.add("(min-width: 1024px)", () => {
+        gsap.fromTo("#headerFixed", {y: 0, opacity: 0}, {
+          y: 80,
+          opacity: 1,
+          scrollTrigger: {
+            trigger: "#staticHeader",
+            start: "top top",
+            end: "bottom -20%",
+            scrub: true,
+            // markers: true
+          },
+          ease: "slow(0.7,0.7,false)"
+        });
       });
-    });
 
-    mm.add("(max-width: 1023px)", () => {
-      gsap.fromTo("#headerFixed", {y: 0, opacity: 0}, {
-        y: 150,
-        opacity: 1,
-        scrollTrigger: {
-          trigger: "#staticHeader",
-          start: "top top",
-          end: "bottom -20%",
-          scrub: true,
-          markers: true
-        },
-        ease: "slow(0.7,0.7,false)"
+      mm.add("(max-width: 1023px)", () => {
+        gsap.fromTo("#headerFixed", {y: 0, opacity: 0}, {
+          y: 150,
+          opacity: 1,
+          scrollTrigger: {
+            trigger: "#staticHeader",
+            start: "top top",
+            end: "bottom -20%",
+            scrub: true,
+            markers: true
+          },
+          ease: "slow(0.7,0.7,false)"
+        });
       });
-    });
+    }
   });
 });
 watch(
