@@ -1,5 +1,5 @@
 <script setup>
-import {computed, ref} from 'vue';
+import {computed, nextTick, ref} from 'vue';
 import {Link} from '@inertiajs/vue3';
 import gsap from 'gsap';
 
@@ -19,10 +19,15 @@ const link = ref(null);
 const underline = ref(null);
 
 const handleEnter = () => {
-  gsap.to(underline.value, {scaleX: 1, duration: .5, ease: 'expo.inOut'})
+  nextTick(() => {
+    gsap.to(underline.value, {scaleX: 1, duration: .5, ease: 'expo.inOut'})
+
+  })
 }
 const handleLeave = () => {
-  gsap.to(underline.value, {scaleX: 0, duration: .5, ease: 'expo.inOut'})
+  nextTick(() => {
+    gsap.to(underline.value, {scaleX: 0, duration: .5, ease: 'expo.inOut'})
+  });
 }
 const classes = computed(() =>
     props.active

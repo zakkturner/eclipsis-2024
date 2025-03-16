@@ -21,16 +21,17 @@ createServer((page) =>
         title: (title) => `${title} - ${appName}`,
         resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue')),
         setup({App, props, plugin}) {
-            return createSSRApp({render: () => h(App, props)})
+            const app = createSSRApp({render: () => h(App, props)});
+            app.use(pinia)
                 .use(plugin)
-                .use(pinia)
                 .component("VIcon", OhVueIcon)
                 .use(ZiggyVue, {
                     ...page.props.ziggy,
                     location: new URL(page.props.ziggy.location),
                 })
-                .provide("gsap", gsap)
+                .provide("gsap", gsap);
 
+            return app;
 
         },
     })
