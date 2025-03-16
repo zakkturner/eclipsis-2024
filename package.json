@@ -35,6 +35,6 @@
         "oh-vue-icons": "^1.0.0-rc3",
         "pinia": "^2.2.0",
         "posthog-js": "^1.230.2",
-        "swiper": "^11.1.14"
+        "swiper": "^11.2.5"
     }
 }

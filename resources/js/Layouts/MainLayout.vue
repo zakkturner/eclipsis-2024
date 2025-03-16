@@ -41,7 +41,7 @@ onMounted(() => {
             start: "top top",
             end: "bottom -20%",
             scrub: true,
-            // markers: true
+
           },
           ease: "slow(0.7,0.7,false)"
         });
@@ -56,7 +56,7 @@ onMounted(() => {
             start: "top top",
             end: "bottom -20%",
             scrub: true,
-            markers: true
+            
           },
           ease: "slow(0.7,0.7,false)"
         });

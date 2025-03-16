@@ -28,8 +28,8 @@ const props = defineProps<{
   company_info: any
 }>();
 
-const serviceStore = useServicesStore();
 onBeforeMount(() => {
+  const serviceStore = useServicesStore();
   if (props.services) {
     serviceStore.setServices(props.services);
   }

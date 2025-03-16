@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {SwiperSlide} from 'swiper/vue';
+import {SwiperSlide, Swiper} from 'swiper/vue';
 // Import Swiper styles
 import 'swiper/css';
 import {Post} from "@/types/post";
@@ -24,7 +24,7 @@ const formattedCreated = (post: Post) => computed(() => {
 <template>
   <section class="max-w-[90%] xl:max-w-6xl mx-auto my-20 ">
     <section-title subtitle="Our News" title="News & Articles"></section-title>
-    <swiper-container
+    <swiper
         :slidesPerView="1"
         :spaceBetween="30"
         :loop="true"
@@ -59,7 +59,7 @@ const formattedCreated = (post: Post) => computed(() => {
           </h3>
         </div>
       </swiper-slide>
-    </swiper-container>
+    </swiper>
     <div class="py-20 text-2xl flex justify-center" v-else>
       <h2>No Posts Yet!</h2>
     </div>

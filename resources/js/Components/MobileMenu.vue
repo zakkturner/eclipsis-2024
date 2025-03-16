@@ -4,7 +4,10 @@ import {gsap} from 'gsap';
 import {useUiStateStore} from "@/store";
 import {Link} from '@inertiajs/vue3'
 
-const uiStore = useUiStateStore();
+const uiStore = ref(null);
+onMounted(() => {
+  uiStore.value = useUiStateStore(); // Initialize in client-side
+});
 const menu = ref(null);
 const menuItems = ref([]);
 
@@ -54,7 +57,7 @@ function linksExit() {
 }
 
 watch(
-    () => uiStore.isMenuOpen,
+    () => uiStore.value?.isMenuOpen,
     (newVal) => {
       if (newVal) {
         linksEnter();
@@ -67,7 +70,7 @@ watch(
 
 function handleClick(path) {
   linksExit();
-  uiStore.isMenuOpen = false
+  uiStore.value.isMenuOpen = false
 
   setTimeout(() => {
     const targetElement = document.querySelector(path);
@@ -90,7 +93,7 @@ const mouseExitAnimation = (e) => {
 };
 
 const handleClose = () => {
-  uiStore.closeMenu();
+  uiStore.value.closeMenu();
   setTimeout(() => {
     emit('menuClicked')
 

@@ -4,6 +4,8 @@ import {Link} from '@inertiajs/vue3';
 import {inject} from "vue";
 import {Post} from "@/types/post";
 import {useFormatDate} from "../../Composables/useFormatDate";
+import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+import {faEnvelope, faLocationArrow, faPhone} from "@fortawesome/free-solid-svg-icons";
 
 const posts: Post[] = inject("posts")
 const company_info: any = inject("company_info")
@@ -56,19 +58,19 @@ const company_info: any = inject("company_info")
         <div>
           <h5 class="text-white text-2xl font-black mb-6">Contact</h5>
           <div class="flex gap-2 mb-4 pb-4 items-center border-b border-gray-400">
-            <VIcon fill="#cea434" name="fa-phone"></VIcon>
+            <font-awesome-icon class="text-eclipsis-gold" :icon="faPhone"></font-awesome-icon>
             <p class="text-gray-400">
               {{ company_info.phone }}
             </p>
           </div>
           <div class="flex gap-2 mb-4 pb-4 items-center border-b border-gray-400">
-            <VIcon fill="#cea434" name="fa-envelope"></VIcon>
 
+            <font-awesome-icon class="text-eclipsis-gold" :icon="faEnvelope"></font-awesome-icon>
             <a :href="`mailto:${company_info.email}`" class="text-gray-400">{{ company_info.email }}</a>
           </div>
           <div class="flex gap-2 mb-4 items-center">
-            <VIcon fill="#cea434" name="fa-location-arrow"></VIcon>
 
+            <font-awesome-icon class="text-eclipsis-gold" :icon="faLocationArrow"></font-awesome-icon>
             <p class="text-gray-400">Atlanta, GA</p>
           </div>
         </div>

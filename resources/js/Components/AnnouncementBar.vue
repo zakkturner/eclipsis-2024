@@ -1,5 +1,9 @@
 <script lang="ts" setup>
 import {Announcement} from "@/types/types";
+import {faFacebook, faInstagram, faTwitter, faXTwitter} from "@fortawesome/free-brands-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+import {faX} from "@fortawesome/free-solid-svg-icons/faX";
+import {faPhone} from "@fortawesome/free-solid-svg-icons";
 
 
 const props = defineProps<{
@@ -18,20 +22,26 @@ const props = defineProps<{
       </div>
       <div class="flex text-white ">
         <div class="mr-2 text-eclipsis-gold">
-          <VIcon name="fa-phone"/>
+          <font-awesome-icon :icon="faPhone"/>
           <span class="text-white">
 404-482-3287
 </span></div>
         <ul class="flex justify-between">
           <li class="mr-2">
             <a href="https://twitter.com/eclipsisdev">
-              <span><VIcon name="fa-twitter"/></span>
+              <span>
+                <font-awesome-icon :icon="faXTwitter"/>
+              </span>
             </a>
           </li>
           <li class="mr-2"><a href="https://www.facebook.com/eclipsisstudiosllc"><span>
-                  <VIcon name="fa-facebook"/></span>
+            <font-awesome-icon :icon="faFacebook"></font-awesome-icon>
+          </span>
           </a></li>
-          <li><a href="https://www.instagram.com/eclipsisstudios/"><span><VIcon name="fa-instagram"/></span></a></li>
+          <li><a href="https://www.instagram.com/eclipsisstudios/"><span>
+
+            <font-awesome-icon :icon="faInstagram"></font-awesome-icon>
+          </span></a></li>
         </ul>
       </div>
     </div>
