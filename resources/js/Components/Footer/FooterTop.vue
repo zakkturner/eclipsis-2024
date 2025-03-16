@@ -57,13 +57,13 @@ const company_info: any = inject("company_info")
         </div>
         <div>
           <h5 class="text-white text-2xl font-black mb-6">Contact</h5>
-          <div class="flex gap-2 mb-4 pb-4 items-center border-b border-gray-400" v-if="company_info.phone">
+          <div class="flex gap-2 mb-4 pb-4 items-center border-b border-gray-400" v-if="company_info && company_info.phone">
             <font-awesome-icon class="text-eclipsis-gold" :icon="faPhone"></font-awesome-icon>
             <p class="text-gray-400">
               {{ company_info.phone }}
             </p>
           </div>
-          <div class="flex gap-2 mb-4 pb-4 items-center border-b border-gray-400" v-if="company_info.email">
+          <div class="flex gap-2 mb-4 pb-4 items-center border-b border-gray-400" v-if="company_info && company_info.email">
 
             <font-awesome-icon class="text-eclipsis-gold" :icon="faEnvelope"></font-awesome-icon>
             <a :href="`mailto:${company_info.email}`" class="text-gray-400">{{ company_info.email }}</a>
