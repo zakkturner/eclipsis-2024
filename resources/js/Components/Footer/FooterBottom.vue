@@ -19,7 +19,7 @@ const companyInfo: any = inject('company_info');
           </small>
         </div>
       </div>
-      <div class="flex justify-between">
+      <div class="flex justify-between" v-if="companyInfo">
         <div v-if="companyInfo.facebook_url" class="mr-10">
           <a :href="companyInfo.facebook_url" target="_blank">
             <font-awesome-icon size="xl" class="text-gray-400" :icon="faFacebookSquare"></font-awesome-icon>
