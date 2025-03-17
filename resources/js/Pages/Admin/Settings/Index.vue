@@ -16,13 +16,13 @@ const props = defineProps<{
 const {flash}: any = usePage().props;
 
 const form = useForm({
-  name: props.company_info.name,
-  phone: props.company_info.phone,
-  email: props.company_info.email,
-  facebook_url: props.company_info.facebook_url,
-  instagram_url: props.company_info.instagram_url,
-  twitter_url: props.company_info.twitter_url,
-  youtube_url: props.company_info.youtube_url,
+  name: props.company_info.name || "",
+  phone: props.company_info.phone || "",
+  email: props.company_info.email || "",
+  facebook_url: props.company_info.facebook_url || "",
+  instagram_url: props.company_info.instagram_url || "",
+  twitter_url: props.company_info.twitter_url || "",
+  youtube_url: props.company_info.youtube_url || "",
 
 });
 
