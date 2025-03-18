@@ -102,12 +102,14 @@ const handleClose = () => {
 </script>
 
 <template>
-  <section class="overflow-hidden flex justify-between bg-[url('/images/moon.gif')] bg-cover bg-no-repeat bg-center  h-screen w-full p-2">
+  <section
+      :class="{'z-[999] relative': uiStore?.isMenuOpen}"
+      class="overflow-hidden flex justify-between bg-[url('/images/moon.gif')] bg-cover bg-no-repeat bg-center  h-screen w-full p-2">
     <nav>
       <ul>
         <li ref="menuItems" v-for="route in routes" key="route.name" class="mb-4">
           <a @mouseover="mouseEnterAnimation" @mouseleave="mouseExitAnimation" @click.prevent="handleClick(route.path)"
-             class="text-5xl lg:text-9xl text-white"
+             class="text-5xl lg:text-9xl text-white hover:cursor-pointer"
           >{{
               route
                   .name
