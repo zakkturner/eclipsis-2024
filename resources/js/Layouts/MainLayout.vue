@@ -56,7 +56,7 @@ onMounted(() => {
             start: "top top",
             end: "bottom -20%",
             scrub: true,
-            
+
           },
           ease: "slow(0.7,0.7,false)"
         });
@@ -85,7 +85,7 @@ watch(
     {immediate: true}
 );
 const refreshScroll = () => {
-  alert('refresh')
+
   ScrollTrigger.refresh();
 }
 </script>
