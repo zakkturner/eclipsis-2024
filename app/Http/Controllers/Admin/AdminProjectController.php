@@ -27,7 +27,7 @@ class AdminProjectController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Admin/Projects/Create');
+        return Inertia::render('Admin/Projects/Create', ['clients' => Client::all()]);
     }
 
     /**
@@ -44,7 +44,8 @@ class AdminProjectController extends Controller
         ]);
 
         Project::create($attr);
-        return Inertia::render('Admin/Projects/Index', ['projects' => Project::all()]);
+//        return Inertia::render('Admin/Projects/Index', ['projects' => Project::all()]);
+        return redirect()->route('admin.projects.index')->with('success', 'Project created successfully.');
     }
 
     /**
@@ -99,7 +100,8 @@ class AdminProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+       
         $project->delete();
-        return Inertia::render('Admin/Projects/Index', ['projects' => Project::all()])->with(["message" => "Projects deleted successfully"]);
+        return redirect()->route('admin.projects.index', ['projects' => Project::all()])->with(["message" => "Projects deleted successfully"]);
     }
 }
