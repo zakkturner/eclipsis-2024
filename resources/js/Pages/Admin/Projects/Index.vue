@@ -26,7 +26,6 @@ const tableHeadings = [
   'launch date',
   'website url',
   'Actions',
-
 ];
 const message = ref("")
 const handleDeleteModal = (project: Project) => {
