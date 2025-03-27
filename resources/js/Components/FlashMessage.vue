@@ -12,6 +12,7 @@ const messageAnimation = async () => {
   gsap.fromTo(msgContainer.value, {x: 200, opacity: 0}, {x: 0, duration: .7, opacity: 1, ease: 'power3.inOut', delay: .5});
   setTimeout(() => {
     gsap.to(msgContainer.value, {x: 200, opacity: 0, duration: .5, ease: 'power3.inOut'});
+
   }, 5000)
 }
 watch(() => props.message, (newMessage) => {

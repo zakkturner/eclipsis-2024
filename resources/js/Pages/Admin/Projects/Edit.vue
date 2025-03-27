@@ -9,6 +9,7 @@ import {Client} from "@/types/types";
 import FormGroup from "@/Components/Form/FormGroup.vue";
 import {router} from '@inertiajs/vue3'
 import TextArea from "@/Components/Form/TextArea.vue";
+import LinkButton from "@/Components/LinkButton.vue";
 
 const props = defineProps<{
   project: Project;
@@ -43,7 +44,10 @@ const handleSubmit = () => {
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">Projects Edit</h2>
     </template>
     <DashboardContainer>
-      <h1 class="text-3xl font-bold mb-4">Edit {{ project.title }}</h1>
+      <div class="flex justify-between items-center my-6">
+        <h1 class="text-3xl font-bold mb-4">Edit {{ project.title }}</h1>
+        <link-button link="/admin/projects">Back to All Projects</link-button>
+      </div>
       <form @submit.prevent="handleSubmit">
         <form-group text="Project Title" for="title">
           <text-input v-model="form.title" name="title"/>
