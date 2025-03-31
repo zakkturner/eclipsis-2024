@@ -108,7 +108,7 @@ const handleClose = () => {
     <nav>
       <ul>
         <li ref="menuItems" v-for="route in routes" key="route.name" class="mb-4">
-          <a @mouseover="mouseEnterAnimation" @mouseleave="mouseExitAnimation" @click.prevent="handleClick(route.path)"
+          <a :href="route.path" @mouseover="mouseEnterAnimation" @mouseleave="mouseExitAnimation" @click.prevent="handleClick(route.path)"
              class="text-5xl lg:text-9xl text-white hover:cursor-pointer"
           >{{
               route
@@ -120,7 +120,7 @@ const handleClose = () => {
     </nav>
     <div>
       <button @click="handleClose" class="text-5xl">
-        <img src="/images/icons/exit.ico"/>
+        <img src="/images/icons/exit.ico" alt="Back to main Eclipsis Studios Site"/>
       </button>
     </div>
   </section>

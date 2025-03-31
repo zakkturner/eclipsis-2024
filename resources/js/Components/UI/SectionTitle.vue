@@ -1,6 +1,6 @@
 <template>
   <div class="text-center mb-12">
-    <h4 class="text-lg text-eclipsis-gold">{{ subtitle }}</h4>
+    <p class="text-lg text-eclipsis-gold">{{ subtitle }}</p>
     <h2 class="text-6xl font-bold text-black">{{ title }}</h2>
   </div>
 </template>

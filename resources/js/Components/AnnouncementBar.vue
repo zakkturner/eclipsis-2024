@@ -21,27 +21,31 @@ const props = defineProps<{
         <h6 class="text-white" v-else>Welcome To Eclipsis Studios</h6>
       </div>
       <div class="flex text-white ">
-        <div class="mr-2 text-eclipsis-gold">
+        <div class="mr-4 text-eclipsis-gold">
           <font-awesome-icon :icon="faPhone"/>
           <span class="text-white">
-404-482-3287
-</span></div>
+                404-482-3287
+          </span>
+        </div>
         <ul class="flex justify-between">
-          <li class="mr-2">
-            <a href="https://twitter.com/eclipsisdev">
+          <li class="mr-4">
+            <a href="https://twitter.com/eclipsisdev" aria-label="Eclipsis Studios X Link">
               <span>
                 <font-awesome-icon :icon="faXTwitter"/>
               </span>
             </a>
           </li>
-          <li class="mr-2"><a href="https://www.facebook.com/eclipsisstudiosllc"><span>
+          <li class="mr-4"><a href="https://www.facebook.com/eclipsisstudiosllc" aria-label="Eclipsis Studios Facebook Link"><span>
             <font-awesome-icon :icon="faFacebook"></font-awesome-icon>
           </span>
           </a></li>
-          <li><a href="https://www.instagram.com/eclipsisstudios/"><span>
-
-            <font-awesome-icon :icon="faInstagram"></font-awesome-icon>
-          </span></a></li>
+          <li>
+            <a href="https://www.instagram.com/eclipsisstudios/" aria-label="Eclipsis Studios Instagram Link">
+              <span>
+                <font-awesome-icon :icon="faInstagram"></font-awesome-icon>
+              </span>
+            </a>
+          </li>
         </ul>
       </div>
     </div>

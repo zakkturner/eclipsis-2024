@@ -24,7 +24,8 @@ import TheLogo from "@/Components/TheLogo.vue";
         </p>
       </div>
       <div class="lg:w-2/6">
-        <img class="w-full" src="/images/logos/cropped-eclipsis-yellow.png"/>
+        <img class="w-full" src="/images/logos/cropped-eclipsis-yellow.png" alt="Eclipsis Studios | Software Agency"
+             title="Eclipsis Studios | Software Agency"/>
       </div>
     </div>
   </section>

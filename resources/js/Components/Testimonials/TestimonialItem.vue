@@ -39,7 +39,8 @@ const handleAnimation = (enter = false) => {
       <div ref="arrow" class="bg-white rotate-45 w-10 h-10 -translate-y-3/4"></div>
     </div>
     <div class="rounded-full overflow-hidden w-[60px] h-[60px]">
-      <img class="w-full object-cover h-full" :src="`storage/${testimonial.avatar}`">
+      <img class="w-full object-cover h-full" :src="`storage/${testimonial.avatar}`"
+           :alt="`Positive client feedback: ${testimonial.client.name} shares their success story with Eclipsis Studio's software solutions.`">
     </div>
     <div class="text-center">
       <h3 class="text-lg font-bold">{{ testimonial.client.name }}</h3>
