@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import NavLink from "@/Components/NavLink.vue";
+import {Link} from "@inertiajs/vue3";
+
 const props = defineProps<{
   tableHeadings?: string[];
 }>();
@@ -28,13 +31,8 @@ const props = defineProps<{
   </div>
 
   <div class="flex justify-center mt-6">
-    <NavLink
-        class="bg-eclipsis-gold px-8 py-4 rounded text-white border-4 border-eclipsis-gold hover:bg-white hover:text-black transition-all ease-in-out"
-        as="button"
-        type="button"
-        href="/dashboard"
-    >
-      Back To Dashboard
-    </NavLink>
+    <Link class="bg-eclipsis-gold px-8 py-4 rounded text-white border-4 border-eclipsis-gold hover:bg-white hover:text-black transition-all
+              ease-in-out" as="button" type="button" href="/dashboard">Back To Dashboard
+    </Link>
   </div>
 </template>
