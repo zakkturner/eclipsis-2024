@@ -22,21 +22,22 @@ const companyInfo: any = inject('company_info');
       <div class="flex justify-between" v-if="companyInfo">
         <div v-if="companyInfo.facebook_url" class="mr-10">
           <a :href="companyInfo.facebook_url" target="_blank">
-            <font-awesome-icon size="xl" class="text-gray-400" :icon="faFacebookSquare"></font-awesome-icon>
+            <font-awesome-icon size="xl" class="text-gray-400" :icon="faFacebookSquare"
+                               aria-label="Eclipsis Studios Facebook Link"></font-awesome-icon>
           </a>
         </div>
         <div v-if="companyInfo.twitter_url" class="mr-10">
-          <a :href="companyInfo.twitter_url" target="_blank">
+          <a :href="companyInfo.twitter_url" target="_blank" aria-label="Eclipsis Studios X Link">
             <font-awesome-icon size="xl" class="text-gray-400" :icon="faSquareXTwitter"></font-awesome-icon>
           </a>
         </div>
         <div v-if="companyInfo.youtube_url" class="mr-10">
-          <a :href="companyInfo.youtube_url" target="_blank">
+          <a :href="companyInfo.youtube_url" target="_blank" aria-label="Eclipsis Studios Youtube Link">
             <font-awesome-icon size="xl" class="text-gray-400" :icon="faYoutubeSquare"></font-awesome-icon>
           </a>
         </div>
         <div v-if="companyInfo.instagram_url">
-          <a :href="companyInfo.instagram_url" target="_blank">
+          <a :href="companyInfo.instagram_url" aria-label="Eclipsis Studios Instagram Link" target="_blank">
             <font-awesome-icon size="xl" class="text-gray-400" :icon="faInstagramSquare"></font-awesome-icon>
           </a>
         </div>

@@ -44,7 +44,7 @@ const company_info: any = inject("company_info")
             <li class="mb-6" v-for="post in posts.slice(0,2)" :key="post.id">
               <div class="flex">
                 <div class="w-20 mr-4">
-                  <img :src="`storage/${post.thumbnail}`"/>
+                  <img :src="`storage/${post.thumbnail}`" :alt="post.excerpt"/>
                 </div>
                 <div>
                   <p class="text-eclipsis-gold">{{ useFormatDate(post.updated_at).formattedDate }}</p>

@@ -33,14 +33,12 @@ const formattedCreated = (post: Post) => computed(() => {
           :pagination="{clickable: true}"
           :breakpoints="{
               768: { slidesPerView: 2 }
-              }"
-          :autoplay="{
-                      delay: 2500,
-                      disableOnInteraction: false,
           }"
-          class="w-full h-full"
-
-      >
+          :autoplay="{
+              delay: 2500,
+              disableOnInteraction: false,
+          }"
+          class="w-full h-full">
         <swiper-slide class="text-center " v-for="post in posts">
           <div class="w-full h-auto mb-8">
             <a :href="`/blog/${post.slug}`">
