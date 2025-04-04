@@ -77,40 +77,40 @@ const handleDelete = () => {
                 </link-button>
               </div>
               <custom-table :tableHeadings="tableHeadings">
-                <li v-for="client in clients" :key="client.id" class="border-eclipsis-navy border-t-2 first:border-t-0 last:border-b-2">
-                  <div class="grid grid-cols-7">
+                <template #default>
+                  <tr v-for="client in clients" :key="client.id" class="border-eclipsis-navy border-t-2 first:border-t-0 last:border-b-2">
                     <!-- Company -->
-                    <div class="border-r-2 border-l-2 border-eclipsis-navy flex-1 p-2">
+                    <td class="border-r-2 border-l-2 border-eclipsis-navy flex-1 p-2">
                       {{ client.company }}
-                    </div>
+                    </td>
 
                     <!-- Contact Name -->
-                    <div class="border-r-2 border-eclipsis-navy flex-1 p-2">
+                    <td class="border-r-2 border-eclipsis-navy flex-1 p-2">
                       {{ client.name }}
-                    </div>
+                    </td>
 
                     <!-- Email -->
-                    <div class="border-r-2 border-eclipsis-navy flex-1 p-2 break-words overflow-hidden whitespace-normal">
+                    <td class="border-r-2 border-eclipsis-navy flex-1 p-2 break-words overflow-hidden whitespace-normal">
                       {{ client.email }}
-                    </div>
+                    </td>
 
                     <!-- Phone -->
-                    <div class="border-r-2 border-eclipsis-navy flex-1 p-2">
+                    <td class="border-r-2 border-eclipsis-navy flex-1 p-2">
                       {{ client.phone }}
-                    </div>
+                    </td>
 
                     <!-- Website URL -->
-                    <div class="border-r-2 border-eclipsis-navy flex-1 p-2">
+                    <td class="border-r-2 border-eclipsis-navy flex-1 p-2">
                       <a :href="client.website_url" class="text-blue-600 underline">{{ client.website_url }}</a>
-                    </div>
+                    </td>
 
                     <!-- Budget -->
-                    <div class="border-r-2 border-eclipsis-navy flex-1 p-2">
+                    <td class="border-r-2 border-eclipsis-navy flex-1 p-2">
                       {{ client.budget }}
-                    </div>
+                    </td>
 
                     <!-- Edit Button -->
-                    <div class="border-r-2 border-eclipsis-navy flex-1 flex justify-center items-center py-2">
+                    <td class="border-r-2 border-eclipsis-navy flex-1 flex justify-center items-center py-2">
                       <NavLink
                           class="bg-eclipsis-gold mr-2 px-4 py-2 rounded text-white border-4 border-eclipsis-gold
                                    hover:bg-eclipsis-navy hover:text-black hover:border-eclipsis-gold transition-all ease-in-out transition duration-700 ease-in-out group"
@@ -124,12 +124,11 @@ const handleDelete = () => {
                               class="bg-red-600 px-4 py-1 rounded text-white border-4 border-red-600 hover:bg-white hover:text-black transition-all ease-in-out">
                         <font-awesome-icon :icon="faTrash"></font-awesome-icon>
                       </button>
-                    </div>
+                    </td>
 
-                    <!-- Delete Button -->
 
-                  </div>
-                </li>
+                  </tr>
+                </template>
               </custom-table>
             </div>
           </div>

@@ -14,7 +14,6 @@ const props = defineProps<{
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         <testimonial-item v-for="testimonial in testimonials" :testimonial="testimonial" :key="testimonial.id"></testimonial-item>
       </div>
-      <!--      <service-list></service-list>-->
     </div>
   </section>
 </template>
