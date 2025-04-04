@@ -6,6 +6,8 @@ import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import {Link} from '@inertiajs/vue3';
+import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+import {faAddressBook, faBriefcase, faBullhorn, faChartLine, faGear, faGears, faNewspaper, faUserPen} from "@fortawesome/free-solid-svg-icons";
 
 const showingNavigationDropdown = ref(false);
 </script>
@@ -31,48 +33,56 @@ const showingNavigationDropdown = ref(false);
               <!-- Navigation Links -->
               <div class="h-fit">
 
-                <div class="hidden space-x-8 sm:-my-px  sm:flex justify-center ">
+                <div class="hidden  sm:mb-2  sm:flex flex-col items-stretch justify-center text-center ">
                   <NavLink class="text-white" :href="route('dashboard')" :active="route().current('dashboard')">
+                    <font-awesome-icon :icon="faChartLine"></font-awesome-icon>
                     Dashboard
                   </NavLink>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px  sm:flex justify-center">
+                <div class="hidden  sm:mb-2  sm:flex flex-col items-stretch justify-center text-center ">
                   <NavLink :href="route('announcements.index')" :active="route().current('announcements')">
+                    <font-awesome-icon :icon="faBullhorn"></font-awesome-icon>
                     Announcements
                   </NavLink>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px  sm:flex justify-center">
+                <div class="hidden  sm:mb-2  sm:flex flex-col items-stretch justify-center text-center ">
                   <NavLink :href="route('admin.services.index')" :active="route().current().includes('admin.services')">
+                    <font-awesome-icon :icon="faGears"></font-awesome-icon>
                     Services
                   </NavLink>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px  sm:flex justify-center">
+                <div class="hidden  sm:mb-2  sm:flex flex-col items-stretch justify-center text-center">
                   <NavLink :href="route('admin.blog.index')" :active="route().current().includes('admin.blog')">
+                    <font-awesome-icon :icon="faNewspaper"></font-awesome-icon>
                     Blog
                   </NavLink>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px  sm:flex justify-center">
+                <div class="hidden  sm:mb-2  sm:flex flex-col items-stretch justify-center text-center">
                   <NavLink :href="route('admin.projects.index')" :active="route().current().includes('admin.projects')">
+                    <font-awesome-icon :icon="faBriefcase"></font-awesome-icon>
                     Projects
                   </NavLink>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px  sm:flex justify-center">
+                <div class="hidden  sm:mb-2  sm:flex flex-col items-stretch justify-center text-center">
                   <NavLink :href="route('admin.clients.index')" :active="route().current().includes('admin.clients')">
+                    <font-awesome-icon :icon="faAddressBook"></font-awesome-icon>
                     Clients
                   </NavLink>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px  sm:flex justify-center">
+                <div class="hidden  sm:mb-2  sm:flex flex-col items-stretch justify-center text-center">
                   <NavLink :href="route('admin.testimonials.index')" :active="route().current().includes('admin.testimonials')">
+                    <font-awesome-icon :icon="faUserPen"></font-awesome-icon>
                     Testimonials
                   </NavLink>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px  sm:flex justify-center">
+                <div class="hidden  sm:mb-2  sm:flex flex-col items-stretch justify-center text-center">
                   <NavLink :href="route('admin.settings')" :active="route().current().includes('admin.settings')">
+                    <font-awesome-icon :icon="faGear"></font-awesome-icon>
                     Settings
                   </NavLink>
                 </div>
               </div>
-              <div class="hidden sm:flex justify-center sm:items-center absolute bottom-6">
+              <div class="hidden sm:flex flex-col items-stretch justify-center sm:items-center absolute bottom-6">
                 <!-- SettingsController Dropdown -->
                 <div class="ms-3 relative">
                   <Dropdown align="right" width="48">

@@ -47,7 +47,7 @@ const handleSubmit = () => {
             <option selected disabled></option>
             <option v-for="clientItem in clients"
                     :value="clientItem.id"
-            >{{ clientItem.name }}
+            >{{ clientItem.company }}
             </option>
           </select>
         </form-group>
@@ -59,13 +59,7 @@ const handleSubmit = () => {
         </form-group>
         <button class="mt-4 bg-green-800 text-white rounded py-4 px-6">Save</button>
       </form>
-      <!--      <hr class="my-4"/>-->
-      <!--      <div>-->
-      <!--        <div class="m-2">-->
-      <!--          <h2 class="text-xl">Add Photos</h2>-->
-      <!--        </div>-->
-      <!--        <photos-form :photos="project_photos"></photos-form>-->
-      <!--      </div>-->
+
     </DashboardContainer>
   </AuthenticatedLayout>
 </template>
