@@ -73,7 +73,7 @@ Route::middleware('auth')->group(function () {
         ]);
         Route::post("/company-info", AdminCompanyController::class)->name('admin.company-info');
         Route::prefix("project-photos")->group(function () {
-            Route::post('/', [ProjectPhotoController::class, 'store'])->name('project_photos.store');
+            Route::post('/{project_id}', [ProjectPhotoController::class, 'store'])->name('project_photos.store');
             Route::put('/{id}', [ProjectPhotoController::class, 'update'])->name('project_photos.update');
         });
         Route::resource('/services', ServiceController::class)->names([

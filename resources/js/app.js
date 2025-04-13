@@ -12,6 +12,9 @@ import * as FaIcons from "oh-vue-icons/icons/fa";
 import posthogPlugin from "./plugins/posthog";
 import {gsap} from 'gsap'
 import {ScrollTrigger} from 'gsap/ScrollTrigger'
+import {fas} from '@fortawesome/free-solid-svg-icons'
+import {library} from '@fortawesome/fontawesome-svg-core'
+import {register} from 'swiper/element/bundle';
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -21,8 +24,8 @@ addIcons(...Fa);
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 const pinia = createPinia();
-import {register} from 'swiper/element/bundle';
 
+library.add(fas)
 register();
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,

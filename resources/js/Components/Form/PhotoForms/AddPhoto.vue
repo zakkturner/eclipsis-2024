@@ -2,14 +2,16 @@
 import {useForm} from '@inertiajs/vue3'
 import FormGroup from "@/Components/Form/FormGroup.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import {inject} from "vue";
 
 const form = useForm({
   alt: "",
   img_src: null
 })
+const projectId = inject('projectId');
 
 function handleSubmit() {
-  form.post("/admin/project-photos ")
+  form.post(`/admin/project-photos/${projectId}`);
 }
 </script>
 <template>
