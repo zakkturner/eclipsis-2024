@@ -5,7 +5,7 @@ import DashboardContainer from "@/Components/UI/DashboardContainer.vue";
 import PhotosForm from "@/Components/Form/PhotoForms/PhotosForm.vue";
 import TextInput from "@/Components/Form/TextInput.vue";
 import {reactive} from "vue";
-import {Client} from "@/types/types";
+import {Client, Service} from "@/types/types";
 import FormGroup from "@/Components/Form/FormGroup.vue";
 import {router} from '@inertiajs/vue3'
 import TextArea from "@/Components/Form/TextArea.vue";
@@ -13,13 +13,15 @@ import TextArea from "@/Components/Form/TextArea.vue";
 const props = defineProps<{
 
   clients: Client[],
+  services: Service[]
 }>()
 const form = reactive({
   title: "",
   description: "",
   launch_date: "",
   website_url: "",
-  client_id: ""
+  client_id: "",
+  services: []
 });
 
 const handleSubmit = () => {
@@ -48,6 +50,15 @@ const handleSubmit = () => {
             <option v-for="clientItem in clients"
                     :value="clientItem.id"
             >{{ clientItem.company }}
+            </option>
+          </select>
+        </form-group>
+        <form-group for="service">
+          <select v-model="form.services" multiple>
+            <option selected disabled></option>
+            <option v-for="serviceItem in services"
+                    :value="serviceItem.id"
+            >{{ serviceItem.title }}
             </option>
           </select>
         </form-group>

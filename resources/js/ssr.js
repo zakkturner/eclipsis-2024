@@ -5,7 +5,8 @@ import createServer from '@inertiajs/vue3/server';
 import {resolvePageComponent} from 'laravel-vite-plugin/inertia-helpers';
 import {ZiggyVue} from '../../vendor/tightenco/ziggy';
 import {gsap} from 'gsap'
-
+import {fas} from '@fortawesome/free-solid-svg-icons'
+import {library} from '@fortawesome/fontawesome-svg-core'
 
 import {createPinia} from 'pinia';
 import {OhVueIcon, addIcons} from "oh-vue-icons";
@@ -17,7 +18,7 @@ register();
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 const pinia = createPinia();
-
+library.add(fas)
 createServer((page) =>
     createInertiaApp({
         page,
