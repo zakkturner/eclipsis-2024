@@ -72,7 +72,7 @@ const handleDelete = () => {
                 <template #default>
                   <tr v-for="project in projects" :key="project.id" class="border-eclipsis-navy border-t-2 first:border-t-0 last:border-b-2">
                     <td class="border border-eclipsis-navy p-2">{{ project.title }}</td>
-                    <td class="border border-eclipsis-navy p-2">{{ project.client.name }}</td>
+                    <td class="border border-eclipsis-navy p-2">{{ project.client.company }}</td>
                     <td class="border border-eclipsis-navy p-2">{{ project.description }}</td>
                     <td class="border border-eclipsis-navy p-2">{{ project.launch_date }}</td>
                     <td class="border border-eclipsis-navy p-2">{{ project.website_url }}</td>
