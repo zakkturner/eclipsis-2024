@@ -100,8 +100,11 @@ const {backgroundImage} = useBackgroundImage()
         </div>
         <hr class="my-20">
         <div class="flex gap-x-8">
-          <project-item v-for="project in similar_projects" :backgroundImage="backgroundImage(project.project_photos)"
-                        :project="project"></project-item>
+          <div v-for="project in similar_projects">
+         
+            <project-item :backgroundImage="backgroundImage(project.project_photos)"
+                          :project="project"></project-item>
+          </div>
         </div>
       </div>
     </section>

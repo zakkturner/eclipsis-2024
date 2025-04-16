@@ -14,7 +14,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::with('services')->get();
+        $projects = Project::with('services')->with('project_photos')->get();
 
         return Inertia::render('Projects/Index', [
             "projects" => $projects
@@ -31,7 +31,7 @@ class ProjectController extends Controller
         $similar_projects = Project::whereHas('services', function ($query) use ($project) {
             $query->whereIn('services.id', $project->services->pluck('id'));
         })
-            ->where('id', '!=', $project->id)->with('services') // Exclude the current project
+            ->where('id', '!=', $project->id)->with('services')->with('project_photos') // Exclude the current project
             ->take(3)
             ->get();
 
