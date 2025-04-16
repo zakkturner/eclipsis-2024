@@ -32,7 +32,7 @@ const props = defineProps<{
         <p>{{ project.description }}</p>
       </form-group>
       <form-group for="client">
-        <p><a :href="`/admin/clients/${client.id}`">{{ client.name }}</a></p>
+        <p><a :href="`/admin/clients/${client.id}`">{{ client.company }}</a></p>
       </form-group>
       <form-group for="launch_date" text="Launch Date">
         <p>{{ project.launch_date }}</p>

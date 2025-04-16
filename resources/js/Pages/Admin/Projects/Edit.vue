@@ -64,7 +64,7 @@ const handleSubmit = () => {
           <select>
             <option v-for="clientItem in clients"
                     :selected="clientItem.id == client.id"
-            >{{ clientItem.name }}
+            >{{ clientItem.company }}
             </option>
           </select>
         </form-group>
