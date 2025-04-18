@@ -10,7 +10,7 @@ const companyInfo: any = inject('company_info');
   <div class="py-6 bg-[#112239]">
     <div class="max-w-[90%] xl:max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between">
       <div class="flex ite items-center mb-10 md:mb-0">
-        <div class="border-r border-gray-400 pr-2 mr-2">
+        <div class="border-r border-gray-400 pr-2 mr-6">
           <the-logo></the-logo>
         </div>
         <div>

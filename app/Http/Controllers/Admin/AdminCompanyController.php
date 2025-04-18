@@ -18,6 +18,7 @@ class AdminCompanyController extends Controller
             'twitter_url' => 'nullable',
             'instagram_url' => 'nullable',
             'youtube_url' => 'nullable',
+            'footer_about' => 'nullable',
         ]);
         $company = CompanyInfo::updateOrCreate(
             ['id' => 1],
