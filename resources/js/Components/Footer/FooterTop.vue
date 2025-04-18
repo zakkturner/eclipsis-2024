@@ -17,9 +17,7 @@ const company_info: any = inject("company_info")
       <div class="grid grid-cols-1 gap-y-10  md:grid-cols-2 md:gap-x-6 lg:gap-y-0 lg:grid-cols-4 lg:justify-items-center">
         <div>
           <h5 class="text-white text-2xl font-black mb-6">About</h5>
-          <p class="text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere libero officia pariatur quas quia reiciendis
-            repellendus totam.
-            Aliquam culpa distinctio dolorem doloribus.</p>
+          <p class="text-gray-400">{{ company_info.footer_about }}</p>
         </div>
         <div>
           <h5 class="text-white text-2xl font-black mb-6">Explore</h5>

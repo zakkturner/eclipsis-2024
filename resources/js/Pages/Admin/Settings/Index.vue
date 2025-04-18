@@ -8,12 +8,13 @@ import TextInput from "@/Components/Form/TextInput.vue";
 import FormGroup from "@/Components/Form/FormGroup.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import FlashMessage from "@/Components/FlashMessage.vue";
-import {ref} from "vue";
+import {computed, ref} from "vue";
+import TextArea from "@/Components/Form/TextArea.vue";
 
 const props = defineProps<{
   company_info: any
 }>()
-const {flash}: any = usePage().props;
+const flash = computed(() => usePage().props.flash);
 
 const form = useForm({
   name: props.company_info?.name || "",
@@ -23,12 +24,18 @@ const form = useForm({
   instagram_url: props.company_info?.instagram_url || "",
   twitter_url: props.company_info?.twitter_url || "",
   youtube_url: props.company_info?.youtube_url || "",
+  footer_about: props.company_info?.footer_about || "",
 
 });
 
-const handleSubmit = () => {
+const handleSubmit = async () => {
+  console.log(flash)
+  try {
 
-  router.post('/admin/company-info', form);
+    await router.post('/admin/company-info', form);
+  } catch (error) {
+    console.log(error)
+  }
 }
 </script>
 
@@ -71,6 +78,9 @@ const handleSubmit = () => {
               </form-group>
               <form-group for="Company Instagram">
                 <text-input type="text" placeholder="Enter Company Instagram" v-model="form.instagram_url" name="instagram"/>
+              </form-group>
+              <form-group for="Footer About">
+                <text-area type="text" placeholder="Enter About for Footer" v-model="form.footer_about" name="instagram"/>
               </form-group>
               <primary-button class="mt-4" type="submit">Save</primary-button>
             </form>
