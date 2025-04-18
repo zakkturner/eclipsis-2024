@@ -14,7 +14,7 @@ const props = defineProps<{
   query,
   tags: Tag[],
   latest_posts: Post[],
-  
+
 }>()
 
 const breadCrumbs: BreadCrumb[] = [
@@ -36,7 +36,7 @@ const breadCrumbs: BreadCrumb[] = [
     <template #hero>
       <SubPageHero pageTitle="Our Blog" :breadcrumbs="breadCrumbs"></SubPageHero>
     </template>
-    <section class="w-3/4 mt-40 mx-auto flex gap-4">
+    <section class="w-3/4 mt-40 mx-auto flex gap-4 bg-white">
       <blog-list :posts="posts"/>
       <blog-sidebar :tags="tags" :latest_posts="latest_posts"></blog-sidebar>
     </section>

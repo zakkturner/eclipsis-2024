@@ -14,6 +14,7 @@ import gsap from 'gsap';
 import DangerButton from "@/Components/DangerButton.vue";
 import dayjs from "dayjs";
 import {useFormatDate} from "@/Composables/useFormatDate";
+import LinkButton from "@/Components/LinkButton.vue";
 
 
 const props = defineProps<{
@@ -71,33 +72,34 @@ const {formattedDate} = useFormatDate()
             <div class="w-full mx-auto flex flex-col justify-center">
               <div class="flex w-full justify-end mb-10">
 
-                <NavLink
-                    class="bg-green-700   px-4 py-2 rounded text-white! border-4 border-eclipsis-gold hover:bg-white hover:text-black transition-all
-                          ease-in-out" href="/admin/testimonials/create"><span class="text-white">Add Testimonial</span>
-                </NavLink>
+                <link-button
+                    class="bg-green-700   px-4 py-2 rounded text-white! border-4 border-green-700 hover:bg-white group hover:text-black transition-all
+                          ease-in-out" link="/admin/testimonials/create"><span class="text-white group-hover:text-green-700">Add Testimonial</span>
+                </link-button>
               </div>
               <custom-table :tableHeadings="tableHeadings" v-if="testimonials.length > 0">
-                <li v-for="testimonial in testimonials" :key="testimonial.id"
-                    class="border-eclipsis-navy border-t-2 first:border-t-0 last:border-b-2">
-                  <div class="grid grid-cols-4">
+                <template #default>
+                  <tr v-for="testimonial in testimonials" :key="testimonial.id"
+                      class="border-eclipsis-navy border-t-2 first:border-t-0 last:border-b-2">
+
                     <!-- Company -->
 
                     <!-- Contact Name -->
-                    <div class="border-r-2 border-eclipsis-navy flex-1 p-2">
+                    <td class="border-r-2 border-eclipsis-navy flex-1 p-2">
                       {{ testimonial.name }}
-                    </div>
+                    </td>
 
                     <!-- Email -->
-                    <div class="border-r-2 border-eclipsis-navy flex-1 p-2 break-words overflow-hidden whitespace-normal">
+                    <td class="border-r-2 border-eclipsis-navy flex-1 p-2 break-words overflow-hidden whitespace-normal">
                       {{ testimonial.client.name }}
-                    </div>
-                    <div class="border-r-2 border-eclipsis-navy flex-1 p-2">
+                    </td>
+                    <td class="border-r-2 border-eclipsis-navy flex-1 p-2">
                       {{ useFormatDate(testimonial.created_at).formattedDate }}
-                    </div>
+                    </td>
 
 
                     <!-- Edit Button -->
-                    <div class="border-r-2 border-eclipsis-navy flex-1 flex justify-center items-center py-2">
+                    <td class="border-r-2 border-eclipsis-navy flex-1 flex justify-center items-center py-2">
                       <NavLink
                           class="bg-eclipsis-navy mr-2 px-4 py-2 rounded text-white border-4 border-eclipsis-navy
                                    hover:bg-eclipsis-gold hover:text-black hover:border-eclipsis-navy transition-all ease-in-out transition duration-700 ease-in-out group"
@@ -119,12 +121,13 @@ const {formattedDate} = useFormatDate()
                               class="bg-red-600 px-4 py-1 rounded text-white border-4 border-red-600 hover:bg-white hover:text-black transition-all ease-in-out">
                         <font-awesome-icon :icon="faTrash"></font-awesome-icon>
                       </button>
-                    </div>
+                    </td>
 
                     <!-- Delete Button -->
 
-                  </div>
-                </li>
+
+                  </tr>
+                </template>
               </custom-table>
               <custom-table :tableHeadings="tableHeadings" v-else>
                 <li>No Data Added</li>

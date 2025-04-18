@@ -9,10 +9,13 @@ const props = defineProps<{
 }>()
 </script>
 <template>
-  <ul class="w-4/6">
+  <ul class="w-4/6" v-if="posts.length > 0">
     <li v-for="post in posts" class="mb-4">
       <blog-post :post="post"></blog-post>
       <NavLink :href="`/blog/${ post.slug }`">Read More</NavLink>
     </li>
   </ul>
+  <div v-else>
+    <h2>No Posts Yet!</h2>
+  </div>
 </template>

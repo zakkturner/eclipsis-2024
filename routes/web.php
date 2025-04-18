@@ -1,16 +1,19 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminClientController;
+use App\Http\Controllers\Admin\AdminCompanyController;
 use App\Http\Controllers\Admin\AdminPostsController;
 use App\Http\Controllers\Admin\AdminProjectController;
 use App\Http\Controllers\Admin\AdminTestimonialController;
 use App\Http\Controllers\Admin\AnnouncementController;
 use App\Http\Controllers\Admin\AdminCategoriesController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectPhotoController;
@@ -20,15 +23,16 @@ use Inertia\Inertia;
 
 Route::get('/', HomeController::class);
 Route::resource('/blog', BlogController::class)->except(['store', 'update', 'edit'])->parameters(['post' => 'slug']);
+Route::get('/blog/category/{category}', CategoriesController::class)->name('blog.category');
 Route::get('/blog/search', [BlogController::class, 'search'])->name('blog.search');
 Route::get('/blog/tag/{tag}', TagsController::class)->name('blog.tag');
-Route::get('/blog/category/{category}', CategoriesController::class)->name('blog.category');
 Route::prefix('/view-projects')->group(function () {
     Route::get('/', [ProjectController::class, 'index'])->name('project.index');
 
     Route::get('/{id}', [ProjectController::class, 'show'])->name('project.show');
 });
 
+Route::post('/newsletter', NewsletterController::class);
 Route::post('/clients', ClientController::class)->name('guest.clients');
 
 Route::get('/dashboard', function () {
@@ -43,8 +47,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::resource('announcements', AnnouncementController::class);
     Route::prefix('admin')->group(function () {
+        Route::resource('announcements', AnnouncementController::class);
         Route::prefix("blog")->group(function () {
 //            Route::get('/', [BlogController::class, 'index'])->name('admin.blog.index');
             Route::resource('/post', AdminPostsController::class)->parameters(['post' => 'slug'])->names([
@@ -67,8 +71,9 @@ Route::middleware('auth')->group(function () {
             'edit' => 'admin.clients.edit',
             'destroy' => 'admin.clients.destroy',
         ]);
+        Route::post("/company-info", AdminCompanyController::class)->name('admin.company-info');
         Route::prefix("project-photos")->group(function () {
-            Route::post('/', [ProjectPhotoController::class, 'store'])->name('project_photos.store');
+            Route::post('/{project_id}', [ProjectPhotoController::class, 'store'])->name('project_photos.store');
             Route::put('/{id}', [ProjectPhotoController::class, 'update'])->name('project_photos.update');
         });
         Route::resource('/services', ServiceController::class)->names([
@@ -95,6 +100,8 @@ Route::middleware('auth')->group(function () {
             'edit' => 'admin.projects.edit',
             'destroy' => 'admin.projects.destroy',
         ]);
+        Route::get("/settings", SettingsController::class)->name('admin.settings');
+
     });
 });
 

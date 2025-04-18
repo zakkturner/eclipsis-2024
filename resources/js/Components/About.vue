@@ -4,9 +4,9 @@ import TheLogo from "@/Components/TheLogo.vue";
 </script>
 
 <template>
-  <section class="lg:py-20">
-    <div class="flex item flex-col lg:max-w-6xl mx-auto my-20 items-center lg:flex-row">
-      <div class="px-12 lg:pr-24 lg:w-4/6 text-center lg:text-left mb-10">
+  <section class="lg:py-20 bg-white">
+    <div class="flex item flex-col max-w-[90%] xl:max-w-6xl mx-auto py-20 items-center lg:flex-row">
+      <div class="px-12 md:px-0 lg:pr-24 lg:w-4/6 text-center lg:text-left mb-10">
         <h2 class="text-6xl mb-4 text-eclipsis-navy font-extrabold">About Eclipsis Studios<span class="text-eclipsis-gold">.</span></h2>
         <p class="leading-8 mb-4 font-bold">At Eclipsis Studios, we are dedicated to helping small business owners thrive in today's digital age. Our
           team of
@@ -24,7 +24,8 @@ import TheLogo from "@/Components/TheLogo.vue";
         </p>
       </div>
       <div class="lg:w-2/6">
-        <img class="w-full" src="/images/logos/cropped-eclipsis-yellow.png"/>
+        <img class="w-full" src="/images/logos/cropped-eclipsis-yellow.png" alt="Eclipsis Studios | Software Agency"
+             title="Eclipsis Studios | Software Agency"/>
       </div>
     </div>
   </section>

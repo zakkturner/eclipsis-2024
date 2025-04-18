@@ -7,6 +7,7 @@ import {computed} from "vue";
 import dayjs from "dayjs";
 import BlogPost from "@/Components/Blog/BlogPost.vue";
 import BlogSidebar from "@/Components/Blog/BlogSidebar.vue";
+import FlashMessage from "@/Components/FlashMessage.vue";
 
 const {post} = defineProps<{
   post: Post,
@@ -28,11 +29,7 @@ const formattedCreated = computed(() => {
     <template #header>
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">Blog</h2>
     </template>
-    <div v-if="message" class="alert
-    bg-green-500 p-4 w-full  z-10 text-center">
-      {{ tags }}
-      <p class="text-white font-bold">{{ message }}</p>
-    </div>
+
     <div class="py-12" :class="message && 'pt-20'">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-6">
@@ -47,9 +44,11 @@ const formattedCreated = computed(() => {
                 <a class="bg-red-600 py-2 px-4 text-white rounded">Delete</a>
               </div>
             </div>
-            <div class="flex">
-
-              <BlogPost :post="post" :categories="categories"/>
+            <div class="flex gap-8 p-8">
+              <div>
+                <BlogPost :post="post" :categories="categories"/>
+                <h3 class="mb-6 text-2xl font-black">{{ post.title }}</h3>
+              </div>
               <blog-sidebar :tags="tags"></blog-sidebar>
             </div>
           </div>
@@ -58,6 +57,6 @@ const formattedCreated = computed(() => {
       </div>
 
     </div>
-
+    <flash-message :message="message"></flash-message>
   </AuthenticatedLayout>
 </template>

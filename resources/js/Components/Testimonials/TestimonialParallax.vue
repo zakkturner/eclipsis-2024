@@ -5,7 +5,7 @@
 <template>
   <section class="relative">
     <div class="bg-[#18212e] h-full w-full absolute z-9 opacity-75"></div>
-    <div class="bg-[url('/images/parallax.jpg')] bg-cover bg-center bg-no-repeat bg-fixed  w-full h-[489px] py-16 flex">
+    <div class="bg-[url('/images/parallax.jpg')] bg-cover bg-center bg-no-repeat bg-scroll md:bg-fixed  w-full h-[489px] py-16 flex">
 
     </div>
     <div class="max-w-6xl  mx-auto  absolute  left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]">

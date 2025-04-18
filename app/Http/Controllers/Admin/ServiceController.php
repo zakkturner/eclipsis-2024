@@ -36,7 +36,8 @@ class ServiceController extends Controller
             'title' => 'required|min:3|max:150',
             'icon' => '|min:3|max:150|nullable',
             'description' => 'nullable|max:250',
-            'is_visible' => 'nullable|boolean'
+            'is_visible' => 'nullable|boolean',
+           
         ]);
 
         Service::create($attrs);
@@ -74,7 +75,8 @@ class ServiceController extends Controller
         ]);
 
 
-        $service->save($attrs);
+        $service->update($attrs);
+        return redirect()->route('admin.services.index')->with('message', 'Service updated successfully');
     }
 
     /**
