@@ -7,6 +7,7 @@ import {computed} from "vue";
 import dayjs from "dayjs";
 import SectionTitle from "@/Components/UI/SectionTitle.vue";
 import LinkButton from "@/Components/LinkButton.vue";
+import BaseSection from "@/Components/UI/BaseSection.vue";
 
 const props = defineProps<{
   posts: Post[]
@@ -23,8 +24,11 @@ const formattedCreated = (post: Post) => computed(() => {
 </script>
 
 <template>
-  <section class="max-w-[90%] xl:max-w-6xl mx-auto my-20 ">
-    <section-title subtitle="Our News" title="News & Articles"></section-title>
+  <base-section padding="md">
+    <template #title>
+      <section-title subtitle="Our News" title="News & Articles"></section-title>
+    </template>
+
     <div class="flex flex-col items-center" v-if="posts.length > 0">
       <swiper
           :slidesPerView="1"
@@ -62,7 +66,8 @@ const formattedCreated = (post: Post) => computed(() => {
     <div class="py-20 text-2xl flex justify-center" v-else>
       <h2>No Posts Yet!</h2>
     </div>
-  </section>
+
+  </base-section>
 
 
 </template>
