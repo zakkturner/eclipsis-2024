@@ -12,6 +12,9 @@ const bgColor = computed(() => {
     case 'blue':
       return 'bg-eclipsis-navy'
       break;
+    case 'yellow':
+      return 'bg-eclipsis-gold'
+      break;
     case 'gray':
       return 'bg-gray-100'
       break;
