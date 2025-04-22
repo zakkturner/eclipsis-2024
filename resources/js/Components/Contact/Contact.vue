@@ -7,6 +7,7 @@ import TextArea from "@/Components/Form/TextArea.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import {faEnvelope, faLocationDot, faPhone} from "@fortawesome/free-solid-svg-icons";
+import BaseSection from "@/Components/UI/BaseSection.vue";
 
 
 const form = useForm({
@@ -34,8 +35,8 @@ const handleSubmit = () => {
 </script>
 
 <template>
-  <section class="bg-eclipsis-navy">
-    <div class="flex flex-col xl:flex-row justify-between py-32 max-w-[90%] xl:max-w-6xl mx-auto">
+  <base-section color="blue">
+    <div class="flex flex-col xl:flex-row justify-between ">
       <div>
         <div class="mb-8">
           <h3 class="text-white uppercase text-5xl font-bold mb-10">Get in touch with us<span class="text-eclipsis-gold">.</span></h3>
@@ -117,7 +118,8 @@ const handleSubmit = () => {
         </div>
       </div>
     </div>
-  </section>
+  </base-section>
+
 </template>
 
 <style scoped>
