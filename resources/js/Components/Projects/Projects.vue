@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import SectionTitle from "@/Components/UI/SectionTitle.vue";
-import BaseSection from "@/BaseSection.vue";
+import BaseSection from "@/Components/UI/BaseSection.vue";
 import {Project} from "@/types/project";
 import gsap from "gsap";
 import {ref} from "vue";
@@ -20,7 +20,7 @@ const {backgroundImage} = useBackgroundImage()
 </script>
 <!---->
 <template>
-  <base-section class="bg-gray-100">
+  <base-section color="gray" padding="md">
     <section-title subtitle="Our Work" title="View Latest Projects"></section-title>
     <projects-grid :projects="projects"></projects-grid>
     <div class="flex justify-center mt-6">

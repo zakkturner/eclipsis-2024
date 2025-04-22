@@ -4,6 +4,7 @@ import {computed} from "vue";
 
 const props = defineProps<{
   color?: string
+  padding?: string
 }>()
 
 const bgColor = computed(() => {
@@ -19,12 +20,24 @@ const bgColor = computed(() => {
 
   }
 })
-
+const padding = computed(() => {
+  switch (props.padding) {
+    case 'sm':
+      return '10'
+      break
+    case 'md':
+      return '20'
+    case 'lg':
+      return '32'
+    default:
+      return '0'
+  }
+})
 </script>
 
 
 <template>
-  <section :class="`py-20 ${bgColor}`">
+  <section :class="`py-${padding} ${bgColor}`">
     <slot name="title"/>
     <div class="max-w-[90%] xl:max-w-6xl mx-auto py-20">
       <slot/>

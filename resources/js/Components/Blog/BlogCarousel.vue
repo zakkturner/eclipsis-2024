@@ -24,7 +24,7 @@ const formattedCreated = (post: Post) => computed(() => {
 </script>
 
 <template>
-  <base-section>
+  <base-section padding="md">
     <template #title>
       <section-title subtitle="Our News" title="News & Articles"></section-title>
     </template>
