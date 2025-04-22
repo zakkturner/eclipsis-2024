@@ -1,6 +1,14 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/laravel/compare/v1.0.0...master)
+## [Unreleased](https://github.com/laravel/laravel/compare/v1.0.1...master)
+
+## [v1.0.1](https://github.com/laravel/laravel/compare/v1.0.0...v1.0.1) - 2025-04-22
+
+### What's Changed
+
+* Bug/fix colors by [@zakkturner](https://github.com/zakkturner) in https://github.com/zakkturner/eclipsis-2024/pull/25
+
+**Full Changelog**: https://github.com/zakkturner/eclipsis-2024/compare/v1.0.0...v1.0.1
 
 ## [v1.0.0](https://github.com/laravel/laravel/compare/v11.1.0...v1.0.0) - 2025-04-18
 
