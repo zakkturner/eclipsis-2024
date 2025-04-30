@@ -49,3 +49,20 @@ export interface Testimonial {
     created_at: Date;
     avatar: string;
 }
+
+export interface CTA {
+    id: number;
+    title: string;
+    subtitle?: string;
+    body?: string;
+    button_text?: string;
+    button_link?: string;
+    background_color?: string;
+    text_color?: string;
+    is_active: boolean;
+    click_count: number;
+    conversion_count: number
+    objective: string;
+
+    form_submissions: number
+}

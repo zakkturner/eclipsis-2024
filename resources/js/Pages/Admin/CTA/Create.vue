@@ -10,11 +10,6 @@ import FormGroup from "@/Components/Form/FormGroup.vue";
 import {router} from '@inertiajs/vue3'
 import TextArea from "@/Components/Form/TextArea.vue";
 
-const props = defineProps<{
-
-  clients: Client[],
-  services: Service[]
-}>()
 const form = reactive({
   title: "",
   subtitle: "",

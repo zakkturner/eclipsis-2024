@@ -13,20 +13,6 @@ import FlashMessage from "@/Components/FlashMessage.vue";
 import {computed, ref} from "vue";
 import {router, usePage} from "@inertiajs/vue3";
 
-interface CTA {
-  id: number;
-  title: string;
-  subtitle?: string;
-  button_text?: string;
-  background_color?: string;
-  text_color?: string;
-  is_active: boolean;
-  click_count: number;
-  conversion_count: number
-  objective: string;
-
-  form_submissions: number
-}
 
 const flash = computed(() => usePage().props.flash);
 const props = defineProps<{

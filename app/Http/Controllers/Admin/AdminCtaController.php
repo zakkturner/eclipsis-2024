@@ -37,12 +37,14 @@ class AdminCtaController extends Controller
         $attr = $request->validate([
             'title' => 'required|string|max:255',
             'subtitle' => 'nullable|string',
+            'body' => 'nullable|string',
             'button_text' => 'nullable|string|max:255',
             'button_link' => 'nullable|url|max:255',
             'background_color' => 'nullable|string|max:50',
             'text_color' => 'nullable|string|max:50',
             'is_active' => 'boolean',
         ]);
+
 
         Cta::create($attr);
         return redirect()->route('admin.ctas.index')->with('success', 'CTA created successfully.');
@@ -75,6 +77,7 @@ class AdminCtaController extends Controller
         $attr = $request->validate([
             'title' => 'required|string|max:255',
             'subtitle' => 'nullable|string',
+            'body' => 'nullable|string',
             'button_text' => 'nullable|string|max:255',
             'button_link' => 'nullable|url|max:255',
             'background_color' => 'nullable|string|max:50',
@@ -92,5 +95,16 @@ class AdminCtaController extends Controller
     {
         $cta->delete();
         return redirect()->route('admin.ctas.index')->with('success', 'CTA deleted successfully.');
+    }
+
+    private function deactivateCTAs($request)
+    {
+        if ($request['is_active']) {
+            $ctas = Cta::where('is_active', true)->get();
+            foreach ($ctas as $cta) {
+                $cta->is_active = false;
+                $cta->save(); // You need this to persist the change
+            }
+        }
     }
 }
