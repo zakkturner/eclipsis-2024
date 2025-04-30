@@ -10,6 +10,7 @@ class CTAFormSubmission extends Model
     use HasFactory;
 
     protected $guarded = [];
+    protected $table = 'cta_form_submissions';
 
     public function cta()
     {

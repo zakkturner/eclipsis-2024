@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminClientController;
 use App\Http\Controllers\Admin\AdminCompanyController;
+use App\Http\Controllers\Admin\AdminCtaController;
 use App\Http\Controllers\Admin\AdminPostsController;
 use App\Http\Controllers\Admin\AdminProjectController;
 use App\Http\Controllers\Admin\AdminTestimonialController;
@@ -72,6 +73,14 @@ Route::middleware('auth')->group(function () {
             'destroy' => 'admin.clients.destroy',
         ]);
         Route::post("/company-info", AdminCompanyController::class)->name('admin.company-info');
+        Route::resource('/ctas', AdminCtaController::class)->names([
+            'index' => 'admin.ctas.index',
+            'create' => 'admin.ctas.create',
+            'store' => 'admin.ctas.store',
+            'show' => 'admin.ctas.show',
+            'edit' => 'admin.ctas.edit',
+            'destroy' => 'admin.ctas.destroy',
+        ]);
         Route::prefix("project-photos")->group(function () {
             Route::post('/{project_id}', [ProjectPhotoController::class, 'store'])->name('project_photos.store');
             Route::put('/{id}', [ProjectPhotoController::class, 'update'])->name('project_photos.update');

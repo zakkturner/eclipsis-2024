@@ -7,7 +7,17 @@ import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import {Link} from '@inertiajs/vue3';
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
-import {faAddressBook, faBriefcase, faBullhorn, faChartLine, faGear, faGears, faNewspaper, faUserPen} from "@fortawesome/free-solid-svg-icons";
+import {
+  faAddressBook,
+  faBell,
+  faBriefcase,
+  faBullhorn,
+  faChartLine,
+  faGear,
+  faGears,
+  faNewspaper,
+  faUserPen
+} from "@fortawesome/free-solid-svg-icons";
 
 const showingNavigationDropdown = ref(false);
 </script>
@@ -41,7 +51,7 @@ const showingNavigationDropdown = ref(false);
                 </div>
                 <div class="hidden  sm:mb-2  sm:flex flex-col items-stretch justify-center text-center ">
                   <NavLink :href="route('announcements.index')" :active="route().current('announcements')">
-                    <font-awesome-icon :icon="faBullhorn"></font-awesome-icon>
+                    <font-awesome-icon :icon="faBell"></font-awesome-icon>
                     Announcements
                   </NavLink>
                 </div>
@@ -67,6 +77,12 @@ const showingNavigationDropdown = ref(false);
                   <NavLink :href="route('admin.clients.index')" :active="route().current().includes('admin.clients')">
                     <font-awesome-icon :icon="faAddressBook"></font-awesome-icon>
                     Clients
+                  </NavLink>
+                </div>
+                <div class="hidden  sm:mb-2  sm:flex flex-col items-stretch justify-center text-center">
+                  <NavLink :href="route('admin.ctas.index')" :active="route().current().includes('admin.ctas')">
+                    <font-awesome-icon :icon="faBullhorn"></font-awesome-icon>
+                    CTAs
                   </NavLink>
                 </div>
                 <div class="hidden  sm:mb-2  sm:flex flex-col items-stretch justify-center text-center">

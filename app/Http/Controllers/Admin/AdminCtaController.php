@@ -6,6 +6,7 @@ use App\Models\Cta;
 use App\Http\Controllers\Controller;
 use App\Models\CTAFormSubmission;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class AdminCtaController extends Controller
 {
@@ -14,8 +15,9 @@ class AdminCtaController extends Controller
      */
     public function index()
     {
-        $ctas = Cta::all();
-        return Inertia::render('Admin/CTA/Index');
+        $ctas = Cta::withCount('ctaFormSubmissions')->get();
+
+        return Inertia::render('Admin/CTA/Index', ['ctas' => $ctas]);
 
     }
 
@@ -43,7 +45,7 @@ class AdminCtaController extends Controller
         ]);
 
         Cta::create($attr);
-        return redirect()->route('admin.cta.index')->with('success', 'CTA created successfully.');
+        return redirect()->route('admin.ctas.index')->with('success', 'CTA created successfully.');
     }
 
     /**
@@ -80,7 +82,7 @@ class AdminCtaController extends Controller
             'is_active' => 'boolean',
         ]);
         $cta->update($attr);
-        return redirect()->route('admin.cta.index')->with('success', 'CTA updated successfully.');
+        return redirect()->route('admin.ctas.index')->with('success', 'CTA updated successfully.');
     }
 
     /**
@@ -89,6 +91,6 @@ class AdminCtaController extends Controller
     public function destroy(Cta $cta)
     {
         $cta->delete();
-        return redirect()->route('admin.cta.index')->with('success', 'CTA deleted successfully.');
+        return redirect()->route('admin.ctas.index')->with('success', 'CTA deleted successfully.');
     }
 }
