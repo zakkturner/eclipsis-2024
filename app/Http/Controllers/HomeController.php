@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Announcement;
 use App\Models\CompanyInfo;
+use App\Models\Cta;
 use App\Models\Post;
 use App\Models\Project;
 use App\Models\Service;
@@ -26,7 +27,7 @@ class HomeController extends Controller
         }])->take(6)->get();
         $testimonials = Testimonial::with("client")->take(3)->get();
         $company_info = CompanyInfo::first();
-
+        $cta = Cta::where('is_active', 1)->get();
         return Inertia::render('Welcome', [
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
@@ -38,6 +39,7 @@ class HomeController extends Controller
             'projects' => $projects,
             'testimonials' => $testimonials,
             'company_info' => $company_info,
+            'cta' => $cta
         ]);
     }
 }

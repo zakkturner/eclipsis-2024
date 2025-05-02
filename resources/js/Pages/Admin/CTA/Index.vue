@@ -12,6 +12,7 @@ import Modal from "@/Components/Modal.vue";
 import FlashMessage from "@/Components/FlashMessage.vue";
 import {computed, ref} from "vue";
 import {router, usePage} from "@inertiajs/vue3";
+import {CTA} from "@/types/types";
 
 
 const flash = computed(() => usePage().props.flash);
@@ -33,12 +34,14 @@ const handleDeleteModal = (CTA: CTA) => {
   isOpen.value = true
   selectedCTA.value = CTA
 }
+
 const handleDelete = () => {
   router.delete('/admin/ctas/' + selectedCTA.value.id, {
     preserveScroll: true, // Prevents scrolling to top on validation error
-    // onSuccess: () => {
-    //   // flash.message.value = "Deleted CTA Successfully"
-    // },
+    onSuccess: () => {
+      // flash.message.value = "Deleted CTA Successfully"
+      isOpen.value = false
+    },
     // onError: (errors) => {
     //   message.value = "Error deleting your CTA: " + errors // Debugging errors
     // }

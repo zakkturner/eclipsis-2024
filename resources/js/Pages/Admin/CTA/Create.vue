@@ -4,12 +4,13 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import DashboardContainer from "@/Components/UI/DashboardContainer.vue";
 import PhotosForm from "@/Components/Form/PhotoForms/PhotosForm.vue";
 import TextInput from "@/Components/Form/TextInput.vue";
-import {reactive} from "vue";
+import {reactive, ref} from "vue";
 import {Client, Service} from "@/types/types";
 import FormGroup from "@/Components/Form/FormGroup.vue";
 import {router} from '@inertiajs/vue3'
 import TextArea from "@/Components/Form/TextArea.vue";
 
+const add_photo = ref(false);
 const form = reactive({
   title: "",
   subtitle: "",
@@ -19,6 +20,9 @@ const form = reactive({
   background_color: "",
   text_color: "",
   is_active: false,
+  alt: "",
+  img_src: null,
+  active: false
 });
 const colors = [
   'blue',
@@ -72,6 +76,33 @@ const handleSubmit = () => {
             >{{ color }}
             </option>
           </select>
+          <form-group for="is_active" text="Activate?">
+            <select v-model="form.is_active">
+              <option selected disabled></option>
+              <option :value="1">Activate</option>
+              <option :value="false">Disabled</option>
+            </select>
+          </form-group>
+          <form-group for="Add Photo?">
+            <input type="checkbox" v-model="add_photo">
+
+          </form-group>
+          <div v-if="add_photo">
+            <form-group for="Photo">
+              <input type="file" @input="form.img_src = $event.target.files[0]"/>
+            </form-group>
+            <form-group for="Photo Alt">
+              <input type="text" v-model="form.alt">
+            </form-group>
+            <form-group for="Photo Active">
+              <select v-model="form.active">
+                <option selected disabled></option>
+                <option :value="1">Activate</option>
+                <option :value="false">Disabled</option>
+              </select>
+            </form-group>
+          </div>
+
         </form-group>
 
 

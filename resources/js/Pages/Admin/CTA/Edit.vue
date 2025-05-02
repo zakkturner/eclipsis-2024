@@ -30,7 +30,6 @@ const colors = [
   'gray'
 ]
 const handleSubmit = () => {
-  // alert('working');
   router.post(`/admin/ctas/${props.cta.id}`, {
     _method: 'put',
     title: form.title,

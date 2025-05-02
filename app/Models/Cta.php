@@ -16,4 +16,9 @@ class Cta extends Model
         return $this->hasMany(CTAFormSubmission::class);
     }
 
+    public function photo()
+    {
+        return $this->hasOne(CtaPhoto::class);
+    }
+
 }

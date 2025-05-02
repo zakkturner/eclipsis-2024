@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\PhotoRequest;
 use App\Models\Cta;
 use App\Http\Controllers\Controller;
 use App\Models\CTAFormSubmission;
+use App\Models\CtaPhoto;
+use App\Models\ProjectPhoto;
+use App\Services\PhotoService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -32,8 +36,9 @@ class AdminCtaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, PhotoRequest $photoRequest, PhotoService $photoService)
     {
+
         $attr = $request->validate([
             'title' => 'required|string|max:255',
             'subtitle' => 'nullable|string',
@@ -44,9 +49,27 @@ class AdminCtaController extends Controller
             'text_color' => 'nullable|string|max:50',
             'is_active' => 'boolean',
         ]);
+        $cta = Cta::create($attr);
+        if (isset($request['img_src'])) {
+            $validatedPhoto = validator(
+                [
+                    'img_src' => $request->file('img_src'),
+                    'alt' => $request->input('alt'),
+                    'active' => $request->input('active'),
+                    'position' => $request->input('position')
+                ],
+                (new PhotoRequest())->rules()
+            )->validate();
+            $photoService->add(
+                $validatedPhoto,
+                $cta->id,
+                CtaPhoto::class,
+                'cta_photos',
+                'cta_id',
+                $request->file('img_src')
+            );
+        }
 
-
-        Cta::create($attr);
         return redirect()->route('admin.ctas.index')->with('success', 'CTA created successfully.');
     }
 
@@ -70,9 +93,9 @@ class AdminCtaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Cta $cta)
+    public function update(Request $request, Cta $cta, PhotoService $photoService)
     {
-        //
+
 
         $attr = $request->validate([
             'title' => 'required|string|max:255',
