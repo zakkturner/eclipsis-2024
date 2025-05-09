@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PhotoRequest;
 use App\Models\CtaPhoto;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class CtaPhotoController extends Controller
 {
@@ -13,7 +15,7 @@ class CtaPhotoController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -27,7 +29,7 @@ class CtaPhotoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PhotoRequest $request)
     {
         //
     }
@@ -51,9 +53,11 @@ class CtaPhotoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CtaPhoto $ctaPhoto)
+    public function update(PhotoRequest $request, CtaPhoto $ctaPhoto)
     {
-        //
+        $validatedPhoto = $request->validated();
+        $ctaPhoto->update($validatedPhoto);
+        return Redirect::back()->with(['message' => 'Photo successfully updated!']);
     }
 
     /**

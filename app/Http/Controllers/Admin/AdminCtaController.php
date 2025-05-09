@@ -87,6 +87,7 @@ class AdminCtaController extends Controller
      */
     public function edit(Cta $cta)
     {
+        $cta->load('photos');
         return Inertia::render('Admin/CTA/Edit', ['cta' => $cta]);
     }
 
@@ -108,7 +109,7 @@ class AdminCtaController extends Controller
             'is_active' => 'boolean',
         ]);
         $cta->update($attr);
-        return redirect()->route('admin.ctas.index')->with('success', 'CTA updated successfully.');
+        return redirect()->route('admin.ctas.index')->with(['message' => 'CTA updated successfully.']);
     }
 
     /**

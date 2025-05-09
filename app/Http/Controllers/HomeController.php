@@ -27,7 +27,7 @@ class HomeController extends Controller
         }])->take(6)->get();
         $testimonials = Testimonial::with("client")->take(3)->get();
         $company_info = CompanyInfo::first();
-        $cta = Cta::where('is_active', 1)->get();
+        $cta = Cta::where('is_active', 1)->with(['photos' => fn($query) => $query->where('active', 1)])->get();
         return Inertia::render('Welcome', [
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
@@ -39,7 +39,7 @@ class HomeController extends Controller
             'projects' => $projects,
             'testimonials' => $testimonials,
             'company_info' => $company_info,
-            'cta' => $cta
+            'cta' => $cta,
         ]);
     }
 }

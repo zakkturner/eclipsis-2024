@@ -9,6 +9,7 @@ import {CTA} from "@/types/types";
 import FormGroup from "@/Components/Form/FormGroup.vue";
 import {router} from '@inertiajs/vue3'
 import TextArea from "@/Components/Form/TextArea.vue";
+import FlashMessage from "@/Components/FlashMessage.vue";
 
 const props = defineProps<{
   cta: CTA
@@ -92,10 +93,10 @@ const handleSubmit = () => {
             <option :value="false">Disabled</option>
           </select>
         </form-group>
-
+        <photos-form :photos="cta.photos"></photos-form>
         <button class="mt-4 bg-green-800 text-white rounded py-4 px-6">Save</button>
       </form>
-
+      <flash-message :message="$page.props.flash.message"></flash-message>
     </DashboardContainer>
   </AuthenticatedLayout>
 </template>

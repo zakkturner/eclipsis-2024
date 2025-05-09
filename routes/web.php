@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\CtaPhotoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\ProfileController;
@@ -81,6 +82,10 @@ Route::middleware('auth')->group(function () {
             'edit' => 'admin.ctas.edit',
             'destroy' => 'admin.ctas.destroy',
         ]);
+        Route::prefix("cta-photos")->group(function () {
+            Route::post('/', [CtaPhotoController::class, 'store'])->name('cta_photos.store');
+            Route::put('/{ctaPhoto}', [CtaPhotoController::class, 'update'])->name('cta_photos.update');
+        });
         Route::prefix("project-photos")->group(function () {
             Route::post('/{project_id}', [ProjectPhotoController::class, 'store'])->name('project_photos.store');
             Route::put('/{id}', [ProjectPhotoController::class, 'update'])->name('project_photos.update');

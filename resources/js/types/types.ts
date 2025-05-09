@@ -50,6 +50,10 @@ export interface Testimonial {
     avatar: string;
 }
 
+export interface CtaPhoto extends BasePhoto {
+    active: boolean;
+}
+
 export interface CTA {
     id: number;
     title: string;
@@ -63,6 +67,6 @@ export interface CTA {
     click_count: number;
     conversion_count: number
     objective: string;
-
+    photos?: CtaPhoto[];
     form_submissions: number
 }

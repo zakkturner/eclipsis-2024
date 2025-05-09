@@ -126,7 +126,7 @@ const handleDelete = () => {
         </div>
       </div>
     </div>
-    <flash-message :message="flash.message"></flash-message>
+    <flash-message :message="$page.props.flash.message"></flash-message>
     <modal :show="isOpen">
       <div class="m-4 flex flex-col items-center">
         <h4 class="py-4">Are you sure you want to delete?</h4>
