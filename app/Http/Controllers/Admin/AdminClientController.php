@@ -88,6 +88,7 @@ class AdminClientController extends Controller
             'linkedin' => ['nullable', 'string', 'max:255'],
             'instagram' => ['nullable', 'string', 'max:255'],
             'notes' => ['nullable', 'string'],
+            'status' => ['nullable', 'string'],
         ]);
 
         $client->update($attrs);

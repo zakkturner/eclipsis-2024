@@ -31,6 +31,14 @@ export interface Client {
     linkedin?: string;
     instagram?: string;
     notes?: string;
+    status: string;
+    last_contacted_at?: string | null;
+    next_follow_up_at?: string | null;
+    converted_at?: string | null;
+    lead_source?: string;
+    industry?: string;
+    is_active: boolean;
+    tags?: string[];
 }
 
 export interface BasePhoto {
@@ -38,6 +46,7 @@ export interface BasePhoto {
     img_src: string;
     created_at: string;
     updated_at: string;
+    position?: string;
     alt?: string;
 }
 
