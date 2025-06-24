@@ -30,6 +30,8 @@ const form = reactive({
   instagram: props.client.instagram,
   status: props.client.status,
   notes: props.client.notes,
+  is_active: props.client.is_active,
+  lead_source: props.client.lead_source
 });
 
 const handleSubmit = () => {
@@ -48,7 +50,9 @@ const handleSubmit = () => {
     linkedin: form.linkedin,
     instagram: form.instagram,
     notes: form.notes,
-    status: form.status
+    status: form.status,
+    source: form.lead_source,
+    is_active: form.is_active
   });
 }
 </script>
@@ -74,7 +78,7 @@ const handleSubmit = () => {
         </ul>
       </div>
       <form @submit.prevent="handleSubmit">
-        <form-group text="client Title" for="company">
+        <form-group text="client company" for="company">
           <text-input v-model="form.company" name="company"/>
         </form-group>
         <form-group for="name">
@@ -82,10 +86,13 @@ const handleSubmit = () => {
         </form-group>
 
         <form-group for="email" text="Email">
-          <input type="text" v-model="form.email">
+          <text-input type="text" v-model="form.email" name="email"/>
         </form-group>
         <form-group for="website_url" text="Website Url">
           <text-input v-model="form.website_url"></text-input>
+        </form-group>
+        <form-group for="address" text="Address">
+          <text-input v-model="form.address"></text-input>
         </form-group>
         <form-group for="budget" text="Budget">
           <div class="flex items-center">
@@ -101,6 +108,14 @@ const handleSubmit = () => {
         </form-group>
         <form-group :socials="true" for="twitter" text="Twitter">
           <text-input class="w-full rounded-tl-none rounded-bl-none" v-model="form.twitter" name="twitter"></text-input>
+        </form-group>
+        <form-group for="is active">
+          <select class="w-full rounded  border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" v-model="form.is_active"
+                  id="status">
+            <option disabled value="">Active?</option>
+            <option :value="true">Yes</option>
+            <option :value="false">No</option>
+          </select>
         </form-group>
         <form-group for="status">
           <select class="w-full rounded  border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" v-model="form.status"

@@ -43,10 +43,8 @@ class AdminClientController extends Controller
 
         Client::create($validatedData);
         $this->newsletterService->subscribe($validatedData['name'], '', $validatedData['email']);
-        return Inertia::render('Admin/Clients/Index', [
-            'message' => 'New Client Created',
-            'data' => $validatedData
-        ], 201);
+        return redirect()->route('admin.clients.index')->with('message', 'New Client Created');
+
 
     }
 
@@ -93,7 +91,7 @@ class AdminClientController extends Controller
 
         $client->update($attrs);
 
-        return redirect(route('admin.clients.index'))->with('success', 'Client updated successfully');
+        return redirect(route('admin.clients.index'))->with('message', 'Client updated successfully');
 
     }
 
@@ -105,6 +103,6 @@ class AdminClientController extends Controller
 
         $client = Client::find($id);
         $client->delete();
-        return redirect()->back()->with('success', 'Client deleted successfully.');
+        return redirect()->back()->with('message', 'Client deleted successfully.');
     }
 }

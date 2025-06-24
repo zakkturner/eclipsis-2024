@@ -13,6 +13,7 @@ import {router} from "@inertiajs/vue3";
 import gsap from 'gsap';
 import DangerButton from "@/Components/DangerButton.vue";
 import LinkButton from "@/Components/LinkButton.vue";
+import FlashMessage from "@/Components/FlashMessage.vue";
 
 const props = defineProps<{
   clients: Client[]
@@ -24,6 +25,8 @@ const tableHeadings = [
   'phone',
   'website url',
   'budget',
+  'source',
+  'status',
   'Actions'
 ];
 
@@ -108,7 +111,12 @@ const handleDelete = () => {
                     <td class="border-r-2 border-eclipsis-navy flex-1 p-2">
                       {{ client.budget }}
                     </td>
-
+                    <td class="border-r-2 border-eclipsis-navy flex-1 p-2">
+                      {{ client.lead_source ?? 'N/A' }}
+                    </td>
+                    <td class="border-r-2 border-eclipsis-navy flex-1 p-2 capitalize">
+                      {{ client.status }}
+                    </td>
                     <!-- Edit Button -->
                     <td class="border-r-2 border-eclipsis-navy flex-1 flex justify-center items-center py-2">
                       <NavLink
@@ -135,11 +143,8 @@ const handleDelete = () => {
         </div>
       </div>
     </div>
-    <Teleport to="body">
-      <div ref="msgContainer" class="fixed z-99 bottom-2 right-2 shadow bg-white p-4 rounded " v-if="message">
-        <p class="text-green-600 font-bold text-lg">{{ message }}</p>
-      </div>
-    </Teleport>
+
+    <flash-message :message="$page.props.flash.message"></flash-message>
     <modal :show="isOpen">
       <div class="m-4 flex flex-col items-center">
         <h4 class="py-4">Are you sure you want to delete?</h4>

@@ -36,7 +36,8 @@ class StoreClientRequest extends FormRequest
             'instagram' => ['nullable', 'string', 'max:255'],
             'notes' => ['nullable', 'string'],
             'status' => ['nullable', 'string'],
-            'is_active' => ['required', 'boolean']
+            'is_active' => ['required', 'boolean'],
+            'lead_source' => ['nullable', 'string'],
         ];
     }
 
