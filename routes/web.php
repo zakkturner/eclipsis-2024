@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\CtaController;
 use App\Http\Controllers\CtaPhotoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsletterController;
@@ -28,6 +29,12 @@ Route::resource('/blog', BlogController::class)->except(['store', 'update', 'edi
 Route::get('/blog/category/{category}', CategoriesController::class)->name('blog.category');
 Route::get('/blog/search', [BlogController::class, 'search'])->name('blog.search');
 Route::get('/blog/tag/{tag}', TagsController::class)->name('blog.tag');
+Route::post('/cta/{cta}', [CtaController::class, 'store'])->name('cta.store');
+
+/**
+ * Counts clicks of ctas
+ */
+Route::post('/cta/{cta}/click', [CtaController::class, 'click'])->name('cta.click');
 Route::prefix('/view-projects')->group(function () {
     Route::get('/', [ProjectController::class, 'index'])->name('project.index');
 

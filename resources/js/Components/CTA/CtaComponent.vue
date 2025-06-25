@@ -6,11 +6,13 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import Modal from "@/Components/Modal.vue";
 import CtaModal from "@/Components/Modals/CtaModal.vue";
+import {router} from "@inertiajs/vue3";
 
 const props = defineProps<{
   cta: CTA
 }>()
 const isOpen = ref(false);
+const formSubmitted = ref(false)
 const ctaImg = props.cta.photos[0] ?? null;
 const imgOrder = computed(() => {
   switch (ctaImg.position) {
@@ -25,6 +27,15 @@ const imgOrder = computed(() => {
       break;
   }
 })
+const handleClick = () => {
+  router.post(`/cta/${props.cta.id}/click`, {}, {
+    preserveScroll: true,
+    preserveState: true,
+    onSuccess: () => {
+      isOpen.value = true
+    }
+  });
+}
 </script>
 
 <template>
@@ -40,13 +51,13 @@ const imgOrder = computed(() => {
           <p>{{ cta.body }}</p>
         </div>
         <div>
-          <secondary-button @click="isOpen = true">{{ cta.button_text }}</secondary-button>
+          <secondary-button @click.prevent="handleClick">{{ cta.button_text }}</secondary-button>
         </div>
       </div>
       <img :class="imgOrder" :src="`/storage/${ctaImg.img_src}`">
     </div>
     <modal centered :show="isOpen">
-      <cta-modal>
+      <cta-modal :cta="cta" @form-submit="formSubmitted = true">
         <div class="flex justify-end">
           <button @click="isOpen = false">X</button>
         </div>

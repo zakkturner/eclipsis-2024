@@ -104,7 +104,7 @@ const handleDelete = () => {
 
                     <!-- Website URL -->
                     <td class="border-r-2 border-eclipsis-navy flex-1 p-2">
-                      <a :href="client.website_url" class="text-blue-600 underline">{{ client.website_url }}</a>
+                      <a :href="client.website_url" class="text-blue-600 underline" target="_blank">{{ client.website_url }}</a>
                     </td>
 
                     <!-- Budget -->
