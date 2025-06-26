@@ -11,7 +11,8 @@ import BaseSection from "@/Components/UI/BaseSection.vue";
 const form: { first_name: string, last_name: string, email: string } = useForm({
   first_name: "",
   last_name: "",
-  email: ""
+  email: "",
+  is_active: true
 })
 
 const message = ref('')
@@ -39,18 +40,18 @@ const handleSubmit = () => {
       <div class="w-4/6 xl:w-2/6 flex-1 mt-4 xl:mt-0">
         <form @submit.prevent="handleSubmit">
           <div class="flex flex-col md:flex-row gap-2 mb-2">
-            <text-input placeholder="Enter First Name" type="text" class="w-full" v-model="form.first_name"></text-input>
-            <text-input placeholder="Enter Your Name" type="text" class="w-full" v-model="form.last_name"></text-input>
+            <text-input placeholder="Enter Your First Name" type="text" class="w-full" v-model="form.first_name"></text-input>
+            <text-input placeholder="Enter Your Last Name" type="text" class="w-full" v-model="form.last_name"></text-input>
           </div>
           <text-input placeholder="Enter Your Email" type="email" class="w-full mb-2" v-model="form.email"></text-input>
           <primary-button type="submit">Join</primary-button>
         </form>
+        <div class="bg-white rounded p-4 mt-4" v-if="message">
+          <p class="text-green-600">{{ message }}</p>
+        </div>
       </div>
 
 
-      <div class="bg-white rounded p-4 mt-4" v-if="message">
-        <p class="text-green-600">{{ message }}</p>
-      </div>
     </div>
 
 
