@@ -17,8 +17,9 @@ const form = useForm({
   company: "",
   website_url: "",
   budget: "",
-  notes: ""
-
+  notes: "",
+  is_active: true,
+  lead_source: `Created by Contact Form`,
 })
 
 const handleSubmit = () => {
@@ -88,7 +89,7 @@ const handleSubmit = () => {
             <text-input type="text" v-model="form.website_url" placeholder="Website Url" required></text-input>
           </div>
           <div class="flex gap-4 mb-4">
-            <select class="w-full rounded" v-model="form.budget" placeholder="Budget" required>
+            <select class="w-full rounded text-eclipsis-navy" v-model="form.budget" placeholder="Budget" required>
               <option selected value="" disabled>Select a Budget</option>
               <option selected value="$0-1000">$0-1500</option>
               <option selected value="$0-1000">$1500-3000</option>
@@ -105,8 +106,11 @@ const handleSubmit = () => {
             <button class="bg-eclipsis-gold p-6 text-eclipsis-navy font-semibold text-sm rounded" @click.prevent="handleSubmit">Send Message</button>
           </div>
         </form>
-        <div class="bg-white rounded p-4" v-if="$page.props.message">
-          <p class="text-green-600">{{ $page.props.message }}</p>
+        <div class="bg-white relative  rounded p-4" v-if="$page.props.flash.message">
+          <button @click="$page.props.flash.message = null"
+                  class="rounded-full text-eclipsis-navy bg-eclipsis-gold w-8 h-8 flex justify-center items-center absolute -top-4 -right-4 z-50">X
+          </button>
+          <p class="text-green-600">{{ $page.props.flash.message }}</p>
         </div>
         <div class="flex flex-col bg-white mb-2 rounded p-4" v-if="Object.keys($page.props.errors).length > 0">
           <h4 class="text-lg text-red-500">Errors:</h4>

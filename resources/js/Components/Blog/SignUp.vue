@@ -11,7 +11,8 @@ import BaseSection from "@/Components/UI/BaseSection.vue";
 const form: { first_name: string, last_name: string, email: string } = useForm({
   first_name: "",
   last_name: "",
-  email: ""
+  email: "",
+  is_active: true
 })
 
 const message = ref('')
