@@ -2,7 +2,7 @@
 import {onBeforeMount, onMounted, provide, ref, watch} from "vue";
 import {Head, Link} from '@inertiajs/vue3';
 import TheHeader from "@/Components/Header/TheHeader.vue";
-import {Announcement, Service, Testimonial} from "@/types/types";
+import {Announcement, CTA, Service, Testimonial} from "@/types/types";
 import TheHero from "@/Components/TheHero.vue";
 import {useServicesStore} from "@/store/services";
 import Services from "@/Components/Services/Services.vue";
@@ -17,6 +17,7 @@ import Testimonials from "@/Components/Testimonials/Testimonials.vue";
 import About from "@/Components/About.vue";
 import SignUp from "@/Components/Blog/SignUp.vue";
 import TheFooter from "@/Components/Footer/TheFooter.vue";
+import CtaComponent from "@/Components/CTA/CtaComponent.vue";
 
 const props = defineProps<{
 
@@ -25,7 +26,8 @@ const props = defineProps<{
   posts: Post[],
   projects: Project[],
   testimonials: Testimonial[]
-  company_info: any
+  company_info: any,
+  cta: CTA
 }>();
 
 onBeforeMount(() => {
@@ -37,6 +39,7 @@ onBeforeMount(() => {
 
 provide('posts', props.posts);
 provide('company_info', props.company_info)
+const cta = props.cta[0]
 </script>
 
 <template>
@@ -52,6 +55,7 @@ provide('company_info', props.company_info)
       <TheHero></TheHero>
     </template>
     <About id="about"></About>
+    <CtaComponent :cta="cta"/>
     <Services id="services"></Services>
     <Projects :projects="projects" id="portfolio"></Projects>
     <TestimonialParallax id="testimonials"></TestimonialParallax>

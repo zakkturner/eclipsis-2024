@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminClientController;
 use App\Http\Controllers\Admin\AdminCompanyController;
+use App\Http\Controllers\Admin\AdminCtaController;
 use App\Http\Controllers\Admin\AdminPostsController;
 use App\Http\Controllers\Admin\AdminProjectController;
 use App\Http\Controllers\Admin\AdminTestimonialController;
@@ -12,6 +13,8 @@ use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\CtaController;
+use App\Http\Controllers\CtaPhotoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\ProfileController;
@@ -26,6 +29,12 @@ Route::resource('/blog', BlogController::class)->except(['store', 'update', 'edi
 Route::get('/blog/category/{category}', CategoriesController::class)->name('blog.category');
 Route::get('/blog/search', [BlogController::class, 'search'])->name('blog.search');
 Route::get('/blog/tag/{tag}', TagsController::class)->name('blog.tag');
+Route::post('/cta/{cta}', [CtaController::class, 'store'])->name('cta.store');
+
+/**
+ * Counts clicks of ctas
+ */
+Route::post('/cta/{cta}/click', [CtaController::class, 'click'])->name('cta.click');
 Route::prefix('/view-projects')->group(function () {
     Route::get('/', [ProjectController::class, 'index'])->name('project.index');
 
@@ -72,6 +81,18 @@ Route::middleware('auth')->group(function () {
             'destroy' => 'admin.clients.destroy',
         ]);
         Route::post("/company-info", AdminCompanyController::class)->name('admin.company-info');
+        Route::resource('/ctas', AdminCtaController::class)->names([
+            'index' => 'admin.ctas.index',
+            'create' => 'admin.ctas.create',
+            'store' => 'admin.ctas.store',
+            'show' => 'admin.ctas.show',
+            'edit' => 'admin.ctas.edit',
+            'destroy' => 'admin.ctas.destroy',
+        ]);
+        Route::prefix("cta-photos")->group(function () {
+            Route::post('/', [CtaPhotoController::class, 'store'])->name('cta_photos.store');
+            Route::put('/{ctaPhoto}', [CtaPhotoController::class, 'update'])->name('cta_photos.update');
+        });
         Route::prefix("project-photos")->group(function () {
             Route::post('/{project_id}', [ProjectPhotoController::class, 'store'])->name('project_photos.store');
             Route::put('/{id}', [ProjectPhotoController::class, 'update'])->name('project_photos.update');

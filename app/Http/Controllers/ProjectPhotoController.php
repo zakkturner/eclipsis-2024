@@ -2,25 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PhotoRequest;
 use App\Models\ProjectPhoto;
 use App\Http\Controllers\Controller;
+use App\Services\PhotoService;
 use Illuminate\Http\Request;
 
 class ProjectPhotoController extends Controller
 {
 
-    public function store(Request $request, $project_id)
+    public function store(PhotoRequest $request, $project_id, PhotoService $photoService)
     {
 
 
-        $validatedPhoto = $request->validate([
-            'alt' => 'nullable|min:3|max:255',
-            'img_src' => 'nullable|mimes:jpeg,jpg,png,gif',
-            'position' => 'nullable|min:3|max:255',
-        ]);
-        $validatedPhoto['img_src'] = request()->file('img_src')->store('project_photos', 'public');
-        $validatedPhoto['project_id'] = $project_id;
-        ProjectPhoto::create($validatedPhoto);
+        $validatedPhoto = $request->validated();
+        $photoService->add(
+            $validatedPhoto,
+            $request->file('img_src'),
+            $project_id,
+            ProjectPhoto::class
+        );
 
         return redirect()->back();
     }

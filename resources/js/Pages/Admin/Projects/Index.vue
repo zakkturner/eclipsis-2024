@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ref} from "vue";
+import {computed, ref} from "vue";
 import {Project} from "@/types/project";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import CustomTable from "@/Components/CustomTable.vue";
@@ -11,7 +11,7 @@ import Modal from "@/Components/Modal.vue";
 import {selector} from "gsap-trial/src/all";
 import DangerButton from "@/Components/DangerButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
-import {router} from "@inertiajs/vue3";
+import {router, usePage} from "@inertiajs/vue3";
 import FlashMessage from "@/Components/FlashMessage.vue";
 
 const props = defineProps<{
@@ -28,7 +28,7 @@ const tableHeadings = [
   'services',
   'Actions',
 ];
-const message = ref("")
+const flash = computed(() => usePage().props.flash);
 const handleDeleteModal = (project: Project) => {
   isOpen.value = true
   selectedProject.value = project
@@ -115,7 +115,7 @@ const handleDelete = () => {
         </div>
       </div>
     </div>
-    <flash-message :message="message"></flash-message>
+    <flash-message :message="flash.message"></flash-message>
     <modal :show="isOpen">
       <div class="p-4 flex justify-center flex-col items-center">
         <h4>Are you sure you want to delete <em class="font-semibold">{{ selectedProject.title }}</em>?</h4>
