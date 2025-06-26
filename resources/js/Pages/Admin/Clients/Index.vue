@@ -7,7 +7,7 @@ import {Client} from "@/types/types";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import {faPencil, faTrash} from "@fortawesome/free-solid-svg-icons";
 import Modal from "@/Components/Modal.vue";
-import {nextTick, onMounted, reactive, ref} from "vue";
+import {nextTick, onMounted, reactive, ref, watch} from "vue";
 import CancelButton from "@/Components/CancelButton.vue";
 import {router} from "@inertiajs/vue3";
 import gsap from 'gsap';
@@ -15,6 +15,8 @@ import DangerButton from "@/Components/DangerButton.vue";
 import LinkButton from "@/Components/LinkButton.vue";
 import FlashMessage from "@/Components/FlashMessage.vue";
 import FormSelect from "@/Components/Form/FormSelect.vue";
+import FormGroup from "@/Components/Form/FormGroup.vue";
+import TableCard from "@/Components/UI/TableCard.vue";
 
 const props = defineProps<{
   clients: Client[]
@@ -36,7 +38,9 @@ const message = ref('');
 const isOpen = ref(false);
 const selectedClient = ref(null)
 const filters = reactive({
-  status: ""
+  status: "all",
+  lead_source: "all",
+  budget: 'all'
 })
 const messageAnimation = async () => {
   await nextTick();
@@ -62,6 +66,7 @@ const handleDelete = () => {
   isOpen.value = false
 }
 const statusFilters = [
+  {label: "All", value: "all"},
   {label: "Lead", value: "lead"},
   {label: "Prospect", value: "prospect"},
   {label: "Negotiation", value: "negotiation"},
@@ -69,12 +74,46 @@ const statusFilters = [
   {label: "Inactive", value: "inactive"},
   {label: "Lost", value: "lost"},
 ]
-const handleStatusFilter = () => {
+const sourceFilters = [
+  {label: "All", value: "all"},
+  ...Array.from(
+      new Set(props.clients.map(c => c.lead_source))
+  ).filter(Boolean).map(source => ({
+    label: source,
+    value: source,
+  }))];
+// const handleStatusFilter = () => {
+//   if (filters.status == 'all') {
+//     filteredClients.value = props.clients
+//     return
+//   }
+//   filteredClients.value = props.clients.filter(client => {
+//     return client.status == filters.status;
+//   });
+// }
+// const handleSourceFilter = () => {
+//   if (filters.lead_source == 'all') {
+//     filteredClients.value = props.clients
+//     return
+//   }
+//   filteredClients.value = props.clients.filter(client => {
+//     return client.lead_source == filters.lead_source;
+//   });
+// }
+const applyFilters = () => {
   filteredClients.value = props.clients.filter(client => {
-    return client.status == filters.status;
+    const matchesStatus = filters.status === 'all' || client.status === filters.status;
+    const matchesSource = filters.lead_source === 'all' || client.lead_source === filters.lead_source;
+    return matchesStatus && matchesSource;
   });
 }
+// Run on initial load
+onMounted(() => {
+  applyFilters();
+});
 
+// Reactive update when filters change
+watch(() => [filters.status, filters.lead_source], applyFilters);
 </script>
 
 <template>
@@ -85,79 +124,97 @@ const handleStatusFilter = () => {
     <div class="py-12">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-          <div class="p-6 text-gray-900">
-            <div class="w-full mx-auto flex flex-col justify-center">
-              <div class="flex w-full justify-between mb-10">
-                <div class="flex">
-                  <form-select @change="handleStatusFilter" :data-prop="statusFilters" :key="filters.status" v-model="filters.status"
+          <div class=" text-gray-900">
+            <table-card>
+              <template #filters>
+                <form-group for="" text="Filter By Status" class="mr-4">
+                  <form-select @change="applyFilters" :data-prop="statusFilters" :key="filters.status" v-model="filters.status"
                                label="Filter By Status"></form-select>
-                </div>
+                </form-group>
+                <form-group for="" text="Filter By Lead Source" class="mr-4">
+                  <form-select @change="applyFilters" :data-prop="sourceFilters" :key="filters.lead_source" v-model="filters.lead_source"
+                               label="Filter By Lead Source"></form-select>
+                </form-group>
+                <form-group for="" text="Filter By Budget">
+                  <form-select @change="applyFilters" :data-prop="sourceFilters" :key="filters.lead_source" v-model="filters.lead_source"
+                               label="Filter By Budget"></form-select>
+                </form-group>
+              </template>
+              <template #add-btn>
                 <link-button
                     bg="bg-green-700"
                     class="   px-4 py-2 rounded text-white! border-4 border-green-700 hover:bg-white transition-all group
-                          ease-in-out" link="/admin/clients/create"><span class="text-white group-hover:text-green-700 ">Add Client</span>
+                                            ease-in-out" link="/admin/clients/create"><span
+                    class="text-white group-hover:text-green-700 ">Add Client</span>
                 </link-button>
-              </div>
-              <custom-table :tableHeadings="tableHeadings">
-                <template #default>
-                  <tr v-for="client in filteredClients" :key="client.id" class="border-eclipsis-navy border-t-2 first:border-t-0 last:border-b-2">
-                    <!-- Company -->
-                    <td class="border-r-2 border-l-2 border-eclipsis-navy flex-1 p-2">
-                      {{ client.company }}
-                    </td>
+              </template>
+              <template #table>
+                <custom-table :tableHeadings="tableHeadings" :pagination="{
+                  show: true,
+                  totalItems: filteredClients.length,
+                  itemsPerPage: 10,
+                  data: filteredClients
+                }">
+                  <template #default="{data}">
+                    <tr v-for="client in data" :key="client.id" class="border-eclipsis-navy border-t-2 first:border-t-0 last:border-b-2">
+                      <!-- Company -->
+                      <td class="border-r-2 border-l-2 border-eclipsis-navy flex-1 p-2">
+                        {{ client.company }}
+                      </td>
 
-                    <!-- Contact Name -->
-                    <td class="border-r-2 border-eclipsis-navy flex-1 p-2">
-                      {{ client.name }}
-                    </td>
+                      <!-- Contact Name -->
+                      <td class="border-r-2 border-eclipsis-navy flex-1 p-2">
+                        {{ client.name }}
+                      </td>
 
-                    <!-- Email -->
-                    <td class="border-r-2 border-eclipsis-navy flex-1 p-2 break-words overflow-hidden whitespace-normal">
-                      {{ client.email }}
-                    </td>
+                      <!-- Email -->
+                      <td class="border-r-2 border-eclipsis-navy flex-1 p-2 break-words overflow-hidden whitespace-normal">
+                        {{ client.email }}
+                      </td>
 
-                    <!-- Phone -->
-                    <td class="border-r-2 border-eclipsis-navy flex-1 p-2">
-                      {{ client.phone }}
-                    </td>
+                      <!-- Phone -->
+                      <td class="border-r-2 border-eclipsis-navy flex-1 p-2">
+                        {{ client.phone }}
+                      </td>
 
-                    <!-- Website URL -->
-                    <td class="border-r-2 border-eclipsis-navy flex-1 p-2">
-                      <a :href="client.website_url" class="text-blue-600 underline" target="_blank">{{ client.website_url }}</a>
-                    </td>
+                      <!-- Website URL -->
+                      <td class="border-r-2 border-eclipsis-navy flex-1 p-2">
+                        <a :href="client.website_url" class="text-blue-600 underline" target="_blank">{{ client.website_url }}</a>
+                      </td>
 
-                    <!-- Budget -->
-                    <td class="border-r-2 border-eclipsis-navy flex-1 p-2">
-                      {{ client.budget }}
-                    </td>
-                    <td class="border-r-2 border-eclipsis-navy flex-1 p-2">
-                      {{ client.lead_source ?? 'N/A' }}
-                    </td>
-                    <td class="border-r-2 border-eclipsis-navy flex-1 p-2 capitalize">
-                      {{ client.status }}
-                    </td>
-                    <!-- Edit Button -->
-                    <td class="border-r-2 border-eclipsis-navy flex-1 flex justify-center items-center py-2">
-                      <NavLink
-                          class="bg-eclipsis-gold mr-2 px-4 py-2 rounded text-white border-4 border-eclipsis-gold
-                                   hover:bg-eclipsis-navy hover:text-black hover:border-eclipsis-gold transition-all ease-in-out transition duration-700 ease-in-out group"
-                          :href="'/admin/clients/' + client.id + '/edit'">
-                            <span class="text-eclipsis-navy group-hover:text-eclipsis-gold">
-                              <font-awesome-icon :icon="faPencil"></font-awesome-icon>
-                            </span>
-                      </NavLink>
+                      <!-- Budget -->
+                      <td class="border-r-2 border-eclipsis-navy flex-1 p-2">
+                        {{ client.budget }}
+                      </td>
+                      <td class="border-r-2 border-eclipsis-navy flex-1 p-2">
+                        {{ client.lead_source ?? 'N/A' }}
+                      </td>
+                      <td class="border-r-2 border-eclipsis-navy flex-1 p-2 capitalize">
+                        {{ client.status }}
+                      </td>
+                      <!-- Edit Button -->
+                      <td class="border-r-2 border-eclipsis-navy flex-1 flex justify-center items-center py-2">
+                        <NavLink
+                            class="bg-eclipsis-gold mr-2 px-4 py-2 rounded text-white border-4 border-eclipsis-gold
+                                                     hover:bg-eclipsis-navy hover:text-black hover:border-eclipsis-gold transition-all ease-in-out transition duration-700 ease-in-out group"
+                            :href="'/admin/clients/' + client.id + '/edit'">
+                                              <span class="text-eclipsis-navy group-hover:text-eclipsis-gold">
+                                                <font-awesome-icon :icon="faPencil"></font-awesome-icon>
+                                              </span>
+                        </NavLink>
 
-                      <button @click="isOpen = true, selectedClient = client.id"
-                              class="bg-red-600 px-4 py-1 rounded text-white border-4 border-red-600 hover:bg-white hover:text-black transition-all ease-in-out">
-                        <font-awesome-icon :icon="faTrash"></font-awesome-icon>
-                      </button>
-                    </td>
+                        <button @click="isOpen = true, selectedClient = client.id"
+                                class="bg-red-600 px-4 py-1 rounded text-white border-4 border-red-600 hover:bg-white hover:text-black transition-all ease-in-out">
+                          <font-awesome-icon :icon="faTrash"></font-awesome-icon>
+                        </button>
+                      </td>
 
 
-                  </tr>
-                </template>
-              </custom-table>
-            </div>
+                    </tr>
+                  </template>
+                </custom-table>
+              </template>
+            </table-card>
           </div>
         </div>
       </div>
