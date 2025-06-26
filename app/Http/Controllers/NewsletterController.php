@@ -27,9 +27,11 @@ class NewsletterController extends Controller
 
 
         $this->newsletterService->subscribe($attr['first_name'], $attr['last_name'], $attr['email']);
+
         Client::create([
             'email' => $attr['email'],
-            'name' => $attr['first_name']
+            'name' => $attr['first_name'] . '  ' . $attr['last_name'],
+            'lead_source' => "Newsletter Subscriber",
         ]);
         return redirect()->back()->with("message", "You have successfully subscribed to our newsletter");
     }
