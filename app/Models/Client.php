@@ -20,4 +20,9 @@ class Client extends Model
     {
         return $this->hasMany(Testimonial::class);
     }
+
+    public function correspondences()
+    {
+        return $this->hasMany(Correspondence::class);
+    }
 }

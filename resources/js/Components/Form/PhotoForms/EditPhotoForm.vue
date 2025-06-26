@@ -1,20 +1,24 @@
 <script lang="ts" setup>
 
-import {Ref, ref} from "vue";
+import {computed, Ref, ref} from "vue";
 import {BasePhoto} from "@/types/types";
 import DangerButton from "@/Components/DangerButton.vue";
 import {useForm, usePage} from "@inertiajs/vue3";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import FormGroup from "@/Components/Form/FormGroup.vue";
+import PhotoPosition from "@/Components/Form/PhotoForms/PhotoPosition.vue";
+import FlashMessage from "@/Components/FlashMessage.vue";
 
 const {flash} = usePage().props;
-
+const page = usePage()
 const props = defineProps<{
   alt?: string,
   position?: string
   selectedPhoto: BasePhoto,
   // message?: string
 }>()
+
+const message = computed(() => flash?.message ?? '');
 const shouldDelete = ref(false);
 const form = useForm({
   position: props.position,
@@ -22,7 +26,17 @@ const form = useForm({
 })
 const handleEdit = (photo: BasePhoto) => {
   console.log('edit');
-  form.put(`/admin/project-photos/${props.selectedPhoto.id}`);
+  if (page.url.includes('projects')) {
+    form.put(`/admin/project-photos/${props.selectedPhoto.id}`, {
+      // preserveScroll: true,
+
+    });
+  } else {
+    form.put(`/admin/cta-photos/${props.selectedPhoto.id}`, {
+      // preserveScroll: true,
+    });
+  }
+
 }
 </script>
 
@@ -40,15 +54,11 @@ const handleEdit = (photo: BasePhoto) => {
             </form-group>
             <form-group for="position">
               <select type="text" v-model="form.position" class="mr-2 w-100">
-                <option value="featured">Featured</option>
-                <option value="first">First</option>
-                <option value="second">Second</option>
-                <option value="third">Third</option>
+                <photo-position></photo-position>
               </select>
             </form-group>
             <PrimaryButton class="h-10 mt-4">Save</PrimaryButton>
           </div>
-          <p class="text-green-700 font-bold" v-if="flash.message">{{ flash.message }}</p>
         </form>
         <div class="mt-6">
           <DangerButton @click.prevent="shouldDelete = true" class="mb-2">Delete Photo</DangerButton>
@@ -64,4 +74,5 @@ const handleEdit = (photo: BasePhoto) => {
 
     </div>
   </div>
+  <!--  <flash-message :message="$page.props.flash.message"></flash-message>-->
 </template>

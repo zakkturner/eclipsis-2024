@@ -24,7 +24,7 @@ watch(() => props.message, (newMessage) => {
 
 <template>
   <Teleport to="body">
-    <div ref="msgContainer" class="fixed z-99 bottom-2 right-2 shadow bg-white p-4 rounded " v-if="message">
+    <div ref="msgContainer" class="fixed z-[999] bottom-2 right-2 shadow bg-white p-4 rounded " v-if="message">
       <p class="text-green-600 font-bold text-lg">{{ message }}</p>
     </div>
   </Teleport>

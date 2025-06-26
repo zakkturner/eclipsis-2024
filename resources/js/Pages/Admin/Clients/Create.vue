@@ -9,6 +9,9 @@ import {router} from '@inertiajs/vue3'
 import TextArea from "@/Components/Form/TextArea.vue";
 import CancelButton from "@/Components/CancelButton.vue";
 
+const props = defineProps({
+  auth: Object
+});
 const form = reactive({
   company: "",
   name: "",
@@ -21,6 +24,7 @@ const form = reactive({
   twitter: "",
   linkedin: "",
   instagram: "",
+  is_active: true,
   notes: "",
 });
 const errors = ref([]);
@@ -39,7 +43,9 @@ const handleSubmit = () => {
     twitter: form.twitter,
     linkedin: form.linkedin,
     instagram: form.instagram,
-    notes: form.notes
+    notes: form.notes,
+    is_active: form.is_active,
+    lead_source: `Created by ${props.auth.user.name}`
   });
 }
 
@@ -71,13 +77,14 @@ const handleSubmit = () => {
         </form-group>
 
         <form-group for="email" text="Email">
-          <input type="text" v-model="form.email">
+          <text-input type="email" v-model="form.email" name="email"/>
         </form-group>
         <form-group for="website_url" text="Website Url">
           <text-input v-model="form.website_url"></text-input>
         </form-group>
         <form-group for="budget" text="Budget">
-          <select class="w-full rounded" v-model="form.budget" placeholder="Budget" required>
+          <select class="w-full rounded border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" v-model="form.budget"
+                  placeholder="Budget" required>
             <option selected value="" disabled>Select a Budget</option>
             <option selected value="$0-1000">$0-1500</option>
             <option selected value="$0-1000">$1500-3000</option>
@@ -86,7 +93,26 @@ const handleSubmit = () => {
             <option selected value="$0-1000">$10000+</option>
           </select>
         </form-group>
-
+        <form-group for="is active">
+          <select class="w-full rounded  border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" v-model="form.is_active"
+                  id="status">
+            <option disabled value="">Active?</option>
+            <option :value="true">Yes</option>
+            <option :value="false">No</option>
+          </select>
+        </form-group>
+        <form-group for="status">
+          <select class="w-full rounded  border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" v-model="form.status"
+                  id="status">
+            <option disabled value="">Select a Status</option>
+            <option value="lead">Lead</option>
+            <option value="prospect">Prospect</option>
+            <option value="negotiation">Negotiation</option>
+            <option value="customer">Customer</option>
+            <option value="inactive">Inactive</option>
+            <option value="lost">Lost</option>
+          </select>
+        </form-group>
         <form-group for="owner_birthday" text="Owner Birthday">
           <text-input type="date" v-model="form.owner_birthday" name="owner_birthday"></text-input>
         </form-group>
