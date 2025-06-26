@@ -7,13 +7,14 @@ import {Client} from "@/types/types";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import {faPencil, faTrash} from "@fortawesome/free-solid-svg-icons";
 import Modal from "@/Components/Modal.vue";
-import {nextTick, onMounted, ref} from "vue";
+import {nextTick, onMounted, reactive, ref} from "vue";
 import CancelButton from "@/Components/CancelButton.vue";
 import {router} from "@inertiajs/vue3";
 import gsap from 'gsap';
 import DangerButton from "@/Components/DangerButton.vue";
 import LinkButton from "@/Components/LinkButton.vue";
 import FlashMessage from "@/Components/FlashMessage.vue";
+import FormSelect from "@/Components/Form/FormSelect.vue";
 
 const props = defineProps<{
   clients: Client[]
@@ -29,11 +30,14 @@ const tableHeadings = [
   'status',
   'Actions'
 ];
-
+const filteredClients = ref(props.clients);
 const msgContainer = ref(null)
 const message = ref('');
 const isOpen = ref(false);
 const selectedClient = ref(null)
+const filters = reactive({
+  status: ""
+})
 const messageAnimation = async () => {
   await nextTick();
   gsap.fromTo(msgContainer.value, {x: 200, opacity: 0}, {x: 0, duration: .7, opacity: 1, ease: 'power3.inOut', delay: .5});
@@ -57,7 +61,19 @@ const handleDelete = () => {
 
   isOpen.value = false
 }
-
+const statusFilters = [
+  {label: "Lead", value: "lead"},
+  {label: "Prospect", value: "prospect"},
+  {label: "Negotiation", value: "negotiation"},
+  {label: "Customer", value: "customer"},
+  {label: "Inactive", value: "inactive"},
+  {label: "Lost", value: "lost"},
+]
+const handleStatusFilter = () => {
+  filteredClients.value = props.clients.filter(client => {
+    return client.status == filters.status;
+  });
+}
 
 </script>
 
@@ -71,8 +87,11 @@ const handleDelete = () => {
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
           <div class="p-6 text-gray-900">
             <div class="w-full mx-auto flex flex-col justify-center">
-              <div class="flex w-full justify-end mb-10">
-
+              <div class="flex w-full justify-between mb-10">
+                <div class="flex">
+                  <form-select @change="handleStatusFilter" :data-prop="statusFilters" :key="filters.status" v-model="filters.status"
+                               label="Filter By Status"></form-select>
+                </div>
                 <link-button
                     bg="bg-green-700"
                     class="   px-4 py-2 rounded text-white! border-4 border-green-700 hover:bg-white transition-all group
@@ -81,7 +100,7 @@ const handleDelete = () => {
               </div>
               <custom-table :tableHeadings="tableHeadings">
                 <template #default>
-                  <tr v-for="client in clients" :key="client.id" class="border-eclipsis-navy border-t-2 first:border-t-0 last:border-b-2">
+                  <tr v-for="client in filteredClients" :key="client.id" class="border-eclipsis-navy border-t-2 first:border-t-0 last:border-b-2">
                     <!-- Company -->
                     <td class="border-r-2 border-l-2 border-eclipsis-navy flex-1 p-2">
                       {{ client.company }}

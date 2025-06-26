@@ -12,7 +12,7 @@ import {
   faBell,
   faBriefcase,
   faBullhorn,
-  faChartLine,
+  faChartLine, faChevronDown,
   faGear,
   faGears,
   faNewspaper,
@@ -73,11 +73,22 @@ const showingNavigationDropdown = ref(false);
                     Projects
                   </NavLink>
                 </div>
-                <div class="hidden  sm:mb-2  sm:flex flex-col items-stretch justify-center text-center">
+                <div class="hidden relative  sm:mb-2  sm:flex flex-col items-stretch justify-center text-center">
                   <NavLink :href="route('admin.clients.index')" :active="route().current().includes('admin.clients')">
                     <font-awesome-icon :icon="faAddressBook"></font-awesome-icon>
                     Clients
+                    <font-awesome-icon :icon="faChevronDown"></font-awesome-icon>
                   </NavLink>
+                  <div class="bg-eclipsis-gold">
+                    <ul class="px-4">
+                      <li>
+                        <NavLink :href="route('admin.clients.index')" :active="route().current().includes('admin.clients')">All Clients</NavLink>
+                      </li>
+                      <li>
+                        <NavLink :href="route('admin.clients.index')" :active="route().current().includes('admin.clients')">Leads</NavLink>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
                 <div class="hidden  sm:mb-2  sm:flex flex-col items-stretch justify-center text-center">
                   <NavLink :href="route('admin.ctas.index')" :active="route().current().includes('admin.ctas')">
