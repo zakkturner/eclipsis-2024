@@ -1,6 +1,15 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/laravel/compare/1.1.0...master)
+## [Unreleased](https://github.com/laravel/laravel/compare/v1.1.0...master)
+
+## [v1.1.0](https://github.com/laravel/laravel/compare/1.1.0...v1.1.0) - 2025-06-26
+
+### What's Changed
+
+* Feature/cta by [@zakkturner](https://github.com/zakkturner) in https://github.com/zakkturner/eclipsis-2024/pull/27
+* Dev by [@zakkturner](https://github.com/zakkturner) in https://github.com/zakkturner/eclipsis-2024/pull/28
+
+**Full Changelog**: https://github.com/zakkturner/eclipsis-2024/compare/v1.0.1...v1.1.0
 
 ## [1.1.0](https://github.com/laravel/laravel/compare/v1.0.1...1.1.0) - 2025-06-26
 
