@@ -29,6 +29,7 @@ class HomeController extends Controller
         $company_info = CompanyInfo::first();
         $cta = Cta::where('is_active', 1)->with(['photos' => fn($query) => $query->where('active', 1)])->get();
         return Inertia::render('Welcome', [
+            'appName' => config('app.name'),
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
             'laravelVersion' => Application::VERSION,

@@ -8,7 +8,7 @@
         <li v-for="new_post in latest_posts" class="flex items-center mb-4">
           <img v-if="new_post.thumbnail" :src="`/storage/${new_post.thumbnail}`" class="w-16 h-16 rounded-full mr-4"/>
           <img v-else src="/images/no-image.jpg" class="w-16 h-16 rounded-full mr-4"/>
-          <a :href="`/blog/${new_post.slug}`" class="uppercase font-semibold text-sm">{{ new_post.title }}</a>
+          <a :href="`/blog/${new_post.slug}`" class="uppercase font-semibold text-sm text-eclipsis-navy">{{ new_post.title }}</a>
         </li>
       </ul>
     </gray-card>
