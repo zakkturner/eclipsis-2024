@@ -37,8 +37,10 @@ const breadCrumbs: BreadCrumb[] = [
     <template #hero>
       <SubPageHero pageTitle="Projects" :breadcrumbs="breadCrumbs"></SubPageHero>
     </template>
-    <section class="w-3/4 mt-40 mb-40 mx-auto flex gap-4 ">
-      <projects-grid :projects="projects"></projects-grid>
+    <section class="flex gap-4 bg-white ">
+      <div class="my-40 mx-auto w-3/4">
+        <projects-grid :projects="projects"></projects-grid>
+      </div>
     </section>
   </main-layout>
 
