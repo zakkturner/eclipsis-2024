@@ -3,6 +3,7 @@
 import {Post} from "@/types/post";
 import BlogPost from "@/Components/Blog/BlogPost.vue";
 import NavLink from "@/Components/NavLink.vue";
+import LinkButton from "@/Components/LinkButton.vue";
 
 const props = defineProps<{
   posts: Post[]
@@ -10,9 +11,9 @@ const props = defineProps<{
 </script>
 <template>
   <ul class="w-4/6" v-if="posts.length > 0">
-    <li v-for="post in posts" class="mb-4">
+    <li v-for="post in posts" class="mb-10">
       <blog-post :post="post"></blog-post>
-      <NavLink :href="`/blog/${ post.slug }`">Read More</NavLink>
+      <link-button :light="true" :link="`/blog/${ post.slug }`">Read More</link-button>
     </li>
   </ul>
   <div v-else>
