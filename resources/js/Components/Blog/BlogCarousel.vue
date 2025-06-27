@@ -64,7 +64,7 @@ const formattedCreated = (post: Post) => computed(() => {
       </div>
     </div>
     <div class="py-20 text-2xl flex justify-center" v-else>
-      <h2>No Posts Yet!</h2>
+      <h2 class="text-eclipsis-gold">No Posts Yet!</h2>
     </div>
 
   </base-section>
