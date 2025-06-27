@@ -40,21 +40,25 @@ const handleClick = () => {
 
 <template>
   <base-section :color="cta.background_color">
+
     <div class="flex  justify-between"
          :class="ctaImg.position == 'center' ? 'flex-col text-center' : 'items-center'">
       <div class="text-white">
         <div class="">
-          <h2 class="text-white text-4xl">{{ cta.title }}</h2>
+          <h2 class="  text-6xl font-bold" :class="cta.background_color == 'blue' ? 'text-eclipsis-gold' : ''">{{ cta.title }}</h2>
           <p class="text-2xl">{{ cta.subtitle }}</p>
         </div>
-        <div class="my-4">
+        <div class="my-4 ">
           <p>{{ cta.body }}</p>
         </div>
-        <div>
-          <secondary-button @click.prevent="handleClick">{{ cta.button_text }}</secondary-button>
+        <div :class="ctaImg.position == 'center' ? 'mb-8' : ''">
+          <button class="bg-eclipsis-gold p-6 text-eclipsis-navy text-sm font-semibold rounded" @click.prevent="handleClick">{{
+              cta.button_text
+            }}
+          </button>
         </div>
       </div>
-      <img :class="imgOrder" :src="`/storage/${ctaImg.img_src}`">
+      <img :class="imgOrder" :src="`/storage/${ctaImg.img_src}`" :alt="`${ctaImg.alt}`"/>
     </div>
     <modal centered :show="isOpen">
       <cta-modal :cta="cta" @form-submit="formSubmitted = true">
