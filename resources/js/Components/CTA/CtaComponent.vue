@@ -52,7 +52,10 @@ const handleClick = () => {
           <p>{{ cta.body }}</p>
         </div>
         <div :class="ctaImg.position == 'center' ? 'mb-8' : ''">
-          <secondary-button @click.prevent="handleClick">{{ cta.button_text }}</secondary-button>
+          <button class="bg-eclipsis-gold p-6 text-eclipsis-navy text-sm font-semibold rounded" @click.prevent="handleClick">{{
+              cta.button_text
+            }}
+          </button>
         </div>
       </div>
       <img :class="imgOrder" :src="`/storage/${ctaImg.img_src}`" :alt="`${ctaImg.alt}`"/>
