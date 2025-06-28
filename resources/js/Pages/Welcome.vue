@@ -44,7 +44,7 @@ const cta = props.cta[0]
 
 <template>
   <Head>
-    <title>Welcome {{ props.appName }}</title>
+    <title>Welcome</title>
     <meta name="description"
           content="At Eclipsis Studios, we are dedicated to helping small business owners thrive in today's digital age. Our team of experts specializes in web development and design,
           providing solutions tailored to each client's unique problems. We understand that your time is valuable, let us take the technical load off of your shoulders.">
