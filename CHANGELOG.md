@@ -1,6 +1,17 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/laravel/compare/v1.1.2...master)
+## [Unreleased](https://github.com/laravel/laravel/compare/v1.1.3...master)
+
+## [v1.1.3](https://github.com/laravel/laravel/compare/v1.1.2...v1.1.3) - 2025-06-28
+
+### What's Changed
+
+* Hotfix/6 26 25 01 by [@zakkturner](https://github.com/zakkturner) in https://github.com/zakkturner/eclipsis-2024/pull/35
+* Dev by [@zakkturner](https://github.com/zakkturner) in https://github.com/zakkturner/eclipsis-2024/pull/36
+* title fixes by [@zakkturner](https://github.com/zakkturner) in https://github.com/zakkturner/eclipsis-2024/pull/37
+* removing extra title by [@zakkturner](https://github.com/zakkturner) in https://github.com/zakkturner/eclipsis-2024/pull/38
+
+**Full Changelog**: https://github.com/zakkturner/eclipsis-2024/compare/v1.1.2...v1.1.3
 
 ## [v1.1.2](https://github.com/laravel/laravel/compare/v1.1.1...v1.1.2) - 2025-06-27
 
