@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\AnnouncementController;
 use App\Http\Controllers\Admin\AdminCategoriesController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SettingsController;
+use App\Http\Controllers\Admin\SiteContentController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ClientController;
@@ -42,6 +43,7 @@ Route::prefix('/view-projects')->group(function () {
 });
 
 Route::post('/newsletter', NewsletterController::class);
+
 Route::post('/clients', ClientController::class)->name('guest.clients');
 
 Route::get('/dashboard', function () {
@@ -122,6 +124,7 @@ Route::middleware('auth')->group(function () {
             'destroy' => 'admin.projects.destroy',
         ]);
         Route::get("/settings", SettingsController::class)->name('admin.settings');
+        Route::post('/site-content', SiteContentController::class);
 
     });
 });

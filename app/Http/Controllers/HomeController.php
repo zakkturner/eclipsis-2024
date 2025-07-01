@@ -8,6 +8,7 @@ use App\Models\Cta;
 use App\Models\Post;
 use App\Models\Project;
 use App\Models\Service;
+use App\Models\SiteContent;
 use App\Models\Testimonial;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,7 @@ class HomeController extends Controller
         }])->take(6)->get();
         $testimonials = Testimonial::with("client")->take(3)->get();
         $company_info = CompanyInfo::first();
+        $site_content = SiteContent::first();
         $cta = Cta::where('is_active', 1)->with(['photos' => fn($query) => $query->where('active', 1)])->get();
         return Inertia::render('Welcome', [
             'appName' => config('app.name'),
@@ -40,6 +42,7 @@ class HomeController extends Controller
             'projects' => $projects,
             'testimonials' => $testimonials,
             'company_info' => $company_info,
+            'site_content' => $site_content,
             'cta' => $cta,
         ]);
     }
