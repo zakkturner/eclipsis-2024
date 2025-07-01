@@ -40,7 +40,6 @@ const handleClick = () => {
 
 <template>
   <base-section :color="cta.background_color">
-
     <div class="flex  justify-between"
          :class="ctaImg.position == 'center' ? 'flex-col text-center' : 'items-center'">
       <div class="text-white">

@@ -27,6 +27,7 @@ const props = defineProps<{
   projects: Project[],
   testimonials: Testimonial[]
   company_info: any,
+  site_content: any,
   cta: CTA
 }>();
 
@@ -52,9 +53,9 @@ const cta = props.cta[0]
 
   <main-layout :announcement="announcement">
     <template #hero>
-      <TheHero></TheHero>
+      <TheHero :site_content="site_content"></TheHero>
     </template>
-    <About id="about"></About>
+    <About :about_text="site_content.about_text" id="about"></About>
     <CtaComponent :cta="cta"/>
     <Services id="services"></Services>
     <Projects :projects="projects" id="portfolio"></Projects>
