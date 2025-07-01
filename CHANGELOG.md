@@ -1,6 +1,15 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/laravel/compare/v1.1.3...master)
+## [Unreleased](https://github.com/laravel/laravel/compare/v1.2.0...master)
+
+## [v1.2.0](https://github.com/laravel/laravel/compare/v1.1.3...v1.2.0) - 2025-07-01
+
+### What's Changed
+
+* Feature/headline control by [@zakkturner](https://github.com/zakkturner) in https://github.com/zakkturner/eclipsis-2024/pull/39
+* Dev by [@zakkturner](https://github.com/zakkturner) in https://github.com/zakkturner/eclipsis-2024/pull/40
+
+**Full Changelog**: https://github.com/zakkturner/eclipsis-2024/compare/v1.1.3...v1.2.0
 
 ## [v1.1.3](https://github.com/laravel/laravel/compare/v1.1.2...v1.1.3) - 2025-06-28
 
