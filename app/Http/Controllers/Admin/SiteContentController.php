@@ -10,11 +10,12 @@ class SiteContentController extends Controller
 {
     public function __invoke(Request $request)
     {
-        
+
         $attr = $request->validate([
 
             'headline_text' => 'nullable|min:3',
             'headline_title' => 'nullable|min:3',
+            'headline_button_text' => 'nullable|min:3',
             'about_text' => 'nullable|min:3',
             'footer_about' => 'nullable|min:3',
         ]);

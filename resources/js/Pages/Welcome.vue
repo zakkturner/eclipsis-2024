@@ -40,6 +40,7 @@ onBeforeMount(() => {
 
 provide('posts', props.posts);
 provide('company_info', props.company_info)
+provide('site_content', props.site_content)
 const cta = props.cta[0]
 </script>
 

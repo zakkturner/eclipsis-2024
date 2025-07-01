@@ -13,6 +13,7 @@ const props = defineProps<{
 const form = useForm({
   headline_title: props.site_content?.headline_title || "",
   headline_text: props.site_content?.headline_text || "",
+  headline_button_text: props.site_content?.headline_button_text || "",
   about_text: props.site_content?.about_text || "",
   footer_about: props.site_content?.footer_about || "",
 
@@ -40,6 +41,10 @@ const handleSubmit = async () => {
     <form-group for="Headline Text">
       <text-area type="text" placeholder="Enter Headline Text" v-model="form.headline_text" name="headline_text"/>
     </form-group>
+    <form-group for="Headline Button">
+      <text-input type="text" placeholder="Enter Headline Button Text" v-model="form.headline_button_text" name="headline_button_text"/>
+    </form-group>
+
     <form-group for="About Text">
       <text-area type="text" placeholder="Enter About Text" v-model="form.about_text" name="about_text"/>
     </form-group>
