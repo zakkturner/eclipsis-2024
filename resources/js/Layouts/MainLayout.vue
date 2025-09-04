@@ -93,7 +93,7 @@ const refreshScroll = () => {
 <template>
   <div ref="wrapper" class="relative h-screen scroll-smooth bg-white" :class="uiStore.isMenuOpen == true? 'overflow-hidden' : ''">
     <mobile-menu @menu-clicked="refreshScroll"></mobile-menu>
-    <main ref="main" class="scroll-smooth bg-gray-50 text-black/50 dark:bg-black dark:text-white/50 absolute z-50 top-0 left-0 w-full h-fit ">
+    <main ref="main" class="scroll-smooth bg-gray-50 text-black/50  bg-white absolute z-50 top-0 left-0 w-full h-fit ">
       <TheHeader id="staticHeader" ref="headerStatic" :announcement="announcement"></TheHeader>
       <FixedHeader id="headerFixed"></FixedHeader>
       <slot name="hero"></slot>

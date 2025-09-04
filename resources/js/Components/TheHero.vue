@@ -11,11 +11,15 @@ const props = defineProps<{
   <section
       class="
     h-screen
-    bg-[url('/images/code.jpg')]
      bg-no-repeat
      bg-cover
      bg-center
-">
+"
+      :class="
+   ` bg-[url(${site_content?.headline_image ?? `'/images/code.jpg'` })]`
+
+"
+  >
     <div class="flex justify-center h-full items-center bg-gradient-to-b from-10% from-eclipsis-navy to-transparent">
       <div class="text-center px-2 max-w-[90%] md:max-w-6xl mx-auto">
         <div class="mb-8">

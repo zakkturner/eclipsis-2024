@@ -38,6 +38,7 @@ const formattedCreated = (post: Post) => computed(() => {
           :breakpoints="{
               768: { slidesPerView: 2 }
           }"
+          :autoHeight="true"
           :autoplay="{
               delay: 2500,
               disableOnInteraction: false,
@@ -59,7 +60,7 @@ const formattedCreated = (post: Post) => computed(() => {
           </div>
         </swiper-slide>
       </swiper>
-      <div>
+      <div class="mt-12">
         <link-button link="/blog">View All</link-button>
       </div>
     </div>
