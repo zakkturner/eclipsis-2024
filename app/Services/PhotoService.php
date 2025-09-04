@@ -21,7 +21,7 @@ class PhotoService
         return $photoModel::create($data);
     }
 
-    public function update(array $data, int $id, string $photoModel,)
+    public function update(array $data, int $id, string $photoModel)
     {
         $photoModel::find($id)->update($data);
     }

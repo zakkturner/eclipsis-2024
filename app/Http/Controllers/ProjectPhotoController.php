@@ -18,9 +18,9 @@ class ProjectPhotoController extends Controller
         $validatedPhoto = $request->validated();
         $photoService->add(
             $validatedPhoto,
-            $request->file('img_src'),
-            $project_id,
-            ProjectPhoto::class
+            $project_id,           // int relatedId
+            ProjectPhoto::class,   // string class name
+            file: $request->file('img_src') // UploadedFile
         );
 
         return redirect()->back();
