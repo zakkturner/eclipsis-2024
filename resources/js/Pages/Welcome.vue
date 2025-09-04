@@ -56,7 +56,7 @@ const cta = props.cta[0]
     <template #hero>
       <TheHero :site_content="site_content"></TheHero>
     </template>
-    <About :about_text="site_content.about_text" id="about"></About>
+    <About :about_text="site_content?.about_text || ''" id="about"></About>
     <CtaComponent :cta="cta"/>
     <Services id="services"></Services>
     <Projects :projects="projects" id="portfolio"></Projects>
